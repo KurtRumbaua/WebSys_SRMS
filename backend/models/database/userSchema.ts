@@ -34,6 +34,6 @@ export interface IUser {
 
 export const userSchema = new Schema<IUser>({
     entityId: { type: String, required: true },
-    username: { type: String, required: true },
+    username: { type: String, required: true, unique: true},
     password: { type: String, required: true }
 });

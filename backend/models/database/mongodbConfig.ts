@@ -31,6 +31,7 @@ const ClassModel = mongoose.model<IClass>('Class', classSchema);
 const EntityModel = mongoose.model<IEntity>('Entity', entitySchema);
 const UserModel = mongoose.model<IUser>('User', userSchema);
 const EnrollmentModel = mongoose.model<IEnrollment>('Enrollment', enrollmentSchema);
+const StudentModel = mongoose.model<IStudent>('Student', studentSchema);
 
 export const db = {
     initDatabaseConnection,
@@ -38,5 +39,6 @@ export const db = {
     ClassModel,
     EntityModel,
     UserModel,
-    EnrollmentModel
+    EnrollmentModel,
+    StudentModel
 }

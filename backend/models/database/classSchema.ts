@@ -8,7 +8,7 @@ export interface IClass {
 }
 
 export const classSchema = new Schema<IClass>({
-    name: { type: String, required: true },
+    name: { type: String, required: true , unique: true},
     teacher: { type: String, required: true },
     students: { type: [String], default: [] }
 });
