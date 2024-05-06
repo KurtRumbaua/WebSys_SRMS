@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
-
+import { IClass, classSchema } from "./classSchema";
+import { IEntity, entitySchema, IUser, userSchema } from "./userSchema";
+import { IEnrollment, enrollmentSchema } from "./enrollmentSchema";
+import { IStudent, studentSchema } from "./studentSchema";
 
 const connectionString: string = process.env.MONGODB_CONNECTION_STRING!;
 const databaseName: string = 'school_db';
@@ -24,7 +27,16 @@ const dropDatabase = async () => {
     }
 }
 
+const ClassModel = mongoose.model<IClass>('Class', classSchema);
+const EntityModel = mongoose.model<IEntity>('Entity', entitySchema);
+const UserModel = mongoose.model<IUser>('User', userSchema);
+const EnrollmentModel = mongoose.model<IEnrollment>('Enrollment', enrollmentSchema);
+
 export const db = {
     initDatabaseConnection,
     dropDatabase,
+    ClassModel,
+    EntityModel,
+    UserModel,
+    EnrollmentModel
 }
