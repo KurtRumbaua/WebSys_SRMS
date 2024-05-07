@@ -1,6 +1,5 @@
 import { IUser, IEntity } from "./database/userSchema";
 import { db } from './database/mongodbConfig';
-import e from "express";
 
 export class UserModel {
     async readUserByUsername(username: string): Promise<IUser> {
