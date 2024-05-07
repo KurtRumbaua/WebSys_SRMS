@@ -69,11 +69,11 @@ export class UserModel {
         return true;
     }
 
-    async readAllEntities(): Promise<IUser[]> {
+    async readAllEntities(): Promise<IEntity[]> {
         return await db.EntityModel.find();
     }
 
-    async readEntities(entityEmail: string): Promise<IEntity> {
+    async readEntity(entityEmail: string): Promise<IEntity> {
         const userData = await db.EntityModel.findOne({ email: entityEmail });
         if (!userData) {
             throw new Error('readEntity: entity not found');
@@ -81,7 +81,7 @@ export class UserModel {
         return userData;
     }
 
-    async updateEntities(oldData: IEntity, newData: IEntity): Promise<boolean> {
+    async updateEntity(oldData: IEntity, newData: IEntity): Promise<boolean> {
         try {
             await db.EntityModel.updateOne({ _id: oldData._id }, newData);
             return true;
@@ -91,7 +91,7 @@ export class UserModel {
         }
     }
 
-    async deleteEntities(entityEmail: string): Promise<boolean> {
+    async deleteEntity(entityEmail: string): Promise<boolean> {
         try  {
             await db.EntityModel.deleteOne({ email: entityEmail });
             return true;

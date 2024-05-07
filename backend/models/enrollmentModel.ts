@@ -1,8 +1,8 @@
 import { IEnrollment } from "./database/enrollmentSchema";
 import { db } from './database/mongodbConfig';
 
-export class ClassModel {
-    async createClass(enrollment: IEnrollment): Promise<boolean> {
+export class EnrollmentModel {
+    async createEnrollment(enrollment: IEnrollment): Promise<boolean> {
         const enrollmentData = new db.EnrollmentModel(enrollment);
         try {
             console.log(`${enrollmentData}`);
@@ -14,11 +14,11 @@ export class ClassModel {
         return true;
     }
 
-    async readAllClasses(): Promise<IEnrollment[]> {
+    async readAllEnrollments(): Promise<IEnrollment[]> {
         return await db.EnrollmentModel.find();
     }
 
-    async readClass(enrollmentId: string): Promise<IEnrollment> {
+    async readEnrollment(enrollmentId: string): Promise<IEnrollment> {
         const enrollmentData = await db.EnrollmentModel.findOne({ _id: enrollmentId });
         if (!enrollmentData) {
             throw new Error('readClass: class not found');
@@ -26,7 +26,7 @@ export class ClassModel {
         return enrollmentData;
     }
 
-    async updateClass(oldData: IEnrollment, newData: IEnrollment): Promise<boolean> {
+    async updateEnrollment(oldData: IEnrollment, newData: IEnrollment): Promise<boolean> {
         try {
             await db.EnrollmentModel.updateOne({ _id: oldData._id }, newData);
             return true;
@@ -36,7 +36,7 @@ export class ClassModel {
         }
     }
 
-    async deleteClass(enrollmentId: string): Promise<boolean> {
+    async deleteEnrollment(enrollmentId: string): Promise<boolean> {
         try  {
             await db.EnrollmentModel.deleteOne({ _id: enrollmentId });
             return true;
