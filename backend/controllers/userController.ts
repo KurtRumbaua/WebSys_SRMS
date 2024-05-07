@@ -1,5 +1,20 @@
 import e, { Request, Response } from 'express';
-import { userCreate, userDelete, userRead, userReadAll, userUpdate, entityCreate, entityDelete, entityRead, entityReadAll, entityUpdate } from '../services/userService';
+import { userCreate, userLogin, userDelete, userRead, userReadAll, userUpdate, entityCreate, entityDelete, entityRead, entityReadAll, entityUpdate } from '../services/userService';
+
+export async function loginUserAPI(req: Request, res: Response) {
+    const { username, password } = req.body;
+    if (!username || !password) {
+        res.status(400).send('Username and password are required');
+        return;
+    }
+
+    const success = await userLogin(username, password);
+    if (success) {
+        res.status(200).send('Login successful');
+    } else {
+        res.status(401).send('Login failed');
+    }
+}
 
 export async function createUserAPI(req: Request, res: Response) {
     const userData = req.body;

@@ -3,6 +3,14 @@ import { db } from './database/mongodbConfig';
 import e from "express";
 
 export class UserModel {
+    async readUserByUsername(username: string): Promise<IUser> {
+        const userData = await db.UserModel.findOne({ username: username });
+        if (!userData) {
+            throw new Error('readUserByUsername: user not found');
+        }
+        return userData;
+    }
+
     async createUser(user: IUser): Promise<boolean> {
         const userExists = await db.UserModel.exists({ username: user.username });
         if (userExists) {

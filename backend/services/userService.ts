@@ -3,6 +3,17 @@ import { IUser, IEntity } from "../models/database/userSchema";
 import { generateHash } from "../utilities/utils";
 const userModel = new UserModel();
 
+export async function userLogin(username: string, password: string): Promise<boolean> {
+    const user = await userModel.readUserByUsername(username);
+    if (user) {
+        const inputPw = await generateHash(password);
+        if (inputPw === user.password) {
+            return true;
+        }
+    }
+    return false;
+}
+
 export async function userCreate(user: IUser): Promise<boolean> {
     user.password = await generateHash(user.password);
     return await userModel.createUser(user);
