@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
 import { IClass, classSchema } from "./classSchema";
-import { IEntity, entitySchema, IUser, userSchema } from "./userSchema";
+import { IUser, userSchema } from "./userSchema";
 import { IEnrollment, enrollmentSchema } from "./enrollmentSchema";
 import { IStudent, studentSchema } from "./studentSchema";
+import { ITransaction, transactionSchema } from "./transactionSchema";
+import { IAnnouncement, announcementSchema } from "./announcementSchema";
+import { IGrade, gradeSchema } from "./gradeSchema";
+import { IParent, parentSchema } from "./parentSchema";
+import { ITeacher, teacherSchema } from "./teacherSchema";
 
 const connectionString: string = process.env.MONGODB_CONNECTION_STRING!;
 const databaseName: string = 'school_db';
@@ -28,17 +33,25 @@ const dropDatabase = async () => {
 }
 
 const ClassModel = mongoose.model<IClass>('Class', classSchema);
-const EntityModel = mongoose.model<IEntity>('Entity', entitySchema);
 const UserModel = mongoose.model<IUser>('User', userSchema);
 const EnrollmentModel = mongoose.model<IEnrollment>('Enrollment', enrollmentSchema);
 const StudentModel = mongoose.model<IStudent>('Student', studentSchema);
+const TransactionModel = mongoose.model<ITransaction>('Transaction', transactionSchema);
+const AnnouncementModel = mongoose.model<IAnnouncement>('Announcement', announcementSchema);
+const GradeModel = mongoose.model<IGrade>('Grade', gradeSchema);
+const ParentModel = mongoose.model<IParent>('Parent', parentSchema);
+const TeacherModel = mongoose.model<ITeacher>('Teacher', teacherSchema);
 
 export const db = {
     initDatabaseConnection,
     dropDatabase,
     ClassModel,
-    EntityModel,
     UserModel,
     EnrollmentModel,
-    StudentModel
+    StudentModel,
+    TransactionModel,
+    AnnouncementModel,
+    GradeModel,
+    ParentModel,
+    TeacherModel
 }

@@ -4,7 +4,20 @@ export async function getLocalDate():Promise <Date> {
     return date;
 }
 
+// for student Id header.
+export async function getCurrentYear():Promise <string> {
+    const now = new Date();
+    return now.getFullYear().toString();
+}
+
+export async function generateStudentId():Promise <string> {
+    const year = await getCurrentYear();
+    const id = Math.floor(100000 + Math.random() * 900000);
+    return `${year + id.toString()}`;
+}
+
 import { pbkdf2 } from 'crypto';
+import { get } from 'mongoose';
 const envSalt = process.env.SALT!
 
 // generate hash for password
