@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../styles/styles.css";  // Ensure this path is correct based on your project structure
+import "../../styles/styles.css";  // Ensure this path is correct based on your project structure
 
 class Login extends Component {
     API_URL = "http://localhost:7777/";
