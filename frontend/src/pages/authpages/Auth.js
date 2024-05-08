@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import "../../styles/styles.css";  // Ensure this path is correct based on your project structure
+import "../../styles/auth.css";
+import logo from "../../assets/Schoollogo.png";
+import schoolbg from "../../assets/schoolbg.png";
 
-class Login extends Component {
+class Auth extends Component {
     API_URL = "http://localhost:7777/";
 
     constructor(props) {
@@ -31,9 +33,10 @@ class Login extends Component {
         const { data, show_value } = this.state;
         return (
             <>
+            <div className="body-bg" style={{ backgroundImage: `url(${schoolbg})` }}>
                 <div className="container">
                     <header>
-                        <img src="../images/school_logo.png" alt="School Logo" />
+                        <img src={logo} alt="School Logo" />
                     </header>
                     <div className="buttons">
                         <button className="login-btn">Login</button>
@@ -48,10 +51,10 @@ class Login extends Component {
                 <footer>
                 Sta. Teresita Elementary School © 2023. All Rights Reserved.
                 </footer>
-                
+            </div>
             </>
         );
     }
 }
 
-export default Login;
+export default Auth;
