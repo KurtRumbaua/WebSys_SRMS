@@ -1,110 +1,56 @@
-import { IUser, IEntity } from "./database/userSchema";
+import { IUser } from "./database/userSchema";
 import { db } from './database/mongodbConfig';
 
 export class UserModel {
-    async readUserByUsername(username: string): Promise<IUser> {
-        const userData = await db.UserModel.findOne({ username: username });
-        if (!userData) {
-            throw new Error('readUserByUsername: user not found');
-        }
-        return userData;
-    }
-
-    async createUser(user: IUser): Promise<boolean> {
-        const userExists = await db.UserModel.exists({ username: user.username });
-        if (userExists) {
-            return false;
-        }
-
-        const userData = new db.UserModel(user);
-        try {
-            console.log(`${userData}`);
-            await userData.save();
-        } catch (error) {
-            console.log('Error creating user:', error);
-            return false;
-        }
-        return true;
-    }
-
-    async readAllUsers(): Promise<IUser[]> {
+    // get
+    async getAllUsers(): Promise<IUser[]> {
         return await db.UserModel.find();
     }
 
-    async readUser(userId: string): Promise<IUser> {
+    async getUser(userId: string): Promise<IUser> {
         const userData = await db.UserModel.findOne({ _id: userId });
         if (!userData) {
-            throw new Error('readUser: user not found');
+            throw new Error(`getUser: user ${userId} not found`);
         }
         return userData;
     }
 
-    async updateUser(oldData: IUser, newData: IUser): Promise<boolean> {
-        try {
-            await db.UserModel.updateOne({ _id: oldData._id }, newData);
+    async doesUserExist(email: string): Promise<boolean> {
+        const userExists = await db.UserModel.exists({ email: email });
+        if (userExists) {
             return true;
-        } catch (error) {
-            console.log('Error updating user:', error);
-            return false;
         }
+        console.log(`User with email ${email} does not exist.`)
+        return false;
     }
 
-    async deleteUser(userId: string): Promise<boolean> {
-        try  {
-            await db.UserModel.deleteOne({ _id: userId });
-            return true;
-        } catch (error) {
-            console.log('Error deleting user:', error);
-            return false;
-        }
+    // create
+    async createUser(user: IUser): Promise<IUser> {
+        const newUser = new db.UserModel(user);
+        return await newUser.save();
     }
 
-    async createEntities(entity: IEntity): Promise<boolean> {
-        const entityExists = await db.EntityModel.exists({ email: entity.email });
-        if (entityExists) {
-            return false;
-        }
+    // not used?
 
-        const entityData = new db.EntityModel(entity);
+    // update
+    async updateUser(email: string, user: IUser): Promise<boolean> {
         try {
-            console.log(`${entityData}`);
-            await entityData.save();
+            await db.UserModel.updateOne({ email: email }, user);
         } catch (error) {
-            console.log('Error creating entity:', error);
+            console.log(`Error updating user: ${email}-${user}.`, error);
             return false;
         }
         return true;
     }
 
-    async readAllEntities(): Promise<IEntity[]> {
-        return await db.EntityModel.find();
-    }
-
-    async readEntity(entityEmail: string): Promise<IEntity> {
-        const userData = await db.EntityModel.findOne({ email: entityEmail });
-        if (!userData) {
-            throw new Error('readEntity: entity not found');
-        }
-        return userData;
-    }
-
-    async updateEntity(oldData: IEntity, newData: IEntity): Promise<boolean> {
+    // delete
+    async deleteUser(email: string): Promise<boolean> {
         try {
-            await db.EntityModel.updateOne({ _id: oldData._id }, newData);
-            return true;
+            await db.UserModel.deleteOne({ email: email });
         } catch (error) {
-            console.log('Error updating entity:', error);
+            console.log(`Error deleting user: ${email}.`, error);
             return false;
         }
-    }
-
-    async deleteEntity(entityEmail: string): Promise<boolean> {
-        try  {
-            await db.EntityModel.deleteOne({ email: entityEmail });
-            return true;
-        } catch (error) {
-            console.log('Error deleting entity:', error);
-            return false;
-        }
+        return true;
     }
 }

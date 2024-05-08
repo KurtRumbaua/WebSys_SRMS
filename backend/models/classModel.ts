@@ -2,50 +2,104 @@ import { IClass } from './database/classSchema';
 import { db } from './database/mongodbConfig';
 
 export class ClassModel {
-    async createClass(classroom: IClass): Promise<boolean> {
-        const classExists = await db.ClassModel.exists({ name: classroom.name });
-        if (classExists) {
-            return false;
-        }
-        const classData = new db.ClassModel(classroom);
+    // assign teacher to class
+    async assignTeacherToClass(classId: string, teacherId: string): Promise<boolean> {
         try {
-            console.log(`${classData}`);
-            await classData.save();
+            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { refTeacherId: teacherId });
+            return isSuccess.modifiedCount > 0;
         } catch (error) {
-            console.log('Error creating class:', error);
+            console.log(`Error assigning teacher ${teacherId} to class: ${classId}.`, error);
             return false;
         }
-        return true;
+    }
+
+    async unassignTeacherFromClass(classId: string): Promise<boolean> {
+        try {
+            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { refTeacherId: null });
+            return isSuccess.modifiedCount > 0;
+        } catch (error) {
+            console.log(`Error unassigning teacher from class: ${classId}.`, error);
+            return false;
+        }
     }
     
-    async readAllClasses(): Promise<IClass[]> {
+    // get 
+    async getClassesByTeacherId(teacherId: string): Promise<IClass[]> {
+        return await db.ClassModel.find({ refTeacherId: teacherId });
+    }
+
+    async getClassesByStudentId(studentId: string): Promise<IClass[]> {
+        return await db.ClassModel.find({ refStudentIds: studentId });
+    }
+
+    async getAllClasses(): Promise<IClass[]> {
         return await db.ClassModel.find();
     }
 
-    async readClass(className: string): Promise<IClass> {
-        const classData = await db.ClassModel.findOne({ name: className });
+    async getClass(classId: string): Promise<IClass> {
+        const classData = await db.ClassModel.findOne({ _id: classId });
         if (!classData) {
-            throw new Error('readClass: class not found');
+            throw new Error(`getClass: class ${classId} not found`);
         }
         return classData;
     }
 
-    async updateClass(oldClass: IClass, newClass: IClass): Promise<boolean> {
-        try {
-            await db.ClassModel.updateOne({ name: oldClass.name }, newClass);
+    // create
+
+    async doesClassExist(classId: string): Promise<boolean> {
+        const classExists = await db.ClassModel.exists({ _id: classId });
+        if (classExists) {
             return true;
+        }
+        console.log(`Class with id ${classId} does not exist.`)
+        return false;
+    }
+
+    async createClass(classData: IClass): Promise<IClass> {
+        const newClass = new db.ClassModel(classData);
+        return await newClass.save();
+    }
+
+    // update
+
+    async updateClass(classId: string, classData: IClass): Promise<boolean> {
+        try {
+            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, classData);
+            return isSuccess.modifiedCount > 0;
         } catch (error) {
-            console.log('Error updating class:', error);
+            console.log(`Error updating class: ${classId}-${classData}.`, error);
             return false;
         }
     }
 
-    async deleteClass(className: string): Promise<boolean> {
-        try  {
-            await db.ClassModel.deleteOne({ name: className });
-            return true;
+    async addStudentToClass(classId: string, studentId: string): Promise<boolean> {
+        try {
+            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { $push: { refStudentIds: studentId } });
+            return isSuccess.modifiedCount > 0;
         } catch (error) {
-            console.log('Error deleting class:', error);
+            console.log(`Error adding student ${studentId} to class: ${classId}.`, error);
+            return false;
+        }
+    }
+    
+    // delete
+
+    async deleteClass(classId: string): Promise<boolean> {
+        try {
+            const isSuccess = await db.ClassModel.deleteOne({ _id: classId });
+            return isSuccess.deletedCount > 0;
+        } catch (error) {
+            console.log(`Error deleting class: ${classId}.`, error);
+            return false;
+        }
+    }
+
+    async deleteAllClasses(): Promise<boolean> {
+        try {
+            const isSuccess = await db.ClassModel.deleteMany({});
+            return isSuccess.deletedCount > 0;
+        } catch (error) {
+            console.log(`Error deleting all classes.`, error);
             return false;
         }
     }

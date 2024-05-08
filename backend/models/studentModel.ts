@@ -2,47 +2,76 @@ import { IStudent } from "./database/studentSchema";
 import { db } from './database/mongodbConfig';
 
 export class StudentModel {
-    async createStudent(student: IStudent): Promise<boolean> {
-        const studentData = new db.StudentModel(student);
-        try {
-            console.log(`${studentData}`);
-            await studentData.save();
-        } catch (error) {
-            console.log('Error creating student:', error);
-            return false;
-        }
-        return true;
+
+    // get 
+    // for basic information
+    async getAllStudentsBasic(): Promise<IStudent[]> {
+        return await db.StudentModel.find({}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1 }).sort('_id'); //leaN? -_id for desc.
     }
 
-    async readAllStudents(): Promise<IStudent[]> {
+    // for full information
+    async getAllStudents(): Promise<IStudent[]> {
         return await db.StudentModel.find();
     }
 
-    async readStudent(studentId: string): Promise<IStudent> {
-        const studentData = await db.StudentModel.findOne({ _id: studentId });
+    async getStudent(studentId: string): Promise<IStudent> {
+        const studentData = await db.StudentModel.findOne({ studentNumber: studentId });
         if (!studentData) {
-            throw new Error('readStudent: student not found');
+            throw new Error(`getStudent: student ${studentId} not found`);
         }
         return studentData;
     }
 
-    async updateStudent(oldData: IStudent, newData: IStudent): Promise<boolean> {
-        try {
-            await db.StudentModel.updateOne({ _id: oldData._id }, newData);
+    // for creating a new student
+    async doesStudentExist(studentNumber: string): Promise<boolean> {
+        const studentExists = await db.StudentModel.exists({ studentNumber: studentNumber });
+        if (studentExists) {
             return true;
+        }
+        console.log(`Student with student number ${studentNumber} does not exist.`)
+        return false;
+    }
+
+    // create
+    async createStudent(student: IStudent): Promise<IStudent> {
+        const newStudent = new db.StudentModel(student);
+        return await newStudent.save();
+    }
+
+    // update
+    async updateStudent(studentNumber: string, student: IStudent): Promise<boolean> {
+        try {
+            const isSuccess = await db.StudentModel.updateOne({ studentNumber: studentNumber }, student);
+            return isSuccess.modifiedCount > 0; // ? idk if modifiedCount is a good indicator.
         } catch (error) {
-            console.log('Error updating student:', error);
+            console.log(`Error updating student: ${studentNumber}-${student}`, error);
             return false;
         }
     }
 
-    async deleteStudent(studentId: string): Promise<boolean> {
-        try  {
-            await db.StudentModel.deleteOne({ _id: studentId });
-            return true;
+    // delete
+    async deleteStudent(studentNumber: string): Promise<boolean> {
+        try {
+            const isSuccess = await db.StudentModel.deleteOne({ studentNumber: studentNumber });
+            return isSuccess.deletedCount > 0; // ?  if false it means data retained.
         } catch (error) {
-            console.log('Error deleting student:', error);
+            console.log(`Error deleting student: ${studentNumber}.`, error);
             return false;
         }
     }
+
+    async deleteAllStudents(): Promise<boolean> {
+        try {
+            const isSuccess = await db.StudentModel.deleteMany({});
+            return isSuccess.deletedCount > 0; // ? if false it means data retained.
+        } catch (error) {
+            console.log(`Error deleting all students.`, error);
+            return false;
+        }
+    }
+
 }
+
+/* Notes
+Student can not be reassigned to class, selected upon registration.
+*/
