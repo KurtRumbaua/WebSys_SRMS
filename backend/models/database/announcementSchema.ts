@@ -1,15 +1,6 @@
 import { Schema, Types } from 'mongoose';
 import { GradeLevel } from './studentSchema';
 
-export enum EnrollmentStatus {
-    ENROLLED = 'ENROLLED',
-    DROPPED = 'DROPPED',
-    PENDING = 'PENDING',
-    GRADUATED = 'GRADUATED',
-    REJECTED = 'REJECTED',
-    NONE = 'NONE'
-}
-
 export interface IAnnouncement {
     _id: Types.ObjectId;
     refClassId: string,
