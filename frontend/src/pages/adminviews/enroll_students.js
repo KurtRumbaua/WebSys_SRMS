@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import React, {useState} from "react";
+=======
+import { React, useState } from "react";
+>>>>>>> 80f1e95c6ebc61cbbf347c79cdf421d3e3061888
 import "../../styles/enroll-students.css"; // Make sure to import the CSS file
 import logo from "../../assets/Schoollogo.png";
 import { NavLink } from "react-router-dom";
 
 function EnrollStudents() {
+<<<<<<< HEAD
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedEnrollee, setSelectedEnrollee] = useState(null);
 
@@ -12,12 +17,21 @@ function EnrollStudents() {
     setSelectedEnrollee(enrollee);
     setIsPopupOpen(!isPopupOpen);
   };
+=======
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen); // Toggles the dropdown state between true and false
+  };
+
+  // Optionally, you can add an event listener to handle clicks outside the dropdown to close it
+>>>>>>> 80f1e95c6ebc61cbbf347c79cdf421d3e3061888
   return (
     <>
       <div className="admin-container">
         <header className="admin-header">
           <img className="home-logo" src={logo} alt="School Logo" />
-          <nav class="nav">
+          <nav className="admin-nav">
             <ul>
               <li>
               <NavLink to="/student-database" activeClassName="active">
@@ -44,9 +58,24 @@ function EnrollStudents() {
                 </NavLink>
             </ul>
           </nav>
+          <nav className="admin-dropdown">
+            <button
+              onClick={toggleDropdown}
+              className="dropbtn"
+              activeClassName=""
+            >
+              User <span className="dropdown-arrow">&#x25BC;</span>
+            </button>
+            {dropdownOpen && (
+              <div className="dropdown-content">
+                <a href="/login">Logout</a>
+              </div>
+            )}
+          </nav>
         </header>
       </div>
       <div className="enroll-students">
+<<<<<<< HEAD
       <div className="admin-content">
         <h1>Enrollees</h1>
         <table className="admin-table">
@@ -72,6 +101,39 @@ function EnrollStudents() {
           </tbody>
         </table>
       </div>
+=======
+        <div className="admin-content">
+          <h1>Enrollees</h1>
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Enrollee No.</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Grade Level</th>
+                <th>Enrollment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem</td>
+                <td>Lorem Ipsum</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem</td>
+                <td>Lorem Ipsum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+>>>>>>> 80f1e95c6ebc61cbbf347c79cdf421d3e3061888
       </div>
       {isPopupOpen && (
         <div className="admin-popup-container">
