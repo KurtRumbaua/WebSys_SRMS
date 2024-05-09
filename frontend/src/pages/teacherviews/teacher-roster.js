@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/teacher-roster.css'; // Import CSS file for styling
+import '../../styles/teacher-roster.css'; // Import CSS file for styling
 
 function TeachersPage() {
     const [teachers, setTeachers] = useState([

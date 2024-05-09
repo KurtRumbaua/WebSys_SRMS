@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/teacher-views.css'; // Import CSS file for styling
+import '../../styles/teacher-roster.css'; // Import CSS file for styling
 
 function TeacherDashboard() {
   return (

@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import '../styles/student-roster.css';
+import '../../styles/student-roster.css';
 
 const StudentRosterPage = () => {
     const sections = ['Imus', 'Maragondon', 'General Trias', 'Dasmarinas', 'Bacoor']; // Example sections

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/class-management.css'; // Import CSS file for styling
+import '../../styles/class-management.css'; // Import CSS file for styling
 
 function ClassManagementPage() {
   const [selectedGrade, setSelectedGrade] = useState('');
