@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./pages/authpages/Auth";
 import Home from "./pages/parentviews/home";
 import StudenInfo from "./pages/parentviews/studentinfo";
+import Login from "./pages/authpages/Login";
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/parenthome" element={<Home/>}/>
         <Route path="/studentprofile" element={<StudenInfo/>}/>
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<Navigate to="/auth" />} />
       </Routes>
     </BrowserRouter>
