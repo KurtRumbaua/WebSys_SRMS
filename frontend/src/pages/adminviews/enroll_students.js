@@ -41,7 +41,7 @@ function EnrollStudents() {
       <div className="enroll-students">
       <div className="admin-content">
         <h1>Enrollees</h1>
-        <table>
+        <table className="admin-table">
           <thead>
             <tr>
               <th>Enrollee No.</th>
