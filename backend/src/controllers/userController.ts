@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { checkIfUserExists, addUser, getAllUsers } from '../services/userService';
+import { checkIfUserExists, addUser, getAllUsers, validateLogin, fetchUserByEmail } from '../services/userService';
 
 export async function registerUserAPI(req: Request, res: Response) {
     const userData = req.body;
@@ -40,3 +40,32 @@ export async function fetchAllUsersAPI(req: Request, res: Response) {
         message: 'Users found',
         data: users});
 }
+
+export async function loginUserAPI(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    const userExists = await checkIfUserExists(email);
+    if (!userExists) {
+        res.status(400).send({
+            success: "false",
+            message: 'User not found'});
+        return;
+    }
+
+    const isValidated = await validateLogin(email, password);
+    if (!isValidated) {
+        res.status(400).send({
+            success: "false",
+            message: 'Invalid login credentials'});
+        return;
+    }
+    const userData = await fetchUserByEmail(email);
+
+    res.status(200).send({
+        success: "true",
+        message: 'User logged in',
+        data: userData
+    });
+}
+
+//logout is a frontend fuction that only redirects to homepage. 
