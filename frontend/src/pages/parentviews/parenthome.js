@@ -3,7 +3,7 @@ import "../../styles/parenthome.css";
 import logo from "../../assets/Schoollogo.png";
 
 class ParentHome extends Component {
-    API_URL = "http://localhost:7777/";
+    API_URL = "http://localhost:7000/";
 
     constructor(props) {
         super(props);
@@ -15,15 +15,14 @@ class ParentHome extends Component {
 
     componentDidMount() {
         fetch(this.API_URL + "account/view", {
-            headers: { 'authorization': sessionStorage.getItem("token") }
+            headers: { 'email': sessionStorage.getItem("email") },
+            method: "GET",
         })
         .then(response => response.json())
         .then(message => {
-            var result = Object.keys(message).reduce((result, key) => {
-                result[key] = { value: message[key] };
-                return result;
-            }, {});
-            this.setState({ data: result, show_value: true });
+            message = message['data'];
+            this.setState({ data: message, show_value: true });
+            console.log(this.state.data);
         })
         .catch(error => console.log(error));
     }

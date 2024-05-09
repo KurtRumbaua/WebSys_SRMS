@@ -39,7 +39,7 @@ export class StudentModel {
 
         let studentNo = await generatestudentNumber();
         let isUnique = await this.doesStudentExist(studentNo);
-        while (!isUnique) {
+        while (isUnique) {
             studentNo = await generatestudentNumber();
             isUnique = await this.doesStudentExist(studentNo);
         }

@@ -59,6 +59,7 @@ export async function fetchAllUsersAPI(req: Request, res: Response) {
 
 export async function loginUserAPI(req: Request, res: Response) {
     try {
+        console.log(req.body);
         const { email, password } = req.body;
 
         const userExists = await checkIfUserExists(email);
@@ -93,7 +94,7 @@ export async function loginUserAPI(req: Request, res: Response) {
 
 export async function getUserRoleAPI(req: Request, res: Response) {
     try {
-        const { email } = req.body;
+        const email:string = req.headers['email'] as string;
 
         const userExists = await checkIfUserExists(email);
         if (!userExists) {
@@ -156,7 +157,8 @@ export async function deleteUserAPI(req: Request, res: Response) {
 
 export async function getUserByEmailAPI(req: Request, res: Response) {
     try {
-        const { email } = req.body;
+        //const { email } = req.body;
+        const email:string = req.headers['email'] as string;
 
         const userExists = await checkIfUserExists(email);
         if (!userExists) {

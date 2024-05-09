@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import {getAllStudents, removeAllStudents, removeStudent, editStudent, fetchStudent, getAllStudentsBasic, checkIfStudentExists } from "../services/studentService";
+import {addStudent} from "../services/studentService";
+
 
 export async function fetchAllStudentsAPI(req: Request, res: Response) {
     try {
@@ -78,7 +80,7 @@ export async function getStudentAPI(req: Request, res: Response) {
 export async function createStudentAPI(req: Request, res: Response) {
     try {
         const studentData = req.body;
-    
+        console.log(studentData); 
         const studentExist = await checkIfStudentExists(studentData.email);
         if (studentExist) {
             res.status(400).send({
@@ -86,6 +88,20 @@ export async function createStudentAPI(req: Request, res: Response) {
                 message: 'Student already exists!'});
             return;
         }
+
+        let student = await addStudent(studentData);
+        if (!student) {
+            res.status(400).send({
+                success: "false",
+                message: 'Error creating student'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'Student created',
+            data: student});
+        
     } catch (error) {
         res.status(400).send({
             success: "false",

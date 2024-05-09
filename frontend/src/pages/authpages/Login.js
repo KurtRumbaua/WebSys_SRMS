@@ -22,30 +22,37 @@ function Login() {
 
   const handleLogin = (event) => {
     event.preventDefault();
+
+    // Checker
     if (!email || !password) {
       setError('All fields must be filled out');
       return;
     }
-
-    const hashedPassword = sha256(password).toString();
-    fetch("http://localhost:7777/login", {
-      method: "POST",
+    
+    // Fetch login information (??) fg
+    console.log('Logging in with:', email)
+    console.log("password: ", password);
+    fetch("http://localhost:7000/account/login", {
       headers: {
         'Content-Type': 'application/json',
-        'authorization': sessionStorage.getItem("token")
       },
-      body: JSON.stringify({ email, password: hashedPassword })
+      method: "POST",
+      body: JSON.stringify({ email, password: password})
     })
     .then(response => {
       if (!response.ok) throw new Error('Wrong email or password');
       return response.json();
     })
-    .then(({ role }) => {
+    .then((message) => {
       setError('');
-      if (role === 'admin') {
+        sessionStorage.setItem('email', email);
+
+        let role = message['data']['role'];
+        console.log('Logged in as:', role);
+      if (role === 'ADMIN') {
         navigate('/admin-dashboard');
-      } else if (role === 'parent') {
-        navigate('/parent-dashboard');
+      } else if (role === 'PARENT') {
+       navigate('/parenthome');
       } else {
         navigate('/user-dashboard');
       }

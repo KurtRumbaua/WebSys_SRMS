@@ -6,7 +6,7 @@ import schoolbg from "../../assets/schoolbg.png";
 import Login from "../../pages/authpages/Login";
 
 class Auth extends Component {
-    API_URL = "http://localhost:7777/";
+    API_URL = "http://localhost:7000/";
 
     constructor(props) {
         super(props);
@@ -34,6 +34,10 @@ class Auth extends Component {
 
     handleLoginClick() {
         this.props.navigate('/Login');
+    }
+
+    handleSignupClick(){
+        this.props.navigate('/signup'); 
     }
 
     render() {
