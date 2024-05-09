@@ -3,7 +3,7 @@ import "../../styles/enroll-students.css"; // Make sure to import the CSS file
 import logo from "../../assets/Schoollogo.png";
 import { NavLink } from "react-router-dom";
 
-function EnrollStudents() {
+function StudentsDatabase() {
   return (
     <>
       <div className="admin-container">
@@ -74,4 +74,4 @@ function EnrollStudents() {
   );
 }
 
-export default EnrollStudents;
+export default StudentsDatabase;
