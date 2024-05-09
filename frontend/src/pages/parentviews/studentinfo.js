@@ -120,6 +120,10 @@ class StudentInfo extends Component {
                     <span class="value">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
                     </div>
                     <div>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
                         <button class="edit-button">
                             <img src={editbutton} alt="Edit button"/>
                         </button>

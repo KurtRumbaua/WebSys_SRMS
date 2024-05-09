@@ -80,7 +80,7 @@
   }
   
   /* Styles for the submit button */
-  button {
+  .login-button {
     background-color: #e55a70; /* Coral pink color */
     color: white;
     border: none;

@@ -77,7 +77,7 @@ function Login() {
               <input type={passwordShown ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
               <img className="eye-icon" src={passwordShown ? eyeIcon : eyeOffIcon} alt="Toggle Password Visibility" onClick={togglePasswordVisibility} />
             </div>
-            <button type="submit">Sign In</button>
+            <button class="login-button" type="submit">Sign In</button>
           </form>
         </div>
       </div>

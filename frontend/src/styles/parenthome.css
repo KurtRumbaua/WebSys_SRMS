@@ -55,7 +55,7 @@
   .home-student-profile .student-information, 
   .home-student-profile .student-medical-information,
   .home-student-profile .parent-guardian-information,
-  .home-student-profile .title   {
+  .home-student-profile .title {
     display: grid;
     grid-template-columns: 0.5fr 0.5fr;  /* Explicitly define two equal columns */ 
     padding-left: 2%;
@@ -67,12 +67,26 @@
     display: flex; /* Align label and value nicely */
     align-items: baseline; /* Vertically align content if heights differ */
     padding-bottom: 1%;
+    
   }
   
   .home-student-profile .label {
     font-weight: bold;
     min-width: 120px; /* Adjust label width as needed */
   } 
+
+  .home-student-profile .value-input { /* Assuming you have an input field */
+    border: none; /* Remove the default border */
+    background-image: linear-gradient(0deg, #ccc 2px, transparent 0); /* Gray underline */
+    background-position: 0 100%; /* Position at the bottom */
+    background-size: 0 2px; /* Initial width of 0 */
+    background-repeat: repeat-x; /* Repeat the underline across */
+    transition: background-size 0.3s ease-in-out; /* Smooth transition */
+}
+
+.home-student-profile .value-input:focus {
+    background-size: 100% 2px; /* Underline stretches to full width on focus */
+}
   
   .nav ul {
     margin: 0; /* Remove default margins */
@@ -137,4 +151,15 @@
     text-align: left; /* Align text to the left */
   }
   
+  .edit-button {
+    margin-bottom: 5%;
+    float: right;
+    background-color: transparent;
+    border: none;
+    
+  }
+
+  .edit-button:hover{
+    cursor: pointer;
+  }
   
