@@ -13,7 +13,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/class-management" />} />
         <Route path="/class-management" element={<ClassManagementPage />} />
         <Route path="/student-roster" element={<StudentRosterPage />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
