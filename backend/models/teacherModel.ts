@@ -1,6 +1,16 @@
 import { ITeacher } from "./database/teacherSchema";
 import { db } from "./database/mongodbConfig";
 
+
+// getAllTeachers()
+// getAllTeachersBasic()
+// getTeacher(teacherId: string)
+// doesTeacherExist(email: string)
+// createTeacher(teacher: ITeacher)
+// updateTeacher(teacherId: string, teacher: ITeacher)
+// deleteTeacher(teacherId: string)
+// deleteAllTeachers()
+
 export class TeacherModel {
     // get
     async getAllTeachers(): Promise<ITeacher[]> {
@@ -24,12 +34,12 @@ export class TeacherModel {
 
     // create
 
-    async doesTeacherExist(email: string): Promise<boolean> {
-        const teacherExists = await db.TeacherModel.exists({ email: email });
+    async doesTeacherExist(id: string): Promise<boolean> {
+        const teacherExists = await db.TeacherModel.exists({ _id: id});
         if (teacherExists) {
             return true;
         }
-        console.log(`Teacher with email ${email} does not exist.`)
+        console.log(`Teacher with id ${id} does not exist.`)
         return false;
     }
 
