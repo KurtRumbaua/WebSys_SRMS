@@ -11,7 +11,7 @@ export enum EnrollmentStatus {
 }
 
 export interface IEnrollment {
-    _id: Types.ObjectId;
+    _id?: Types.ObjectId;
     studentId: string,
     gradeLevel: GradeLevel,
     enrollmentDate: Date,

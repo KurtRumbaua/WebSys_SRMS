@@ -5,7 +5,7 @@ export enum TransactionType {
     INCOMING = 'INCOMING'
 }
 export interface ITransaction {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     to: string,
     from: string,
     amount: number, //in php

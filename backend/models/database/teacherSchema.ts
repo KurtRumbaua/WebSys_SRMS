@@ -14,7 +14,7 @@ export enum Field {
 }
 
 export interface ITeacher {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     firstName: string,
     middleName?: string,
     lastName: string,

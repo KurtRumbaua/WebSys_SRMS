@@ -1,7 +1,7 @@
 import { Schema, Types } from 'mongoose';
 
 export interface IParent {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     firstName: string,
     middleName?: string,
     lastName: string,

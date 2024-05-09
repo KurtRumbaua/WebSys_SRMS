@@ -19,7 +19,7 @@ export enum Section {
 }
 
 export interface IStudent {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     parentId: string,
     firstName: string,
     middleName?: string,

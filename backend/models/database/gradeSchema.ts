@@ -2,7 +2,7 @@ import { Schema, Types } from 'mongoose';
 import { Field } from './teacherSchema';
 
 export interface IGrade {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     subject: Field,
     assignment_1: number,
     assignment_2: number,

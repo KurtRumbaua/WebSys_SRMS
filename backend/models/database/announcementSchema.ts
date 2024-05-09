@@ -2,7 +2,7 @@ import { Schema, Types } from 'mongoose';
 import { GradeLevel } from './studentSchema';
 
 export interface IAnnouncement {
-    _id: Types.ObjectId;
+    _id?: Types.ObjectId;
     refClassId: string,
     datePosted: Date,
     title: string,

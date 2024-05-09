@@ -3,7 +3,7 @@ import { Field } from './teacherSchema';
 import { GradeLevel, Section } from './studentSchema';
 
 export interface IClass {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     subject: Field,
     section: Section,
     gradeLevel: GradeLevel,
