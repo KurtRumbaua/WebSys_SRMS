@@ -60,6 +60,17 @@ export class ClassModel {
         return await newClass.save();
     }
 
+    async populateClass(classData: IClass, session: any): Promise<boolean> {
+        try {
+            const newClass = new db.ClassModel(classData);
+            await newClass.save({ session });
+            return true;
+        } catch (error) {
+            console.log(`Error populating class: ${classData}.`, error);
+            throw error; // Throw the error after logging it
+        }
+    }
+    
     // update
 
     async updateClass(classId: string, classData: IClass): Promise<boolean> {

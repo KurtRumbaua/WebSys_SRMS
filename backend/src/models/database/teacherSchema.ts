@@ -52,7 +52,7 @@ export interface IClass {
 
 export const classSchema = new Schema<IClass>({
     section: { type: String, required: true, default: Section.imus },
-    refTeacherId: { type: String, required: true },
+    refTeacherId: { type: String, default: '' },
     refStudentIds: { type: [String], required: true, default: []},
     room: { type: String, required: true }
 });

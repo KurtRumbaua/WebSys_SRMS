@@ -4,6 +4,8 @@ const cors = require("cors");
 import express from "express";
 import { db } from "./models/database/mongodbConfig";
 import userRoute from "./routes/userRoute";
+import studentRoute from "./routes/studentRoute";
+import classRoute from "./routes/classRoute";
 
 db.initDatabaseConnection();
 
@@ -24,7 +26,9 @@ app.get("/reset", (_, res) => {
 })
 
 const apiRoutes = {
-    "/account": userRoute
+    "/account": userRoute,
+    "/student": studentRoute,
+    "/class": classRoute,
 }
 for (const key of Object.keys(apiRoutes)) {
     app.use(key, apiRoutes[key as keyof typeof apiRoutes]);

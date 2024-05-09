@@ -38,3 +38,7 @@ export async function validateLogin(email: string, password: string): Promise<bo
 export async function fetchUserByEmail(email: string): Promise<IUser> {
     return await userModel.getUserByEmail(email);
 }
+
+export async function removeUser(email: string): Promise<boolean> {
+    return await userModel.deleteUser(email);
+}

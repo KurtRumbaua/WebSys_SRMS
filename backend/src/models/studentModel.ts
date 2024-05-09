@@ -9,11 +9,11 @@ export class StudentModel {
         return await db.StudentModel.find({}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1 }).sort('_id'); //leaN? -_id for desc.
     }
 
-    // for full information
+    
     async getAllStudents(): Promise<IStudent[]> {
         return await db.StudentModel.find();
     }
-
+    // for full information
     async getStudent(studentId: string): Promise<IStudent> {
         const studentData = await db.StudentModel.findOne({ studentNumber: studentId });
         if (!studentData) {

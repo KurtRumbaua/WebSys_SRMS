@@ -1,45 +1,193 @@
 import { Request, Response } from "express";
-import { studentCreate, studentDelete, studentRead, studentReadAll, studentUpdate } from "../services/studentService";
+import {getAllStudents, removeAllStudents, removeStudent, editStudent, fetchStudent, getAllStudentsBasic, checkIfStudentExists } from "../services/studentService";
 
-export async function createStudentAPI(req: Request, res: Response) {
-    const studentData = req.body;
-    const success = await studentCreate(studentData);
-    if (success) {
-        res.status(201).send('Student created');
-    } else {
-        res.status(400).send('Student not created');
+export async function fetchAllStudentsAPI(req: Request, res: Response) {
+    try {
+        const students = await getAllStudents();
+        if (!students) {
+            res.status(400).send({
+                success: "false",
+                message: 'No students found'});
+            return;
+        }
+        res.status(200).send({
+            success: "true",
+            message: 'Students found',
+            data: students});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching students',
+            log_error: error});
     }
 }
 
-export async function readAllStudentsAPI(req: Request, res: Response) {
-    const students = await studentReadAll();
-    res.status(200).json(students);
+export async function fetchStudentsBasicAPI(req: Request, res: Response) {
+    try {
+        const students = await getAllStudentsBasic();
+        if (!students) {
+            res.status(400).send({
+                success: "false",
+                message: 'No students found'});
+            return;
+        }
+        res.status(200).send({
+            success: "true",
+            message: 'Students found',
+            data: students});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching students',
+            log_error: error});
+    }
 }
 
-export async function readStudentAPI(req: Request, res: Response) {
-    const studentId = req.params.id;
-    const student = await studentRead(studentId);
-    res.status(200).json(student);
+export async function getStudentAPI(req: Request, res: Response) {
+    try {
+        const { studentId } = req.body;
+
+        const studentExists = await checkIfStudentExists(studentId);
+        if (!studentExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'Student does not exist'});
+            return;
+        }
+
+        const student = await fetchStudent(studentId);
+        if (!student) {
+            res.status(400).send({
+                success: "false",
+                message: 'Student data not found'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'Student found',
+            data: student});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching student',
+            log_error: error});
+    }
+}
+
+export async function createStudentAPI(req: Request, res: Response) {
+    try {
+        const studentData = req.body;
+    
+        const studentExist = await checkIfStudentExists(studentData.email);
+        if (studentExist) {
+            res.status(400).send({
+                success: "false",
+                message: 'Student already exists!'});
+            return;
+        }
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error creating student',
+            log_error: error});
+    }
 }
 
 export async function updateStudentAPI(req: Request, res: Response) {
-    const oldStudent = req.body.oldData;
-    const newStudent = req.body.newData;
-    const success = await studentUpdate(oldStudent, newStudent);
-    if (success) {
-        res.status(200).send('Student updated');
-    } else {
-        res.status(400).send('Student not updated');
+    try {
+        const studentData = req.body;
+        const { studentNumber } = req.query;
+        if (!studentNumber || !studentData || typeof studentNumber !== 'string') {
+            res.status(400).send({
+                success: "false",
+                message: 'Student number and data required'});
+            return;
+        }
+
+        const studentExist = await checkIfStudentExists(studentNumber);
+        if (!studentExist) {
+            res.status(400).send({
+                success: "false",
+                message: 'Student does not exist'});
+            return;
+        }
+
+        const student = await editStudent(studentNumber, studentData);
+        if (!student) {
+            res.status(400).send({
+                success: "false",
+                message: 'Error updating student'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'Student updated',
+            data: student});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error updating student',
+            log_error: error});
     }
 }
 
-export async function deleteStudentAPI(req: Request, res: Response) {
-    const studentId = req.params.id;
-    const success = await studentDelete(studentId);
-    if (success) {
-        res.status(200).send('Student deleted');
-    } else {
-        res.status(400).send('Student not deleted');
+export async function removeStudentAPI(req: Request, res: Response) {
+    try {
+        const { studentNumber } = req.query;
+        if (!studentNumber || typeof studentNumber !== 'string') {
+            res.status(400).send({
+                success: "false",
+                message: 'Student number required'});
+            return;
+        }
+
+        const studentExist = await checkIfStudentExists(studentNumber);
+        if (!studentExist) {
+            res.status(400).send({
+                success: "false",
+                message: 'Student does not exist'});
+            return;
+        }
+
+        const student = await removeStudent(studentNumber);
+        if (!student) {
+            res.status(400).send({
+                success: "false",
+                message: 'Error deleting student'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'Student deleted',
+            data: student});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error deleting student',
+            log_error: error});
     }
 }
 
+export async function removeAllStudentsAPI(req: Request, res: Response) {
+    try {
+        const students = await removeAllStudents();
+        if (!students) {
+            res.status(400).send({
+                success: "false",
+                message: 'No students found'});
+            return;
+        }
+        res.status(200).send({
+            success: "true",
+            message: 'Students deleted',
+            data: students});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error deleting students',
+            log_error: error});
+    }
+}
