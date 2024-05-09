@@ -19,10 +19,14 @@ function EnrollStudents() {
           <nav className="admin-nav">
             <ul>
               <li>
-                <a href="/*">Students</a>
+              <NavLink to="/student-database" activeClassName="active">
+                  Students
+                </NavLink>
               </li>
               <li>
-                <a href="/*">Employees</a>
+              <NavLink to="/employee-database" activeClassName="active">
+                  Employees
+                </NavLink>
               </li>
               <li>
                 <NavLink to="/enroll-student" activeClassName="active">
@@ -30,8 +34,13 @@ function EnrollStudents() {
                 </NavLink>
               </li>
               <li>
-                <a href="/*">Class Management</a>
+              <NavLink to="/class-management" activeClassName="active">
+                  Class Management
+                </NavLink>
               </li>
+              <NavLink to="/financial-management" activeClassName="active">
+                  Financial Management
+                </NavLink>
             </ul>
           </nav>
           <nav className="admin-dropdown">
@@ -81,6 +90,7 @@ function EnrollStudents() {
             </tbody>
           </table>
         </div>
+
       </div>
       <div>
         <footer className="admin-footer">

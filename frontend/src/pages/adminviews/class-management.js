@@ -47,7 +47,7 @@ function ClassManagementPage() {
               <div key={`subject-${subject}`} className="card">
                 <h2 className="card-title">{subject}</h2>
                 <p className="card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor accumsan tincidunt.</p>
-                <a href="#!" onClick={() => handleAssignClick(selectedGrade)} className="assign-link">Assign</a>
+                <a href="/class-teacher-assign" onClick={() => handleAssignClick(selectedGrade)} className="assign-link">Assign</a>
               </div>
             ))}
           </div>
