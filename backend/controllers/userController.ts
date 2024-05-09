@@ -1,101 +1,187 @@
-import e, { Request, Response } from 'express';
-import { userCreate, userLogin, userDelete, userRead, userReadAll, userUpdate, entityCreate, entityDelete, entityRead, entityReadAll, entityUpdate } from '../services/userService';
+import { Request, Response } from 'express';
+import { removeUser, checkIfUserExists, addUser, getAllUsers, validateLogin, fetchUserByEmail, getUserRole } from '../services/userService';
+
+export async function registerUserAPI(req: Request, res: Response) {
+    try {
+        const userData = req.body;
+
+        const doesUserExist = await checkIfUserExists(userData.email);
+        if (doesUserExist) {
+            res.status(400).send({
+                success: "false",
+                message: 'User is already registered!'});
+            return;
+            
+        }
+
+        const success = await addUser(userData);
+        if (!success) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not registered'});
+            return;
+        }
+
+        res.status(201).send({
+            success: "true",
+            message:'User registered',
+            data: success});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error registering user',
+            log_error: error});
+    }
+}
+
+export async function fetchAllUsersAPI(req: Request, res: Response) {
+    try {
+        const users = await getAllUsers();
+        if (!users) {
+            res.status(400).send({
+                success: "false",
+                message: 'No users found'});
+            return;
+        }
+        res.status(200).send({
+            success: "true",
+            message: 'Users found',
+            data: users});
+            
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching users',
+            log_error: error});
+    }
+
+}
 
 export async function loginUserAPI(req: Request, res: Response) {
-    const { username, password } = req.body;
-    if (!username || !password) {
-        res.status(400).send('Username and password are required');
-        return;
+    try {
+        const { email, password } = req.body;
+
+        const userExists = await checkIfUserExists(email);
+        if (!userExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
+
+        const isValidated = await validateLogin(email, password);
+        if (!isValidated) {
+            res.status(400).send({
+                success: "false",
+                message: 'Invalid login credentials'});
+            return;
+        }
+        const userData = await fetchUserByEmail(email);
+
+        res.status(200).send({
+            success: "true",
+            message: 'User logged in',
+            data: userData
+        });
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error logging in',
+            log_error: error});
     }
-
-    const success = await userLogin(username, password);
-    if (success) {
-        res.status(200).send('Login successful');
-    } else {
-        res.status(401).send('Login failed');
-    }
 }
 
-export async function createUserAPI(req: Request, res: Response) {
-    const userData = req.body;
-    const success = await userCreate(userData);
-    if (success) {
-        res.status(201).send('User created');
-    } else {
-        res.status(400).send('User not created');
-    }
-}
+export async function getUserRoleAPI(req: Request, res: Response) {
+    try {
+        const { email } = req.body;
 
-export async function readAllUsersAPI(req: Request, res: Response) {
-    const users = await userReadAll();
-    res.status(200).json(users);
-}
+        const userExists = await checkIfUserExists(email);
+        if (!userExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
 
-export async function readUserAPI(req: Request, res: Response) {
-    const userId = req.params.id;
-    const user = await userRead(userId);
-    res.status(200).json(user);
-}
+        const role = await getUserRole(email);
+        if (!role) {
+            res.status(400).send({
+                success: "false",
+                message: 'Role not found'});
+            return;
+        }
 
-export async function updateUserAPI(req: Request, res: Response) {
-    const oldUser = req.body.oldData;
-    const newUser = req.body.newData;
-    const success = await userUpdate(oldUser, newUser);
-    if (success) {
-        res.status(200).send('User updated');
-    } else {
-        res.status(400).send('User not updated');
+        res.status(200).send({
+            success: "true",
+            message: 'Role found',
+            data: role});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching role',
+            log_error: error});
     }
 }
 
 export async function deleteUserAPI(req: Request, res: Response) {
-    const userId = req.params.id;
-    const success = await userDelete(userId);
-    if (success) {
-        res.status(200).send('User deleted');
-    } else {
-        res.status(400).send('User not deleted');
+    try {
+        const { email } = req.body;
+
+        const userExists = await checkIfUserExists(email);
+        if (!userExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
+
+        const isDeleted = await removeUser(email);
+        if (!isDeleted) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not deleted'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'User deleted'});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error deleting user',
+            log_error: error});
     }
 }
 
-export async function createEntityAPI(req: Request, res: Response) {
-    const entityData = req.body;
-    const success = await entityCreate(entityData);
-    if (success) {
-        res.status(201).send('Entity created');
-    } else {
-        res.status(400).send('Entity not created');
-    }
-}
+export async function getUserByEmailAPI(req: Request, res: Response) {
+    try {
+        const { email } = req.body;
 
-export async function readAllEntitiesAPI(req: Request, res: Response) {
-    const entities = await entityReadAll();
-    res.status(200).json(entities);
-}
+        const userExists = await checkIfUserExists(email);
+        if (!userExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
 
-export async function readEntityAPI(req: Request, res: Response) {
-    const entityId = req.params.id;
-    const entity = await entityRead(entityId);
-    res.status(200).json(entity);
-}
+        const userData = await fetchUserByEmail(email);
+        if (!userData) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
 
-export async function updateEntityAPI(req: Request, res: Response) {
-    const oldEntity = req.body.oldData;
-    const newEntity = req.body.newData;
-    const success = await entityUpdate(oldEntity, newEntity);
-    if (success) {
-        res.status(200).send('Entity updated');
-    } else {
-        res.status(400).send('Entity not updated');
-    }
-}
-
-export async function deleteEntityAPI(req: Request, res: Response) {
-    const entityId = req.params.id;
-    const success = await entityDelete(entityId);
-    if (success) {
-        res.status(200).send('Entity deleted');
-    } else {
-        res.status(400).send('Entity not deleted');
+        res.status(200).send({
+            success: "true",
+            message: 'User found',
+            data: userData});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching user',
+            log_error: error});
     }
 }

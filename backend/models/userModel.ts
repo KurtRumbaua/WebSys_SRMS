@@ -7,6 +7,14 @@ export class UserModel {
         return await db.UserModel.find();
     }
 
+    async getUserByEmail(email: string): Promise<IUser> {
+        const userData = await db.UserModel.findOne({ email: email });
+        if (!userData) {
+            throw new Error(`getUserByEmail: user ${email} not found`);
+        }
+        return userData;
+    }
+    
     async getUser(userId: string): Promise<IUser> {
         const userData = await db.UserModel.findOne({ _id: userId });
         if (!userData) {

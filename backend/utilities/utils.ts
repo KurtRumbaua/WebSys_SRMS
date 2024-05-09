@@ -10,14 +10,13 @@ export async function getCurrentYear():Promise <string> {
     return now.getFullYear().toString();
 }
 
-export async function generateStudentId():Promise <string> {
+export async function generatestudentNumber():Promise <string> {
     const year = await getCurrentYear();
     const id = Math.floor(100000 + Math.random() * 900000);
     return `${year + id.toString()}`;
 }
 
 import { pbkdf2 } from 'crypto';
-import { get } from 'mongoose';
 const envSalt = process.env.SALT!
 
 // generate hash for password

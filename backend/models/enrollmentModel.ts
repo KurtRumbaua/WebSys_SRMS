@@ -1,78 +1,30 @@
-import { EnrollmentStatus, IEnrollment } from "./database/enrollmentSchema";
+import { EnrollmentStatus, IStudent } from "./database/studentSchema";
 import { db } from './database/mongodbConfig';
 
 export class EnrollmentModel {
     // get
-
-    async getEnrollments(): Promise<IEnrollment[]> {
-        return await db.EnrollmentModel.find();
+    async getNotEnrolled(): Promise<IStudent[]> {
+        return await db.StudentModel.find({ $ne: EnrollmentStatus.ENROLLED }, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1, enrollmentStatus: 1, }).sort('lastName'); //leaN? -_id for desc.
     }
 
-    async getEnrollment(enrollmentId: string): Promise<IEnrollment> {
-        const enrollmentData = await db.EnrollmentModel.findOne({ _id: enrollmentId });
-        if (!enrollmentData) {
-            throw new Error(`getEnrollment: enrollment ${enrollmentId} not found`);
+    async getPendingEnrollments(): Promise<IStudent[]> {
+        return await db.StudentModel.find({enrollmentStatus: EnrollmentStatus.PENDING}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1, enrollmentStatus: 1 }).sort('lastName'); //leaN? -_id for desc.
+    }
+
+    async getEnrolledStudents(): Promise<IStudent[]> {
+        return await db.StudentModel.find({enrollmentStatus: !EnrollmentStatus.ENROLLED}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1, enrollmentStatus: 1 }).sort('lastName'); //leaN? -_id for desc.
+    }
+
+    async getAllEnrollments(): Promise<IStudent[]> {
+        return await db.StudentModel.find();
+    }
+
+    async getEnrolledInfo(studentNumber: string): Promise<IStudent> {
+        const studentData = await db.StudentModel.findOne({ studentNumber: studentNumber });
+        if (!studentData) {
+            throw new Error(`getStudent: student ${studentNumber} not found`);
         }
-        return enrollmentData;
-    }
-
-    // create
-    async createEnrollment(enrollment: IEnrollment): Promise<IEnrollment> {
-        const newEnrollment = new db.EnrollmentModel(enrollment);
-        return await newEnrollment.save();
-    }
-
-    // update
-    async updateEnrollment(enrollmentId: string, enrollment: IEnrollment): Promise<boolean> {
-        try {
-            const isSuccess = await db.EnrollmentModel.updateOne({ _id: enrollmentId }, enrollment);
-            return isSuccess.modifiedCount > 0;
-        } catch (error) {
-            console.log(`Error updating enrollment: ${enrollmentId}-${enrollment}`, error);
-            return false;
-        }
-    }
-
-    async updateEnrollmentStatus(enrollmentId: string, status: EnrollmentStatus): Promise<boolean> {
-        try {
-            const isSuccess = await db.EnrollmentModel.updateOne({ _id: enrollmentId }, { enrollmentStatus: status });
-            return isSuccess.modifiedCount > 0;
-        } catch (error) {
-            console.log(`Error updating enrollment status: ${enrollmentId}-${status}`, error);
-            return false;
-        }
-    }
-
-    // delete
-
-    async deleteEnrollment(enrollmentId: string): Promise<boolean> {
-        try {
-            const isSuccess = await db.EnrollmentModel.deleteOne({ _id: enrollmentId });
-            return isSuccess.deletedCount > 0;
-        } catch (error) {
-            console.log(`Error deleting enrollment: ${enrollmentId}.`, error);
-            return false;
-        }
-    }
-
-    async deleteAllEnrollments(): Promise<boolean> {
-        try {
-            const isSuccess = await db.EnrollmentModel.deleteMany({});
-            return isSuccess.deletedCount > 0;
-        } catch (error) {
-            console.log(`Error deleting all enrollments.`, error);
-            return false;
-        }
-    }
-
-    async deleteEnrollmentByStudentId(studentId: string): Promise<boolean> {
-        try {
-            const isSuccess = await db.EnrollmentModel.deleteOne({ refStudentId: studentId });
-            return isSuccess.deletedCount > 0;
-        } catch (error) {
-            console.log(`Error deleting enrollment by student id: ${studentId}.`, error);
-            return false;
-        }
+        return studentData;
     }
 
 }

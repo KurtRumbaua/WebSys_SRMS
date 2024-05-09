@@ -1,11 +1,11 @@
-import { IGrade } from "./database/gradeSchema";
+import { IGrade } from "./database/teacherSchema";
 import { db } from "./database/mongodbConfig";
 import { Field } from "./database/teacherSchema";
 
 export class GradeModel {
     // get
-    async getGrades(refStudentId: string, subject: Field): Promise<IGrade[]> {
-        return await db.GradeModel.find({ refStudentId, subject });
+    async getGrades(refStudentId: string, subject: string): Promise<IGrade[]> {
+        return await db.GradeModel.find({ refStudentId: refStudentId, subject: subject });
     }
     
     async getGradesByStudentId(refStudentId: string): Promise<IGrade[]> {
@@ -27,6 +27,16 @@ export class GradeModel {
         return await newGrade.save();
     }
 
+    async populateGrade(gradeData: IGrade, session: any) {
+        try {
+            const newGrade = new db.GradeModel(gradeData);
+            await newGrade.save({ session });
+            return true;
+        } catch (error) {
+            console.log(`Error populating grade ${gradeData}.`, error);
+            return false;
+        }
+    }
     // update
 
     async updateGrade(gradeId: string, grade: IGrade): Promise<boolean> {

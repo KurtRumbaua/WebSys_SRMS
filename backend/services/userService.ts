@@ -1,56 +1,56 @@
+import { IUser } from "../models/database/userSchema";
 import { UserModel } from "../models/userModel";
-import { IUser, IEntity } from "../models/database/userSchema";
 import { generateHash } from "../utilities/utils";
 const userModel = new UserModel();
 
-export async function userLogin(username: string, password: string): Promise<boolean> {
-    const user = await userModel.readUserByUsername(username);
-    if (user) {
-        const inputPw = await generateHash(password);
-        if (inputPw === user.password) {
-            return true;
-        }
+export async function checkIfUserExists(email: string): Promise<boolean>{
+    return await userModel.doesUserExist(email);
+}
+
+export async function addUser(userData: IUser): Promise<IUser> {
+    const hashedPassword = await generateHash(userData.password);
+    userData.password = hashedPassword;
+    return await userModel.createUser(userData);
+}
+
+export async function getAllUsers(): Promise<IUser[] | boolean> {
+    const usersQuery = await userModel.getAllUsers();
+    if (!usersQuery) {
+        return false;
     }
+    return usersQuery;
+}
+
+export async function getUserRole(userId: string): Promise<string> {
+    const user = await userModel.getUser(userId);
+    if (!user) {
+        return "no role!";
+    }
+    return user.role;
+}
+
+export async function getUser(email: string): Promise<IUser> {
+    return await userModel.getUserByEmail(email);
+}
+
+export async function validateLogin(email: string, password: string): Promise<boolean> {
+    const user = await userModel.getUserByEmail(email);
+    if (!user) {
+        return false;
+    }
+
+    const hashPass = await generateHash(password);
+    if (hashPass === user.password) {
+        return true;
+    }
+    console.log(`Wrong password for user ${email}.`)
     return false;
 }
 
-export async function userCreate(user: IUser): Promise<boolean> {
-    user.password = await generateHash(user.password);
-    return await userModel.createUser(user);
+export async function fetchUserByEmail(email: string): Promise<IUser> {
+    return await userModel.getUserByEmail(email);
 }
 
-export async function userReadAll(): Promise<IUser[]> {
-    return await userModel.readAllUsers();
-}
-
-export async function userRead(userId: string): Promise<IUser> {
-    return await userModel.readUser(userId);
-}
-
-export async function userUpdate(oldUser: IUser, newUser: IUser): Promise<boolean> {
-    return await userModel.updateUser(oldUser, newUser);
-}
-
-export async function userDelete(userId: string): Promise<boolean> {
-    return await userModel.deleteUser(userId);
-}
-
-export async function entityCreate(entity: IEntity): Promise<boolean> {
-    return await userModel.createEntities(entity);
-}
-
-export async function entityReadAll(): Promise<IEntity[]> {
-    return await userModel.readAllEntities();
-}
-
-export async function entityRead(entityId: string): Promise<IEntity> {
-    return await userModel.readEntity(entityId);
-}
-
-export async function entityUpdate(oldEntity: IEntity, newEntity: IEntity): Promise<boolean> {
-    return await userModel.updateEntity(oldEntity, newEntity);
-}
-
-export async function entityDelete(entityId: string): Promise<boolean> {
-    return await userModel.deleteEntity(entityId);
+export async function removeUser(email: string): Promise<boolean> {
+    return await userModel.deleteUser(email);
 }

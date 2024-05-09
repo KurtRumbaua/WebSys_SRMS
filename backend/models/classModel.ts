@@ -1,4 +1,4 @@
-import { IClass } from './database/classSchema';
+import { IClass } from './database/teacherSchema';
 import { db } from './database/mongodbConfig';
 
 export class ClassModel {
@@ -28,8 +28,8 @@ export class ClassModel {
         return await db.ClassModel.find({ refTeacherId: teacherId });
     }
 
-    async getClassesByStudentId(studentId: string): Promise<IClass[]> {
-        return await db.ClassModel.find({ refStudentIds: studentId });
+    async getClassesByStudentNumber(studentNumber: string): Promise<IClass[]> {
+        return await db.ClassModel.find({ refStudentIds: studentNumber });
     }
 
     async getAllClasses(): Promise<IClass[]> {
@@ -60,6 +60,17 @@ export class ClassModel {
         return await newClass.save();
     }
 
+    async populateClass(classData: IClass, session: any): Promise<boolean> {
+        try {
+            const newClass = new db.ClassModel(classData);
+            await newClass.save({ session });
+            return true;
+        } catch (error) {
+            console.log(`Error populating class: ${classData}.`, error);
+            throw error; // Throw the error after logging it
+        }
+    }
+    
     // update
 
     async updateClass(classId: string, classData: IClass): Promise<boolean> {
@@ -72,12 +83,12 @@ export class ClassModel {
         }
     }
 
-    async addStudentToClass(classId: string, studentId: string): Promise<boolean> {
+    async addStudentToClass(classId: string, studentNumber: string): Promise<boolean> {
         try {
-            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { $push: { refStudentIds: studentId } });
+            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { $push: { refStudentIds: studentNumber } });
             return isSuccess.modifiedCount > 0;
         } catch (error) {
-            console.log(`Error adding student ${studentId} to class: ${classId}.`, error);
+            console.log(`Error adding student ${studentNumber} to class: ${classId}.`, error);
             return false;
         }
     }

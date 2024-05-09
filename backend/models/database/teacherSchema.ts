@@ -43,7 +43,6 @@ export const teacherSchema = new Schema<ITeacher>({
 
 export interface IClass {
     _id?: Types.ObjectId,
-    subject: Field,
     section: Section,
     gradeLevel: GradeLevel,
     refTeacherId: string, //teacher id
@@ -52,9 +51,8 @@ export interface IClass {
 }
 
 export const classSchema = new Schema<IClass>({
-    subject: { type: String, required: true, default: Field.science },
     section: { type: String, required: true, default: Section.imus },
-    refTeacherId: { type: String, required: true },
+    refTeacherId: { type: String, default: '' },
     refStudentIds: { type: [String], required: true, default: []},
     room: { type: String, required: true }
 });
