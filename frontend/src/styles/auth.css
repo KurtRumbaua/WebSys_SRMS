@@ -15,6 +15,7 @@ html, body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    opacity: .7;
   }
 
 #root {
@@ -63,13 +64,15 @@ header img {
 }
 
 footer {
-    text-align: center;
-    font-size: 12px;
-    color: #fff;
-    width: 100%;
-    padding: 10px 0;;
-    /*width:10000%;*/
+    position: absolute;
+    left: 0;
+    bottom: 0;
     height: 100px;
+    width: 100%;
     background-color: #e55a70;
-    margin-top: auto;
-}
+    color: white;
+    text-align: center;
+  }
+
+
+
