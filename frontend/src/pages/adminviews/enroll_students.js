@@ -1,15 +1,22 @@
-import React from "react";
+import { React, useState } from "react";
 import "../../styles/enroll-students.css"; // Make sure to import the CSS file
 import logo from "../../assets/Schoollogo.png";
 import { NavLink } from "react-router-dom";
 
 function EnrollStudents() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen); // Toggles the dropdown state between true and false
+  };
+
+  // Optionally, you can add an event listener to handle clicks outside the dropdown to close it
   return (
     <>
       <div className="admin-container">
         <header className="admin-header">
           <img className="home-logo" src={logo} alt="School Logo" />
-          <nav class="nav">
+          <nav className="admin-nav">
             <ul>
               <li>
                 <a href="/*">Students</a>
@@ -27,34 +34,53 @@ function EnrollStudents() {
               </li>
             </ul>
           </nav>
+          <nav className="admin-dropdown">
+            <button
+              onClick={toggleDropdown}
+              className="dropbtn"
+              activeClassName=""
+            >
+              User
+            </button>
+            {dropdownOpen && (
+              <div className="dropdown-content">
+                <a href="/login">Logout</a>
+              </div>
+            )}
+          </nav>
         </header>
       </div>
       <div className="enroll-students">
-      <div className="admin-content">
-        <h1>Enrollees</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Enrollee No.</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Grade Level</th>
-              <th>Enrollment Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Example row (you can add more or integrate with data fetching logic) */}
-            <tr>
-              <td>1</td>
-              <td>Lorem Ipsum</td>
-              <td>Lorem Ipsum</td>
-              <td>Lorem</td>
-              <td>Lorem Ipsum</td>
-            </tr>
-            {/* Repeat the <tr> block for more entries */}
-          </tbody>
-        </table>
-      </div>
+        <div className="admin-content">
+          <h1>Enrollees</h1>
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Enrollee No.</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Grade Level</th>
+                <th>Enrollment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem</td>
+                <td>Lorem Ipsum</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem Ipsum</td>
+                <td>Lorem</td>
+                <td>Lorem Ipsum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div>
         <footer className="admin-footer">
