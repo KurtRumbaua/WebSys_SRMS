@@ -47,10 +47,10 @@ class StudentInfo extends Component {
                 <div className ="home-content">
                 <div className="parentenrollment">
                     <h2>Enrollment Status: Pending</h2>
-                    <div className="form-container">
+                    <div className="parent-form-container">
                         <form>
-                            <div className="form-row">
-                                <label htmlFor="gradeLevel" className="form-label">Grade Level:</label>
+                            <div className="parent-parent-form-row">
+                                <label htmlFor="gradeLevel" className="parent-form-label">Grade Level:</label>
                                 <select name="gradeLevel" id="gradeLevel">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -60,30 +60,30 @@ class StudentInfo extends Component {
                                 <option value="6">6</option>
                                 </select>
                             </div>
-                            <div className="form-row">
-                                <label htmlFor="enrolleeType" className="form-label">Enrollee Type:</label>
+                            <div className="parent-form-row">
+                                <label htmlFor="enrolleeType" className="parent-form-label">Enrollee Type:</label>
                                 <select name="enrolleeType" id="enrolleeType">
                                 <option value="transferee">Transferee</option>
                                 <option value="other">Other</option>
                                 </select>
                             </div>
-                            <div className="form-row">
+                            <div className="parent-form-row">
                                 <label htmlFor="form137" className="form137">Form 137  Report Card:</label>
                                 <input type="text" name="form137" id="form137" />
                             </div>
-                            <div className="form-row">
+                            <div className="parent-form-row">
                                 <label htmlFor="birthCerth" className="birthCerth">Birth Certificate:</label>
                                 <input type="text" name="birthCerth" id="birthCerth" />
                             </div>
-                            <div className="form-row">
+                            <div className="parent-form-row">
                                 <label htmlFor="GMC" className="GMC">GMC:</label>
                                 <input type="text" name="GMC" id="GMC" />
                             </div>
-                            <div className="form-row">
+                            <div className="parent-form-row">
                                 <label htmlFor="proofPayment" className="GMC">Proof Of Payment:</label>
                                 <input type="text" name="proofPayment" id="proofPayment" />
                             </div>
-                        <button type="submit">Submit</button>
+                        <button class="parent-button" type="parent-submit">Submit</button>
                         </form>
                     </div>
                     </div>
