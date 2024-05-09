@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../../styles/auth.css";
 import logo from "../../assets/Schoollogo.png";
 import schoolbg from "../../assets/schoolbg.png";
+import Login from "../../pages/authpages/Login";
 
 class Auth extends Component {
     API_URL = "http://localhost:7777/";
@@ -12,6 +14,7 @@ class Auth extends Component {
             data: null,
             show_value: false,
         };
+        this.handleLoginClick = this.handleLoginClick.bind(this);
     }
 
     componentDidMount() {
@@ -29,6 +32,10 @@ class Auth extends Component {
         .catch(error => console.log(error));
     }
 
+    handleLoginClick() {
+        this.props.navigate('/Login');
+    }
+
     render() {
         const { data, show_value } = this.state;
         return (
@@ -39,7 +46,7 @@ class Auth extends Component {
                         <img src={logo} alt="School Logo" />
                     </header>
                     <div className="buttons">
-                        <button className="login-btn">Login</button>
+                        <button className="login-btn" onClick={this.handleLoginClick}>Login</button>
                         <button className="signup-btn">Sign Up</button>
                     </div>
                     {show_value && data && Object.entries(data).map(([key, { value }]) => (
@@ -53,7 +60,7 @@ class Auth extends Component {
             <div>
             <footer>
                 <br/>
-                <br/>
+                <br/> 
                 Sta. Teresita Elementary School © 2023. All Rights Reserved.
                 </footer>
             </div>
@@ -62,4 +69,12 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+function withRouter(Component) {
+    function ComponentWithNavigation(props) {
+        const navigate = useNavigate();
+        return <Component {...props} navigate={navigate} />;
+    }
+    return ComponentWithNavigation;
+}
+
+export default withRouter(Auth);
