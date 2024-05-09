@@ -14,6 +14,54 @@
     transform: scale(0.85); 
   }
 
+  .parentenrollment {
+    background-color: #FBF4F4;
+    padding: 2%;
+}
+
+.parent-form-container {
+    margin-top: 20px;
+}
+
+.parent-form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.parent-form-row {
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.parent-button[type="parent-submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto; /* Centers the button horizontally */
+}
+
+
+.parent-button[type="parent-submit"]:hover {
+    background-color: #45a049;
+}
+
+.parent-button[type="parent-submit"]:focus {
+    outline: none;
+}
+
+  
   .home-leftcontainer{
     display: flex;
     flex-direction: column;
