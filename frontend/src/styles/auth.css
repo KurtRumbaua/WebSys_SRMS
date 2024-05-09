@@ -1,0 +1,78 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.body-bg {
+    background-image: "../frontend/src/assets/schoolbg.png";
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 300px;
+    height: 55%;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:7%;
+}
+
+header img {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    background-color: #ff6384;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 100px;
+}
+
+.buttons button:hover {
+    background-color: #e55a70;
+}
+
+.authfooter {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    background-color: #e55a70;
+    color: white;
+    text-align: center;
+  }
+
+
+
