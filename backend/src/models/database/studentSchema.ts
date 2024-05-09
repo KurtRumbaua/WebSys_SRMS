@@ -37,13 +37,18 @@ export interface IStudent {
     section: Section,
     email: string,
     contactNumber: string,
-    studentNumber: string, // use generateStudentId() from utilities/utils.ts
+    studentNumber: string, // use generateStudentNumber() from utilities/utils.ts
     birthDate: Date,
     address: string,
-    medicalCondition: string,
-    allergy: string,
+    medicalCondition?: string,
+    allergy?: string,
     emergencyContact: string,
-    enrollmentStatus: EnrollmentStatus
+    enrollmentStatus: EnrollmentStatus,
+    enrollmentDate: Date,
+    form137?: string,
+    GMC?: string,
+    birthCertificate?: string,
+    paymentProof?: string
 }
 
 export const studentSchema = new Schema<IStudent>({
@@ -61,29 +66,10 @@ export const studentSchema = new Schema<IStudent>({
     medicalCondition: { type: String, default: 'none'},
     allergy: { type: String, default: 'none'},
     emergencyContact: { type: String, required: true },
-    enrollmentStatus: { type: String, required: true, default: EnrollmentStatus.NONE}
-});
-
-
-export interface IEnrollment {
-    _id?: Types.ObjectId;
-    studentId: string,
-    gradeLevel: GradeLevel,
-    enrollmentDate: Date,
-    enrollmentStatus: EnrollmentStatus,
-    form137?: string,
-    GMC?: string,
-    birthCertificate?: string,
-    paymentProof?: string
-}
-
-export const enrollmentSchema = new Schema<IEnrollment>({
-    studentId: { type: String, required: true },
-    gradeLevel: { type: String, required: true, default: GradeLevel.first_grade },
+    enrollmentStatus: { type: String, required: true, default: EnrollmentStatus.PENDING},
     enrollmentDate: { type: Date, required: true },
-    enrollmentStatus: { type: String, required: true, default: EnrollmentStatus.PENDING },
-    form137: { type: String , default: null},
-    GMC: { type: String , default: null},
-    birthCertificate: { type: String , default: null},
-    paymentProof: { type: String , default: null}
+    form137: { type: String },
+    GMC: { type: String },
+    birthCertificate: { type: String },
+    paymentProof: { type: String }
 });

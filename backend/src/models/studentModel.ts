@@ -1,12 +1,13 @@
-import { IStudent } from "./database/studentSchema";
+import { IStudent, EnrollmentStatus } from "./database/studentSchema";
 import { db } from './database/mongodbConfig';
-
+import { generatestudentNumber, getLocalDate } from "../utilities/utils";
 export class StudentModel {
+    //student numbers are used not student Id. 
 
     // get 
     // for basic information
     async getAllStudentsBasic(): Promise<IStudent[]> {
-        return await db.StudentModel.find({}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1 }).sort('_id'); //leaN? -_id for desc.
+        return await db.StudentModel.find({enrollmentStatus: EnrollmentStatus.ENROLLED}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1, enrollmentStatus: 1 }).sort('_id'); //leaN? -_id for desc.
     }
 
     
@@ -14,14 +15,14 @@ export class StudentModel {
         return await db.StudentModel.find();
     }
     // for full information
-    async getStudent(studentId: string): Promise<IStudent> {
-        const studentData = await db.StudentModel.findOne({ studentNumber: studentId });
+    async getStudent(studentNumber: string): Promise<IStudent> {
+        const studentData = await db.StudentModel.findOne({ studentNumber: studentNumber });
         if (!studentData) {
-            throw new Error(`getStudent: student ${studentId} not found`);
+            throw new Error(`getStudent: student ${studentNumber} not found`);
         }
         return studentData;
     }
-
+    
     // for creating a new student
     async doesStudentExist(studentNumber: string): Promise<boolean> {
         const studentExists = await db.StudentModel.exists({ studentNumber: studentNumber });
@@ -31,9 +32,19 @@ export class StudentModel {
         console.log(`Student with student number ${studentNumber} does not exist.`)
         return false;
     }
-
     // create
     async createStudent(student: IStudent): Promise<IStudent> {
+        student.enrollmentStatus = EnrollmentStatus.PENDING;
+        student.enrollmentDate = await getLocalDate();
+
+        let studentNo = await generatestudentNumber();
+        let isUnique = await this.doesStudentExist(studentNo);
+        while (!isUnique) {
+            studentNo = await generatestudentNumber();
+            isUnique = await this.doesStudentExist(studentNo);
+        }
+
+        student.studentNumber = studentNo;
         const newStudent = new db.StudentModel(student);
         return await newStudent.save();
     }
@@ -49,6 +60,16 @@ export class StudentModel {
         }
     }
 
+    async updateStudentEnrollmentStatus(studentNumber: string, status: EnrollmentStatus): Promise<boolean> {
+        try {
+            const isSuccess = await db.StudentModel.updateOne({ studentNumber: studentNumber }, { enrollmentStatus: status });
+            return isSuccess.modifiedCount > 0; // ? idk if modifiedCount is a good indicator.
+        } catch (error) {
+            console.log(`Error updating student: ${studentNumber}-${status}`, error);
+            return false;
+        }
+    }
+    
     // delete
     async deleteStudent(studentNumber: string): Promise<boolean> {
         try {

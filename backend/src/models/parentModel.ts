@@ -15,8 +15,8 @@ export class ParentModel {
         return parentData;
     }
 
-    async getParentByStudentId(refStudentId: string): Promise<IParent[]> {
-        return await db.ParentModel.find({ refStudentIds: refStudentId });
+    async getParentBystudentNumber(studentNumber: string): Promise<IParent[]> {
+        return await db.ParentModel.find({ refStudentIds: studentNumber });
     }
 
     // create
@@ -57,7 +57,7 @@ export class ParentModel {
         }
     }
 
-    async deleteParentByStudentId(refStudentId: string): Promise<boolean> {
+    async deleteParentByStudentNumber(refStudentId: string): Promise<boolean> {
         try {
             const isSuccess = await db.ParentModel.deleteMany({ refStudentIds: refStudentId });
             return isSuccess.deletedCount > 0;

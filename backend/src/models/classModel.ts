@@ -28,8 +28,8 @@ export class ClassModel {
         return await db.ClassModel.find({ refTeacherId: teacherId });
     }
 
-    async getClassesByStudentId(studentId: string): Promise<IClass[]> {
-        return await db.ClassModel.find({ refStudentIds: studentId });
+    async getClassesByStudentNumber(studentNumber: string): Promise<IClass[]> {
+        return await db.ClassModel.find({ refStudentIds: studentNumber });
     }
 
     async getAllClasses(): Promise<IClass[]> {
@@ -83,12 +83,12 @@ export class ClassModel {
         }
     }
 
-    async addStudentToClass(classId: string, studentId: string): Promise<boolean> {
+    async addStudentToClass(classId: string, studentNumber: string): Promise<boolean> {
         try {
-            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { $push: { refStudentIds: studentId } });
+            const isSuccess = await db.ClassModel.updateOne({ _id: classId }, { $push: { refStudentIds: studentNumber } });
             return isSuccess.modifiedCount > 0;
         } catch (error) {
-            console.log(`Error adding student ${studentId} to class: ${classId}.`, error);
+            console.log(`Error adding student ${studentNumber} to class: ${classId}.`, error);
             return false;
         }
     }

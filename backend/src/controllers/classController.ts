@@ -51,8 +51,8 @@ export async function populateClassAPI(req: Request, res: Response) {
 
 export async function getStudentClassAPI(req: Request, res: Response) {
     try {
-        const { studentId } = req.body;
-        const validateStudent = await checkIfStudentExists(studentId);
+        const { studentNumber } = req.body;
+        const validateStudent = await checkIfStudentExists(studentNumber);
         if (!validateStudent) {
             res.status(400).send({
                 success: "false",
@@ -61,7 +61,7 @@ export async function getStudentClassAPI(req: Request, res: Response) {
             return;
         }
         
-        const classes = await getClassesByStudent(studentId);
+        const classes = await getClassesByStudent(studentNumber);
         if (!classes) {
             res.status(400).send({
                 //redundant but welp
@@ -221,7 +221,6 @@ export async function removeAllClassesAPI(req: Request, res: Response) {
     }
 }
 
-
 export async function assignTeacherAPI(req: Request, res: Response) {
     try {
         const { teacherId, classId } = req.body;
@@ -321,7 +320,7 @@ export async function editClassInfoAPI(req: Request, res: Response) {
 
 export async function addStudentToClassAPI(req: Request, res: Response) {
     try {
-        const { classId, studentId } = req.body;
+        const { classId, studentNumber } = req.body;
         const classExists = await checkIfClassExists(classId);
         if (!classExists) {
             res.status(400).send({
@@ -330,7 +329,7 @@ export async function addStudentToClassAPI(req: Request, res: Response) {
             });
             return;
         }
-        const added = await addStudent(classId, studentId);
+        const added = await addStudent(classId, studentNumber);
         if (!added) {
             res.status(400).send({
                 success: "false",

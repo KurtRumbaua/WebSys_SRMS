@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { removeUser, checkIfUserExists, addUser, getAllUsers, validateLogin, fetchUserByEmail } from '../services/userService';
+import { removeUser, checkIfUserExists, addUser, getAllUsers, validateLogin, fetchUserByEmail, getUserRole } from '../services/userService';
 
 export async function registerUserAPI(req: Request, res: Response) {
     try {
@@ -91,6 +91,38 @@ export async function loginUserAPI(req: Request, res: Response) {
     }
 }
 
+export async function getUserRoleAPI(req: Request, res: Response) {
+    try {
+        const { email } = req.body;
+
+        const userExists = await checkIfUserExists(email);
+        if (!userExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
+
+        const role = await getUserRole(email);
+        if (!role) {
+            res.status(400).send({
+                success: "false",
+                message: 'Role not found'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'Role found',
+            data: role});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching role',
+            log_error: error});
+    }
+}
+
 export async function deleteUserAPI(req: Request, res: Response) {
     try {
         const { email } = req.body;
@@ -121,4 +153,35 @@ export async function deleteUserAPI(req: Request, res: Response) {
             log_error: error});
     }
 }
-//logout is a frontend fuction that only redirects to homepage. 
+
+export async function getUserByEmailAPI(req: Request, res: Response) {
+    try {
+        const { email } = req.body;
+
+        const userExists = await checkIfUserExists(email);
+        if (!userExists) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
+
+        const userData = await fetchUserByEmail(email);
+        if (!userData) {
+            res.status(400).send({
+                success: "false",
+                message: 'User not found'});
+            return;
+        }
+
+        res.status(200).send({
+            success: "true",
+            message: 'User found',
+            data: userData});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching user',
+            log_error: error});
+    }
+}

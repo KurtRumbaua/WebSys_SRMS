@@ -21,6 +21,18 @@ export async function getAllUsers(): Promise<IUser[] | boolean> {
     return usersQuery;
 }
 
+export async function getUserRole(userId: string): Promise<string> {
+    const user = await userModel.getUser(userId);
+    if (!user) {
+        return "no role!";
+    }
+    return user.role;
+}
+
+export async function getUser(email: string): Promise<IUser> {
+    return await userModel.getUserByEmail(email);
+}
+
 export async function validateLogin(email: string, password: string): Promise<boolean> {
     const user = await userModel.getUserByEmail(email);
     if (!user) {

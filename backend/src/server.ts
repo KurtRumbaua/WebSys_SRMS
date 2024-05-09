@@ -6,6 +6,7 @@ import { db } from "./models/database/mongodbConfig";
 import userRoute from "./routes/userRoute";
 import studentRoute from "./routes/studentRoute";
 import classRoute from "./routes/classRoute";
+import enrollmentRoute from "./routes/enrollmentRoute";
 
 db.initDatabaseConnection();
 
@@ -29,6 +30,7 @@ const apiRoutes = {
     "/account": userRoute,
     "/student": studentRoute,
     "/class": classRoute,
+    "/enrollment": enrollmentRoute,
 }
 for (const key of Object.keys(apiRoutes)) {
     app.use(key, apiRoutes[key as keyof typeof apiRoutes]);
