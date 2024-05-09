@@ -11,6 +11,27 @@ class ParentHome extends Component {
             data: null,
             show_value: false,
         };
+        this.grades = {}
+    }
+
+    handleComputation(){
+        // DO THIS SHIT
+    }
+
+    getSubject(name: string){
+        // fetch the grades
+        fetch("http://localhost:7000/grade/view/subject", {
+            headers: {
+                "studentNumber": this.state.data['studentNumber'],
+                "subject": name
+            },
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(message =>{
+            this.grades['science'] = message['data'];
+        })
+        .catch(error => console.log(error));
     }
 
     componentDidMount() {
@@ -26,10 +47,28 @@ class ParentHome extends Component {
         })
         .then(response => response.json())
         .then(message => {
+            console.log("the message", message)
             message = message['data'];
             // Fetch login information (??) fg
             this.setState({ data: message, show_value: true });
-            console.log(this.state.data);
+            console.log("The data: ", this.state.data);
+            
+            // Get the grades of a student (fetch)
+            this.subjects = ["SCIENCE",
+                "MATH",
+                "ENGLISH",
+                "FILIPINO",
+                "HISTORY",
+                "P.E",
+                "HEALTH",
+                "MUSIC",
+                "ARTS"
+            ];
+            this.subjects.forEach(subject => {
+                this.getSubject(subject);
+            });
+            console.log("The grades: ", this.grades);
+
         })
         .catch(error => console.log(error));
     }
