@@ -1,0 +1,116 @@
+ .home-header {
+    max-height: 7%;
+    display: flex; /* Activate Flexbox */
+    align-items: center; /* Align items vertically to the center */
+    padding: 1rem; 
+    background-color: #FBF4F4; 
+  }
+    /* Other styles for nav, ul, li, a as before */
+  .home-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+  }
+
+  .home-leftcontainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #FBF4F4;
+    border-right: 50px solid white;
+  }
+
+  .home-studentsummary{
+    padding: 5%;
+    border-bottom: 30px solid white;
+  }
+
+  .home-classannouncement{
+    padding: 5%;
+  }
+
+  .home-rightcontainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #FBF4F4;
+    overflow-y: auto;
+    max-height: 478px;
+    min-width: 60%;
+  }
+
+  .home-subjectgrade{
+    border-bottom: 30px solid white;
+    padding: 5%;
+  }
+
+  .home-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  nav ul {
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    list-style: none; /* Removes default bullet points */
+  }
+  
+  nav li {
+    display: inline-block; /* Makes navigation items appear side-by-side */
+    margin-right: 1rem; /* Spacing between items */
+  }
+  
+  nav a {
+    text-decoration: none; /* Removes underline from links */
+    color: black; /* Font color */
+  }
+
+  .home-logo {
+    max-width: 60px; /* Desired width */
+    max-height: 60px; /* Desired height */
+    margin-top: 1%;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+  
+  .home-footer {
+    text-align: center;
+    font-size: 12px;
+    max-height: 7%;
+    color: #fff;
+    background-color: #e55a70;
+}
+
+.home-student-profile{
+    background-color: #FBF4F4;
+}
+
+
+/* Apply basic styles to the table */
+table {
+    border-collapse: collapse; /* Collapse table borders */
+    width: 100%; /* Full width of its container */
+  }
+  
+  /* Apply styles to table headers */
+  th {
+    background-color: #f2f2f2; /* Light gray background */
+    border: 1px solid #dddddd; /* Gray border */
+    padding: 8px; /* Padding inside cells */
+    text-align: left; /* Align text to the left */
+  }
+  
+  /* Apply alternating background color to table rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lighter gray background for even rows */
+  }
+  
+  /* Apply styles to table data cells */
+  td {
+    border: 1px solid #dddddd; /* Gray border */
+    padding: 8px; /* Padding inside cells */
+    text-align: left; /* Align text to the left */
+  }
+  
+  
