@@ -1,5 +1,6 @@
 import { StudentModel } from "../models/studentModel";
 import { IStudent } from "../models/database/studentSchema";
+import { IUser } from "../models/database/userSchema";
 
 const studentModel = new StudentModel();
 
@@ -29,6 +30,10 @@ export async function addStudent(studentData: IStudent): Promise<IStudent> {
 
 export async function fetchStudent(studentNumber: string): Promise<IStudent> {
     return await studentModel.getStudent(studentNumber);
+}
+
+export async function fetchStudentByUserId(userId: string): Promise<IStudent> {
+    return await studentModel.getStudentByUserId(userId);
 }
 
 export async function editStudent(studentNumber: string, studentData: IStudent): Promise<boolean> {

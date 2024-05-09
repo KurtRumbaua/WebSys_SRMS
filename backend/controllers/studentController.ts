@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {getAllStudents, removeAllStudents, removeStudent, editStudent, fetchStudent, getAllStudentsBasic, checkIfStudentExists } from "../services/studentService";
-import {addStudent} from "../services/studentService";
+import {addStudent, fetchStudentByUserId} from "../services/studentService";
 
 
 export async function fetchAllStudentsAPI(req: Request, res: Response) {
@@ -44,6 +44,29 @@ export async function fetchStudentsBasicAPI(req: Request, res: Response) {
             log_error: error});
     }
 }
+
+export async function fetchStudentAPI(req: Request, res: Response) {
+    try {
+        const userId:string = req.headers['userid'] as string;
+        const students = await fetchStudentByUserId(userId);
+        if (!students) {
+            res.status(400).send({
+                success: "false",
+                message: 'No students found'});
+            return;
+        }
+        res.status(200).send({
+            success: "true",
+            message: 'Students found',
+            data: students});
+    } catch (error) {
+        res.status(400).send({
+            success: "false",
+            message: 'Error fetching students',
+            log_error: error});
+    }
+}
+
 
 export async function getStudentAPI(req: Request, res: Response) {
     try {

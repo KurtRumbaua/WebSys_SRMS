@@ -1,6 +1,8 @@
 import { IStudent, EnrollmentStatus } from "./database/studentSchema";
+import { IUser } from "../models/database/userSchema";
 import { db } from './database/mongodbConfig';
 import { generatestudentNumber, getLocalDate } from "../utilities/utils";
+
 export class StudentModel {
     //student numbers are used not student Id. 
 
@@ -21,6 +23,19 @@ export class StudentModel {
             throw new Error(`getStudent: student ${studentNumber} not found`);
         }
         return studentData;
+    }
+
+    async getStudentByUserId(userId: string): Promise<IStudent> {
+        const parentData = await db.ParentModel.findOne({ userId: userId});
+        if (parentData) {
+            const studentData = await db.StudentModel.findOne({ parentId: parentData._id});
+            console.log(`getStudentByUserId: studentData: ${studentData}`);
+            if (!studentData) {
+                throw new Error(`getStudentByUserId: student with userId ${userId} not found`);
+            }
+            return studentData;
+        }
+        throw new Error(`getStudentByUserId: student with userId ${userId} not found`);
     }
     
     // for creating a new student

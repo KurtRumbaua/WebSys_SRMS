@@ -14,13 +14,20 @@ class ParentHome extends Component {
     }
 
     componentDidMount() {
-        fetch(this.API_URL + "account/view", {
-            headers: { 'email': sessionStorage.getItem("email") },
+
+        let user_id = sessionStorage.getItem("user_id");
+        console.log("water_user_id: ", user_id);
+        
+        fetch("http://localhost:7000/student/viewone", {
+            headers: { 
+                'userId': user_id
+            },
             method: "GET",
         })
         .then(response => response.json())
         .then(message => {
             message = message['data'];
+            // Fetch login information (??) fg
             this.setState({ data: message, show_value: true });
             console.log(this.state.data);
         })
@@ -46,11 +53,16 @@ class ParentHome extends Component {
                     <div className="home-leftcontainer">
                         <div className="home-studentsummary">
                             <h1>
-                                Juan Dela Cruz
+                                {
+                                    this.state.show_value ? this.state.data['firstName'] + 
+                                    " " + this.state.data['lastName'] : "Loading..."
+                                }
                             </h1>
-                            <p>3rd Grade</p>
-                            <p>Status</p>
-                            <p>Age:</p>
+                            <p>
+                                {this.state.show_value ? this.state.data['gradeLevel'] : "Loading..."}
+                                {this.state.show_value ? this.state.data['gradeLevel'] === 1  ? "st" : this.state.data['gradeLevel'] === 2 ? "nd" : this.state.data['gradeLevel'] === 3 ? "rd" : "th" : "Loading..."} Grade
+                            </p>
+                            <p>{this.state.show_value? this.state.data['enrollmentStatus'] : "Loading..."}</p>
                         </div>
                         <div className="home-classannouncement">
                             <h1>Class Announcements:</h1>

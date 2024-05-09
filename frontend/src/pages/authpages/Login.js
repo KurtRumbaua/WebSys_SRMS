@@ -46,6 +46,8 @@ function Login() {
     .then((message) => {
       setError('');
         sessionStorage.setItem('email', email);
+        sessionStorage.setItem("user_id", message['data']['_id']);
+        console.log("user_id: ", message['data']['_id']);
 
         let role = message['data']['role'];
         console.log('Logged in as:', role);
