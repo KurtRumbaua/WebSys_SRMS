@@ -53,6 +53,7 @@ class Auth extends Component {
             <div>
             <footer>
                 <br/>
+                <br/>
                 Sta. Teresita Elementary School © 2023. All Rights Reserved.
                 </footer>
             </div>
