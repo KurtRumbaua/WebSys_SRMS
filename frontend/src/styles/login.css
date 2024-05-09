@@ -1,0 +1,114 @@
+/* General styles */
+.login-background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: "../frontend/src/assets/schoolbg.png";
+    background-size: cover;
+    background-position: center;
+  }
+  
+  
+  .login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column; /* Adjust to a column layout for smaller screens */
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.9); /* Adjusted background color for better visibility */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Adjusted max-width for better responsiveness */
+    border-radius: 25px;
+  }
+  
+  .right-container {
+    padding-right: 50px;
+    padding-left: 10px;
+  }
+  
+  .left-container {
+    padding-right: 0; /* Remove right padding for smaller screens */
+    border-right: none; /* Remove border for smaller screens */
+  }
+  
+  .input-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: auto;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    left: 160px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px; /* Adjust icon size here */
+  }
+  
+  input {
+    width: 100%; /* Take full width */
+    padding: 8px 40px 8px 40px; /* Padding adjusted for icons */
+    font-size: 16px;
+  }
+  
+  .logo {
+    width: 100px; /* Adjust logo size for smaller screens */
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+    margin-left: auto; /* Center the logo */
+    margin-right: auto; /* Center the logo */
+  }
+  
+  /* Styles for the submit button */
+  .login-button {
+    background-color: #e55a70; /* Coral pink color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  /* Media query for tablet screens */
+  @media only screen and (min-width: 768px) {
+    .login-container {
+      flex-direction: row; /* Switch back to row layout */
+    }
+  
+    .right-container {
+      flex: 1;
+    }
+  
+    .left-container {
+      padding-right: 10px;
+      border-right: 2px solid #cccccc;
+    }
+  
+    input {
+      width: 80%; /* Adjust input width for tablet screens */
+    }
+  
+    .logo {
+      width: 150px; /* Restore logo size for larger screens */
+    }
+  
+    .eye-icon {
+      right: 40px; /* Adjusted position for tablet screens */
+    }
+  }
+  

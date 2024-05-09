@@ -1,0 +1,44 @@
+.teachers-page {
+    padding: 20px;
+  }
+  
+  .page-title {
+    margin-bottom: 20px;
+  }
+  
+  .teachers-table-container {
+    overflow-x: auto;
+  }
+  
+  .teachers-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .teachers-table th, .teachers-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .teachers-table th {
+    background-color: #f0f0f0;
+  }
+  
+  .teachers-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .assign-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .assign-button:hover {
+    background-color: #0056b3;
+  }
