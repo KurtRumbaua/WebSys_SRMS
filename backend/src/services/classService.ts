@@ -11,8 +11,8 @@ export async function getClassesByTeacher(teacherId: string): Promise <IClass[]>
     return await classModel.getClassesByTeacherId(teacherId);
 }
 
-export async function getClassesByStudent(studentId: string): Promise <IClass[]> {
-    return await classModel.getClassesByStudentId(studentId);
+export async function getClassesByStudent(studentNumber: string): Promise <IClass[]> {
+    return await classModel.getClassesByStudentNumber(studentNumber);
 }
 
 export async function getAllClasses(): Promise <IClass[]| boolean> {
@@ -51,6 +51,6 @@ export async function editClass(classId: string, classData: IClass): Promise <bo
     return await classModel.updateClass(classId, classData);
 }
 
-export async function addStudent(classId: string, studentId: string): Promise <boolean> {
-    return await classModel.addStudentToClass(classId, studentId);
+export async function addStudent(classId: string, studentNumber: string): Promise <boolean> {
+    return await classModel.addStudentToClass(classId, studentNumber);
 }

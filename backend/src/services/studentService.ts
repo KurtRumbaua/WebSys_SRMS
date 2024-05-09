@@ -27,8 +27,8 @@ export async function addStudent(studentData: IStudent): Promise<IStudent> {
     return await studentModel.createStudent(studentData);
 }
 
-export async function fetchStudent(studentId: string): Promise<IStudent> {
-    return await studentModel.getStudent(studentId);
+export async function fetchStudent(studentNumber: string): Promise<IStudent> {
+    return await studentModel.getStudent(studentNumber);
 }
 
 export async function editStudent(studentNumber: string, studentData: IStudent): Promise<boolean> {

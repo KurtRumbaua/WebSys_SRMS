@@ -1,12 +1,13 @@
 //@ts-nocheck
 import { Router } from "express";
-import { createEnrollmentAPI, deleteEnrollmentAPI, readAllEnrollmentsAPI, readEnrollmentAPI, updateEnrollmentAPI } from "../controllers/enrollmentController";
+import { approveEnrollmentAPI, updateStudentEnrollmentStatus, fetchAllEnrollmentRecordsAPI, fetchEnrolledInfoAPI, fetchEnrolledStudentsAPI, fetchPendingEnrollmentAPI} from "../controllers/enrollmentController";
 
 const router = Router();
 
-router.post('/create', createEnrollmentAPI);
-router.get('/all', readAllEnrollmentsAPI);
-router.get('/read', readEnrollmentAPI);
-router.put('/update', updateEnrollmentAPI);
-router.delete('/delete', deleteEnrollmentAPI);
+router.get('/view/pending', fetchPendingEnrollmentAPI);
+router.get('/view/all', fetchAllEnrollmentRecordsAPI);
+router.get('/view/enrolled', fetchEnrolledStudentsAPI);
+router.get('/view/:studentNumber', fetchEnrolledInfoAPI);
+router.put('/update', updateStudentEnrollmentStatus);
+router.patch('/approve', approveEnrollmentAPI)
 export default router;

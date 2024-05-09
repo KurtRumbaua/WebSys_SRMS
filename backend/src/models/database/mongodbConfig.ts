@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { IClass, classSchema } from "./teacherSchema";
 import { IUser, userSchema } from "./userSchema";
-import { IEnrollment, enrollmentSchema } from "./studentSchema";
 import { IStudent, studentSchema } from "./studentSchema";
 import { ITransaction, transactionSchema } from "./transactionSchema";
 import { IAnnouncement, announcementSchema } from "./announcementSchema";
@@ -32,7 +31,6 @@ const dropDatabase = async () => {
 
 const ClassModel = mongoose.model<IClass>('Class', classSchema);
 const UserModel = mongoose.model<IUser>('User', userSchema);
-const EnrollmentModel = mongoose.model<IEnrollment>('Enrollment', enrollmentSchema);
 const StudentModel = mongoose.model<IStudent>('Student', studentSchema);
 const TransactionModel = mongoose.model<ITransaction>('Transaction', transactionSchema);
 const AnnouncementModel = mongoose.model<IAnnouncement>('Announcement', announcementSchema);
@@ -45,7 +43,6 @@ export const db = {
     dropDatabase,
     ClassModel,
     UserModel,
-    EnrollmentModel,
     StudentModel,
     TransactionModel,
     AnnouncementModel,

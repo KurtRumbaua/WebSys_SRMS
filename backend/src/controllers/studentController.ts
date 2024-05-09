@@ -45,9 +45,9 @@ export async function fetchStudentsBasicAPI(req: Request, res: Response) {
 
 export async function getStudentAPI(req: Request, res: Response) {
     try {
-        const { studentId } = req.body;
+        const { studentNumber } = req.body;
 
-        const studentExists = await checkIfStudentExists(studentId);
+        const studentExists = await checkIfStudentExists(studentNumber);
         if (!studentExists) {
             res.status(400).send({
                 success: "false",
@@ -55,7 +55,7 @@ export async function getStudentAPI(req: Request, res: Response) {
             return;
         }
 
-        const student = await fetchStudent(studentId);
+        const student = await fetchStudent(studentNumber);
         if (!student) {
             res.status(400).send({
                 success: "false",
