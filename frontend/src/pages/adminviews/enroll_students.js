@@ -40,7 +40,7 @@ function EnrollStudents() {
               className="dropbtn"
               activeClassName=""
             >
-              User
+              User <span className="dropdown-arrow">&#x25BC;</span>
             </button>
             {dropdownOpen && (
               <div className="dropdown-content">

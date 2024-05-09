@@ -190,3 +190,7 @@
 .dropdown-content:hover {
   background-color: #FBF4F4;
 }
+
+.dropdown-arrow {
+  font-size: 10px;
+}
