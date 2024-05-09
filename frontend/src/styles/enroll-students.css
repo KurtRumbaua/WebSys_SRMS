@@ -1,0 +1,139 @@
+
+
+.enroll-students {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #FBF4F4;
+  border-radius: 15px;
+  padding: 10px 75px 75px;
+}
+
+.admin-content {
+  margin: 10px 20px 10px;
+}
+
+.enroll-students h1 {
+  text-align: center;
+  color: #333;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.admin-table {
+  width: 100%;
+}
+
+.admin-table, th, td {
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 23px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+.nav ul {
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  list-style: none; /* Removes default bullet points */
+}
+
+.nav li {
+  display: inline-block; /* Makes navigation items appear side-by-side */
+  margin-right: 1rem; /* Spacing between items */
+}
+
+.nav a {
+  text-decoration: none; /* Removes underline from links */
+  color: black; /* Font color */
+}
+
+.admin-logo {
+  max-width: 60px; /* Desired width */
+  max-height: 60px; /* Desired height */
+  margin-top: 1%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.admin-footer {
+  text-align: center;
+  position: fixed;
+  font-size: 12px;
+  min-height: 7%;
+  color: #fff;
+  background-color: #e55a70;
+  box-shadow: 0 2px 4px rgba(229, 0, 0, 0.1);
+  left:0;
+  bottom:0;
+  right:0;
+  padding: 1 rem;
+  max-height: 10%;
+  z-index: 1000;
+  width: 100%;
+}
+
+.admin-footer p{
+  padding: 10px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #FBF4F4; 
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1 rem;
+  max-height: 10%;
+}
+
+.home-logo {
+  max-width: 60px; /* Desired width */
+  max-height: 60px; /* Desired height */
+  margin-top: 1%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-left: 0px; /* Adjust spacing between logo and nav */
+}
+
+.nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.nav li {
+  padding: 0 10px; /* Adds horizontal spacing between nav items */
+}
+
+.nav a, .nav .active {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.nav a:hover, .nav .active {
+  color: #653636; /* Changes color to black on hover and when active */
+}
+
