@@ -8,6 +8,7 @@ import Auth from "./pages/authpages/Auth";
 import StudenInfo from "./pages/parentviews/studentinfo";
 import Login from "./pages/authpages/Login";
 import ParentHome from "./pages/parentviews/parenthome";
+
 function App() {
   return (
     <BrowserRouter>
