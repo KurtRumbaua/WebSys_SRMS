@@ -3,7 +3,7 @@ import "../../styles/parenthome.css";
 import logo from "../../assets/Schoollogo.png";
 
 class ParentHome extends Component {
-    API_URL = "http://localhost:7000/";
+    API_URL = "http://localhost:7777/";
 
     constructor(props) {
         super(props);
@@ -11,64 +11,19 @@ class ParentHome extends Component {
             data: null,
             show_value: false,
         };
-        this.grades = {}
-    }
-
-    handleComputation(){
-        // DO THIS SHIT
-    }
-
-    getSubject(name: string){
-        // fetch the grades
-        fetch("http://localhost:7000/grade/view/subject", {
-            headers: {
-                "studentNumber": this.state.data['studentNumber'],
-                "subject": name
-            },
-            method: "GET"
-        })
-        .then(response => response.json())
-        .then(message =>{
-            this.grades['science'] = message['data'];
-        })
-        .catch(error => console.log(error));
     }
 
     componentDidMount() {
-
-        let user_id = sessionStorage.getItem("user_id");
-        console.log("water_user_id: ", user_id);
-        
-        fetch("http://localhost:7000/student/viewone", {
-            headers: { 
-                'userId': user_id
-            },
-            method: "GET",
+        fetch(this.API_URL + "account/view", {
+            headers: { 'authorization': sessionStorage.getItem("token") }
         })
         .then(response => response.json())
         .then(message => {
-            console.log("the message", message)
-            message = message['data'];
-            // Fetch login information (??) fg
-            this.setState({ data: message, show_value: true });
-            console.log("The data: ", this.state.data);
-            
-            // Get the grades of a student (fetch)
-            this.subjects = ["SCIENCE",
-                "MATH",
-                "ENGLISH",
-                "FILIPINO",
-                "HISTORY",
-                "P.E",
-                "HEALTH",
-                "MUSIC",
-                "ARTS"
-            ];
-            this.subjects.forEach(subject => {
-                this.getSubject(subject);
-            });
-            console.log("The grades: ", this.grades);
-
+            var result = Object.keys(message).reduce((result, key) => {
+                result[key] = { value: message[key] };
+                return result;
+            }, {});
+            this.setState({ data: result, show_value: true });
         })
         .catch(error => console.log(error));
     }
@@ -92,16 +47,11 @@ class ParentHome extends Component {
                     <div className="home-leftcontainer">
                         <div className="home-studentsummary">
                             <h1>
-                                {
-                                    this.state.show_value ? this.state.data['firstName'] + 
-                                    " " + this.state.data['lastName'] : "Loading..."
-                                }
+                                Juan Dela Cruz
                             </h1>
-                            <p>
-                                {this.state.show_value ? this.state.data['gradeLevel'] : "Loading..."}
-                                {this.state.show_value ? this.state.data['gradeLevel'] === 1  ? "st" : this.state.data['gradeLevel'] === 2 ? "nd" : this.state.data['gradeLevel'] === 3 ? "rd" : "th" : "Loading..."} Grade
-                            </p>
-                            <p>{this.state.show_value? this.state.data['enrollmentStatus'] : "Loading..."}</p>
+                            <p>3rd Grade</p>
+                            <p>Status</p>
+                            <p>Age:</p>
                         </div>
                         <div className="home-classannouncement">
                             <h1>Class Announcements:</h1>
