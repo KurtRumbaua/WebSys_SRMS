@@ -1,0 +1,58 @@
+.signup-bg-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../assets/schoolbg.png");
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  .signup-form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    border-radius: 25px;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+  
+  .signup-right-container {
+    width: 100%;
+  }
+  
+  .signup-input-container {
+    margin-bottom: 20px;
+  }
+  
+  .signup-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .signup-input {
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .signup-button {
+    background-color: #e55a70;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 95%;
+    margin-top: 20px;
+  }
+  
