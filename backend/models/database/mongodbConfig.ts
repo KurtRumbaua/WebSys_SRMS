@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import { IClass, classSchema } from "./classSchema";
+import { IClass, classSchema } from "./teacherSchema";
 import { IUser, userSchema } from "./userSchema";
-import { IEnrollment, enrollmentSchema } from "./enrollmentSchema";
+import { IEnrollment, enrollmentSchema } from "./studentSchema";
 import { IStudent, studentSchema } from "./studentSchema";
 import { ITransaction, transactionSchema } from "./transactionSchema";
 import { IAnnouncement, announcementSchema } from "./announcementSchema";
-import { IGrade, gradeSchema } from "./gradeSchema";
+import { IGrade, gradeSchema } from "./teacherSchema";
 import { IParent, parentSchema } from "./parentSchema";
 import { ITeacher, teacherSchema } from "./teacherSchema";
 
