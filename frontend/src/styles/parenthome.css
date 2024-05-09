@@ -10,7 +10,8 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;   
+    transform: scale(0.85); 
   }
 
   .home-leftcontainer{
@@ -36,6 +37,7 @@
     overflow-y: auto;
     max-height: 478px;
     min-width: 60%;
+    font-family: Arial, sans-serif;
   }
 
   .home-subjectgrade{
@@ -50,18 +52,40 @@
     min-height: 100%;
   }
 
-  nav ul {
+  .home-student-profile .student-information, 
+  .home-student-profile .student-medical-information,
+  .home-student-profile .parent-guardian-information,
+  .home-student-profile .title   {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;  /* Explicitly define two equal columns */ 
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+  
+  
+  .home-student-profile .field {
+    display: flex; /* Align label and value nicely */
+    align-items: baseline; /* Vertically align content if heights differ */
+    padding-bottom: 1%;
+  }
+  
+  .home-student-profile .label {
+    font-weight: bold;
+    min-width: 120px; /* Adjust label width as needed */
+  } 
+  
+  .nav ul {
     margin: 0; /* Remove default margins */
     padding: 0; /* Remove default padding */
     list-style: none; /* Removes default bullet points */
   }
   
-  nav li {
+  .nav li {
     display: inline-block; /* Makes navigation items appear side-by-side */
     margin-right: 1rem; /* Spacing between items */
   }
   
-  nav a {
+  .nav a {
     text-decoration: none; /* Removes underline from links */
     color: black; /* Font color */
   }
@@ -77,24 +101,24 @@
   .home-footer {
     text-align: center;
     font-size: 12px;
-    max-height: 7%;
+    min-height: 7%;
     color: #fff;
     background-color: #e55a70;
-}
+  }
 
-.home-student-profile{
-    background-color: #FBF4F4;
-}
+  .home-student-profile{
+      background-color: #FBF4F4;
+  }
 
 
 /* Apply basic styles to the table */
-table {
+.parent-table {
     border-collapse: collapse; /* Collapse table borders */
     width: 100%; /* Full width of its container */
   }
   
   /* Apply styles to table headers */
-  th {
+  .parent-th {
     background-color: #f2f2f2; /* Light gray background */
     border: 1px solid #dddddd; /* Gray border */
     padding: 8px; /* Padding inside cells */
@@ -102,12 +126,12 @@ table {
   }
   
   /* Apply alternating background color to table rows */
-  tr:nth-child(even) {
+  .parent-tr:nth-child(even) {
     background-color: #f9f9f9; /* Lighter gray background for even rows */
   }
   
   /* Apply styles to table data cells */
-  td {
+  .parent-td {
     border: 1px solid #dddddd; /* Gray border */
     padding: 8px; /* Padding inside cells */
     text-align: left; /* Align text to the left */

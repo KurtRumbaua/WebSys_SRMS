@@ -63,7 +63,7 @@ header img {
     background-color: #e55a70;
 }
 
-footer {
+.authfooter {
     position: absolute;
     left: 0;
     bottom: 0;

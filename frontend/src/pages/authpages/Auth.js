@@ -51,7 +51,7 @@ class Auth extends Component {
                 
             </div>
             <div>
-            <footer>
+            <footer className="authfooter">
                 <br/>
                 <br/>
                 Sta. Teresita Elementary School © 2023. All Rights Reserved.
