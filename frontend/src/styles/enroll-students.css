@@ -4,8 +4,13 @@
   font-family: Arial, sans-serif;
   color: #333;
   background-color: #FBF4F4;
-  border-radius: 15px;
+  border-radius: 15px;  
   padding: 10px 75px 75px;
+  max-width: 70%;
+  max-height: 70%;
+  min-width: 5%;
+  min-height: 5%;
+  
 }
 
 .admin-content {
@@ -15,31 +20,37 @@
 .enroll-students h1 {
   text-align: center;
   color: #333;
+  font-size: 24px;
 }
 
 .admin-table {
   width: 100%;
-  border-collapse: collapse;
   margin: 20px 0;
 }
 
-.admin-table {
-  width: 100%;
-}
-
 .admin-table, th, td {
-  border: 1px solid #ccc;
-  width: 200px;
-  height: 23px;
+  border-collapse: collapse;
+  border: 2px solid #fda4b1;  
+  height: 12px;
 }
 
-th, td {
+.admin-table th, td {
   padding: 8px;
+  width: 500px;
   text-align: left;
+  font-size: 12px;
 }
 
-thead {
-  background-color: #f2f2f2;
+.admin-table th {
+  text-align: center;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #000;
+}
+
+.admin-table thead {
+  background-color: #fcc6cf;
 }
 
 .nav ul {
