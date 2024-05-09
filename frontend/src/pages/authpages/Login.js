@@ -6,6 +6,7 @@ import passwordIcon from "../../assets/password.png";
 import eyeIcon from "../../assets/eye.png";
 import eyeOffIcon from "../../assets/noeye.png";
 import logo from "../../assets/Schoollogo.png";
+import schoolbg from "../../assets/schoolbg.png";
 import sha256 from 'crypto-js/sha256';
 
 function Login() {
@@ -56,7 +57,7 @@ function Login() {
   };
 
   return (
-    <div className="login-background">
+    <div className="login-background" style={{backgroundImage: `url(${schoolbg})`, backgroundSize: "cover", backgroundPosition: "center"}}>
       <div className="login-container">
         <div className="left-container">
           <h1>Santa Teresita</h1>
