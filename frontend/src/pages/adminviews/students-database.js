@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/enroll-students.css'; // Ensure this CSS file contains the new styles
 import logo from '../../assets/Schoollogo.png';
 import { NavLink } from 'react-router-dom';
+import AdminHeader from "../../components/admin-header";
+import STESFooter from "../../components/footer";
 
 function StudentsDatabase() {
     const [students, setStudents] = useState([{
@@ -52,18 +54,7 @@ function StudentsDatabase() {
     return (
         <>
             <div className="admin-container" style={{marginLeft:300, width:1500}}>
-                <header className="admin-header">
-                    <img className="home-logo" src={logo} alt="School Logo" />
-                    <nav className="nav">
-                        <ul>
-                            <li><NavLink to="/student-database" activeClassName="active">Students</NavLink></li>
-                            <li><NavLink to="/employee-database" activeClassName="active">Employees</NavLink></li>
-                            <li><NavLink to="/enroll-student" activeClassName="active">Enrollment</NavLink></li>
-                            <li><NavLink to="/class-management" activeClassName="active">Class Management</NavLink></li>
-                            <li><NavLink to="/financial-management" activeClassName="active">Financial Management</NavLink></li>
-                        </ul>
-                    </nav>
-                </header>
+                <AdminHeader/>
                 <div className="enroll-students" style={{marginTop:70}}>
                     <div className="admin-content">
                         <h1>Student Database</h1>
@@ -120,9 +111,7 @@ function StudentsDatabase() {
                     )}
                 </div>
             </div>
-            <footer className="admin-footer">
-                <p>Sta. Teresita Elementary School © 2023. All Rights Reserved.</p>
-            </footer>
+            <STESFooter/>
         </>
     );
 }

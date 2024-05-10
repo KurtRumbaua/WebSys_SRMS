@@ -1,294 +1,290 @@
-  .enroll-students {
-    font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #FBF4F4;
-    border-radius: 15px;
-    padding: 10px 75px 75px;
-    max-width: 70%;
-    max-height: 70%;
-    min-width: 5%;
-    min-height: 5%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    overflow-y: scroll;
-    max-height: 60%;
-  }
-  
-  .admin-content {
-    margin: 10px 20px 10px; 
-    min-width: none;
-  }
-  
-  .enroll-students h1 {
-    text-align: center;
-    color: #333;
-    font-size: 24px;
-  }
-  
-  .admin-table {
-    width: 100%;
-    margin: 20px 0;
-    min-width: 5%;
-    max-height: auto;
-  }
-  
-  .admin-table, th, td {
-    border-collapse: collapse;
-    border: 2px solid #fda4b1;  
-    height: 12px;
-  }
-  
-  .admin-table th, td {
-    padding: 8px;
-    width: 500px;
-    text-align: left;
-    font-size: 12px;
-  }
-  
-  .admin-table th {
-    text-align: center;
-  }
-  
-  .admin-table tr:nth-child(even) {
-    background-color: #ffeff2;
-  }
-  
-  .admin-table thead {
-    background-color: #fcc6cf;
-  }
-  
-  .admin-nav ul {
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove default padding */
-    list-style: none; /* Removes default bullet points */
-  }
-  
-  .admin-nav li {
-    display: inline-block; /* Makes navigation items appear side-by-side */
-    margin-right: 1rem; /* Spacing between items */
-  }
-  
-  .admin-nav a {
-    text-decoration: none; /* Removes underline from links */
-    color: black; /* Font color */
-  }
-  
-  .admin-logo {
-    max-width: 60px; /* Desired width */
-    max-height: 60px; /* Desired height */
-    margin-top: 1%;
-    margin-right: 5%;
-    margin-left: 5%;
-  }
-  
-  .admin-footer {
-    text-align: center;
-    position: fixed;
-    font-size: 12px;
-    min-height: 7%;
-    color: #fff;
-    background-color: #e55a70;
-    box-shadow: 0 2px 4px rgba(229, 0, 0, 0.1);
-    left:0;
-    bottom:0;
-    right:0;
-    padding: 1 rem;
-    max-height: 10%;
-    z-index: 1000;
-    width: 100%;
-  }
-  
-  .admin-footer p{
-    padding: 10px;
-  }
-  
-  .admin-header {
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #FBF4F4; 
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1 rem;
-    max-height: 10%;
-  }
-  
-  .home-logo {
-    max-width: 60px; /* Desired width */
-    max-height: 60px; /* Desired height */
-    margin-top: 1%;
-    margin-right: 5%;
-    margin-left: 5%;
-  }
-  
-  .admin-nav {
-    display: flex;
-    align-items: center;
-    margin-left: 0px; /* Adjust spacing between logo and nav */
-  }
-  
-  .admin-nav ul {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-  }
-  
-  .admin-nav li {
-    padding: 0 10px; /* Adds horizontal spacing between nav items */
-  }
-  
-  .admin-nav a, .admin-nav .active {
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    transition: color 0.3s; /* Smooth transition for color change */
-  }
-  
-  .admin-nav a:hover, .admin-nav .active {
-    color: #653636; /* Changes color to black on hover and when active */
-  }
-  
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .admin-popup-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .admin-popup-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .admin-popup-content h2 {
-    margin-top: 0;
-  }
-  
-  .admin-popup-content p {
-    margin-bottom: 10px;
-  }
-  
-  .admin-popup-content button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .admin-post-button{
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .admin-popup-content button:hover {
-    background-color: #45a049;
-  }
-  
-  .admin-dropdown {
-    margin-left: 40%; /* Ensures the dropdown aligns to the right */
-  }
-  
-  .admin-dropdown .dropbtn {
-    border: none;
-    background-color: #FBF4F4;
-    color: #333;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 10px 15px;
-    transition: color 0.3s;
-  }
-  
-  .dropbtn:hover {
-    color: #653636;
-  }
-  
-  .dropdown-content {
-    display: block; /* Initial state is not visible */
-    position: absolute;
-    background-color: #ffffff;
-    width: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 15px;
-    transition: color 0.3ms;
-  }
-  
-  .dropdown-content a {
-    color: #333;
-    padding: 12px 40px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    transition: color 2ms;
-  }
-  
-  .dropdown-content:hover {
-    background-color: #FBF4F4;
-  }
-  
-  .dropdown-arrow {
-    font-size: 10px;
-  }
-  .editStudentButton {
-    background-color: rgb(254, 184, 184);
-    padding: 6px;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  .editFormModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1000;
+.enroll-students {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #FBF4F4;
+  border-radius: 15px;
+  padding: 10px 75px 75px;
+  max-width: 70%;
+  max-height: 70%;
+  min-width: 5%;
+  min-height: 5%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  overflow-y: scroll;
+  max-height: 60%;
 }
 
-.editFormModal form {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 90%;
-    max-width: 600px;
+.admin-content {
+  margin: 10px 20px 10px; 
+  min-width: none;
+}
+
+.enroll-students h1 {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+}
+
+.admin-table {
+  width: 100%;
+  margin: 20px 0;
+  min-width: 5%;
+  max-height: auto;
+}
+
+.admin-table, th, td {
+  border-collapse: collapse;
+  border: 2px solid #fda4b1;  
+  height: 12px;
+}
+
+.admin-table th, td {
+  padding: 8px;
+  width: 500px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.admin-table th {
+  text-align: center;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #ffeff2;
+}
+
+.admin-table thead {
+  background-color: #fcc6cf;
+}
+
+.admin-nav ul {
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  list-style: none; /* Removes default bullet points */
+}
+
+.admin-nav li {
+  display: inline-block; /* Makes navigation items appear side-by-side */
+  margin-right: 1rem; /* Spacing between items */
+}
+
+.admin-nav a {
+  text-decoration: none; /* Removes underline from links */
+  color: black; /* Font color */
+}
+
+.admin-logo {
+  max-width: 60px; /* Desired width */
+  max-height: 60px; /* Desired height */
+  margin-top: 1%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.admin-footer {
+  text-align: center;
+  position: fixed;
+  font-size: 12px;
+  min-height: 7%;
+  color: #fff;
+  background-color: #e55a70;
+  box-shadow: 0 2px 4px rgba(229, 0, 0, 0.1);
+  left:0;
+  bottom:0;
+  right:0;
+  padding: 1 rem;
+  max-height: 10%;
+  z-index: 1000;
+  width: 100%;
+}
+
+.admin-footer p{
+  padding: 10px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #FBF4F4; 
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1 rem;
+  max-height: 11%;
+}
+
+.home-logo {
+  max-width: 60px; /* Desired width */
+  max-height: 60px; /* Desired height */
+  margin-top: 1%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.admin-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 0px; /* Adjust spacing between logo and nav */
+  width: 50%;
+}
+
+.admin-nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.admin-nav li {
+  padding: 0 10px; /* Adds horizontal spacing between nav items */
+}
+
+.admin-nav a, .admin-nav .active {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.admin-nav a:hover, .admin-nav .active {
+  color: #653636; /* Changes color to black on hover and when active */
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.admin-popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.admin-popup-content h2 {
+  margin-top: 0;
+}
+
+.admin-popup-content p {
+  margin-bottom: 10px;
+}
+
+.admin-popup-content button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-post-button{
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-popup-content button:hover {
+  background-color: #45a049;
+}
+
+.admin-dropdown {
+   /* Ensures the dropdown aligns to the right */
+   right: 0;
+   position: relative;
+   margin-right: 3%;
+   margin-left: auto;
+}
+
+.admin-dropdown .dropbtn {
+  border: none;
+  background-color: #FBF4F4;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: color 0.3s;
+}
+
+.dropbtn:hover {
+  color: #653636;
+}
+
+.dropdown-content {
+  display: block; /* Initial state is not visible */
+  position: absolute;
+  background-color: #ffffff;
+  width: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 15px;
+  transition: color 0.3ms;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 40px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  transition: color 2ms;
+}
+
+.dropdown-content:hover {
+  background-color: #FBF4F4;
+}
+
+.dropdown-arrow {
+  font-size: 10px;
+}
+.editStudentButton {
+  background-color: rgb(254, 184, 184);
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+}
+
+.editFormModal {
+  position: absolute;
+  top: 20%;
+  left: 10px;
+  min-width: 10px;
+  height: fit-content;
+  padding: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
