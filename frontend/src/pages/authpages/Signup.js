@@ -180,7 +180,7 @@ function Signup() {
       })
 
     console.log('Form data submitted:', data);
-    //navigate('/login'); // Redirect to login after submission
+    navigate('/login'); // Redirect to login after submission
   };
 
   return (
