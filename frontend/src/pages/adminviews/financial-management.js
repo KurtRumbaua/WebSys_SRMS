@@ -14,18 +14,27 @@ function TransactionDatabase() {
 
     // Simulate fetching data
     useEffect(() => {
-        //const fetchData = async () => {
-        //    // Simulated fetch from an API
-        //    let result = await fetch('http://localhost:7000/student/basic')
-        //        .then(response => response.json())
-        //        .catch(error => console.error('Error:', error));
-        //    result = result['data'];
-        //    for (let i = 0; i < result.length; i++) {
-        //        setStudents(oldArray => [...oldArray, result[i]]);
-        //    }
-        //};
+        const fetchData = async () => {
+            // Simulated fetch from an API
+            let result = await fetch('http://localhost:7000/transaction/view/all')
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error));
+            result = result['data'];
+            for (let i = 0; i < result.length; i++) {
+                console.log("Result: ", result[i]);
+                let tempResult = {
+                    id: result[i]._id,
+                    transactionType: result[i].transactionType,
+                    transactionDescription: result[i].transactionDescription,
+                    transactionDate: result[i].transactionDate,
+                    cost: result[i]['amount']
+                };
+                console.log("Temp Result: ", tempResult);
+                setTransactions(oldArray => [...oldArray, tempResult]);
+            }
+        };
 
-        //fetchData();
+        fetchData();
     }, []); // Empty dependency array means this effect runs only once after the initial
 
 
