@@ -96,7 +96,7 @@ class ParentHome extends Component {
                     <ul>
                       <li><a href="/parenthome">Home</a></li>
                       <li><a href="/studentprofile">Student Information</a></li>
-                      <li><a href="/enroll-student">Enrollment</a></li>
+                      <li><a href="/parentenrollment">Enrollment</a></li>
                     </ul>
                   </nav>
                 </header>
@@ -245,7 +245,6 @@ class ParentHome extends Component {
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
-                                    <td class="parent-td">Row 2</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Written Task</td>
