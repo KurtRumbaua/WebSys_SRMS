@@ -64,7 +64,7 @@ function StudentsDatabase() {
                         </ul>
                     </nav>
                 </header>
-                <div className="enroll-students">
+                <div className="enroll-students" style={{marginTop:70}}>
                     <div className="admin-content">
                         <h1>Student Database</h1>
                         <table style={{paddingBottom:50}}>

@@ -2,12 +2,15 @@
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #FBF4F4;
-    border-radius: 15px;  
+    border-radius: 15px;
     padding: 10px 75px 75px;
     max-width: 70%;
     max-height: 70%;
     min-width: 5%;
     min-height: 5%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    max-height: 60%;
   }
   
   .admin-content {
