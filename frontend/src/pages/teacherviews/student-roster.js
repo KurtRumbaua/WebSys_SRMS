@@ -12,7 +12,7 @@ import logo from "../../assets/Schoollogo.png";
 
 const StudentRosterPage = () => {
     const sections = ['Imus', 'Maragondon', 'General Trias', 'Dasmarinas', 'Bacoor']; // Example sections
-    const category = ['Assignments', 'Projects', 'Exams', 'Quizzes']; // Example category
+    const category = ['Assignment 1', 'Assigment 2', 'Written Task', 'Performance Task', 'Final Exam']; // Example category
 
     const [selectedSection, setSelectedSection] = useState('');
     const [students, setStudents] = useState([]);
@@ -153,7 +153,13 @@ const StudentRosterPage = () => {
                             ))}
                         </Select>
                     </FormControl>
-                    <input type="number" placeholder="Grade" value={gradeInput} onChange={handleGradeInputChange} />
+                    <input
+                        placeholder="Grade"
+                        value={gradeInput}
+                        onChange={handleGradeInputChange}
+                        pattern="[0-9]+"  // Accepts only digits (0-9) one or more times (+)
+                        />
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleDialogClose}>Cancel</Button>

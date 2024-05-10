@@ -2,12 +2,13 @@
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #FBF4F4;
-    border-radius: 15px;  
+    border-radius: 15px;
     padding: 10px 75px 75px;
     max-width: 70%;
     max-height: 70%;
     min-width: 5%;
     min-height: 5%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   }
   
   .admin-content {
@@ -109,7 +110,7 @@
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     padding: 1 rem;
-    max-height: 10%;
+    max-height: 11%;
   }
   
   .home-logo {
@@ -124,6 +125,7 @@
     display: flex;
     align-items: center;
     margin-left: 0px; /* Adjust spacing between logo and nav */
+    width: 50%;
   }
   
   .admin-nav ul {
@@ -216,7 +218,11 @@
   }
   
   .admin-dropdown {
-    margin-left: 40%; /* Ensures the dropdown aligns to the right */
+     /* Ensures the dropdown aligns to the right */
+     right: 0;
+     position: relative;
+     margin-right: 3%;
+     margin-left: auto;
   }
   
   .admin-dropdown .dropbtn {
