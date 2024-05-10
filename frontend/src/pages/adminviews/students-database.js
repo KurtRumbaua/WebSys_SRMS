@@ -1,15 +1,29 @@
-import React, {useEffect ,useState } from 'react';
-import '../../styles/enroll-students.css';
+import React, { useEffect, useState } from 'react';
+import '../../styles/enroll-students.css'; // Ensure this CSS file contains the new styles
 import logo from '../../assets/Schoollogo.png';
 import { NavLink } from 'react-router-dom';
 
 function StudentsDatabase() {
-    const [students, setStudents] = useState([
-        { id: 1, lastName: "Doe", firstName: "John", middleName: "L", address: "123 Main St", contactNumber: "123-456-7890", email: "john.doe@example.com", gradeLevel: "10", section: "A" }
-    ]);
+    const [students, setStudents] = useState([{
+        id: 1, lastName: "Doe", firstName: "John", middleName: "L", address: "123 Main St",
+        contactNumber: "123-456-7890", email: "john.doe@example.com", gradeLevel: "10", section: "A"
+    }]);
 
     const [editFormData, setEditFormData] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let result = await fetch('http://localhost:7000/student/basic')
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error));
+            result = result['data'];
+            for (let i = 0; i < result.length; i++) {
+                setStudents(oldArray => [...oldArray, result[i]]);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleEditClick = (student) => {
         setIsEditing(true);
@@ -23,12 +37,9 @@ function StudentsDatabase() {
 
     const handleSave = (event) => {
         event.preventDefault();
-        const updatedStudents = students.map(student => {
-            if (student.id === editFormData.id) {
-                return { ...editFormData };
-            }
-            return student;
-        });
+        const updatedStudents = students.map(student =>
+            student.id === editFormData.id ? { ...editFormData } : student
+        );
         setStudents(updatedStudents);
         setIsEditing(false);
     };
@@ -38,26 +49,9 @@ function StudentsDatabase() {
         setEditFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    // Simulate fetching data
-    useEffect(() => {
-        const fetchData = async () => {
-            // Simulated fetch from an API
-            let result = await fetch('http://localhost:7000/student/basic')
-                .then(response => response.json())
-                .catch(error => console.error('Error:', error));
-            result = result['data'];
-            for (let i = 0; i < result.length; i++) {
-                setStudents(oldArray => [...oldArray, result[i]]);
-            }
-        };
-
-        fetchData();
-    }, []); // Empty dependency array means this effect runs only once after the initial
-
-
     return (
         <>
-            <div className="admin-container">
+            <div className="admin-container" style={{marginLeft:300, width:1500}}>
                 <header className="admin-header">
                     <img className="home-logo" src={logo} alt="School Logo" />
                     <nav className="nav">
@@ -70,51 +64,61 @@ function StudentsDatabase() {
                         </ul>
                     </nav>
                 </header>
-            </div>
-            <div className="enroll-students">
-                <div className="admin-content">
-                    <h1>Student Database</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Last Name</th><th>First Name</th><th>Middle Name</th>
-                                <th>Address</th><th>Contact Number</th><th>Email</th>
-                                <th>Grade Level</th><th>Section</th><th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {students.map(student => (
-                                <tr key={student.id}>
-                                    <td>{student.lastName}</td>
-                                    <td>{student.firstName}</td>
-                                    <td>{student.middleName}</td>
-                                    <td>{student.address}</td>
-                                    <td>{student.contactNumber}</td>
-                                    <td>{student.email}</td>
-                                    <td>{student.gradeLevel}</td>
-                                    <td>{student.section}</td>
-                                    <td><button className="editStudentButton" onClick={() => handleEditClick(student)}>Edit</button></td>
+                <div className="enroll-students">
+                    <div className="admin-content">
+                        <h1>Student Database</h1>
+                        <table style={{paddingBottom:50}}>
+                            <thead>
+                                <tr>
+                                    <th>Last Name</th><th>First Name</th><th>Middle Name</th>
+                                    <th>Address</th><th>Contact Number</th><th>Email</th>
+                                    <th>Grade Level</th><th>Section</th><th>Action</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                {isEditing && (
-                    <div className="editFormModal">
-                        <form onSubmit={handleSave}>
-                            <input type="text" name="lastName" value={editFormData.lastName} onChange={handleChange} placeholder="Last Name" style={{width:400}}/>
-                            <input type="text" name="firstName" value={editFormData.firstName} onChange={handleChange} placeholder="First Name" style={{width:400}}/>
-                            <input type="text" name="middleName" value={editFormData.middleName} onChange={handleChange} placeholder="Middle Name" style={{width:400}}/>
-                            <input type="text" name="address" value={editFormData.address} onChange={handleChange} placeholder="Address" style={{width:400}}/>
-                            <input type="text" name="contactNumber" value={editFormData.contactNumber} onChange={handleChange} placeholder="Contact Number" style={{width:400}}/>
-                            <input type="email" name="email" value={editFormData.email} onChange={handleChange} placeholder="Email" style={{width:400}}/>
-                            <input type="text" name="gradeLevel" value={editFormData.gradeLevel} onChange={handleChange} placeholder="Grade Level" style={{width:400}}/>
-                            <input type="text" name="section" value={editFormData.section} onChange={handleChange} placeholder="Section" style={{width:400}}/>
-                            <button type="submit">Save</button>
-                            <button onClick={handleCancel}>Cancel</button>
-                        </form>
+                            </thead>
+                            <tbody>
+                                {students.map(student => (
+                                    <tr key={student.id}>
+                                        <td>{student.lastName}</td>
+                                        <td>{student.firstName}</td>
+                                        <td>{student.middleName}</td>
+                                        <td>{student.address}</td>
+                                        <td>{student.contactNumber}</td>
+                                        <td>{student.email}</td>
+                                        <td>{student.gradeLevel}</td>
+                                        <td>{student.section}</td>
+                                        <td><button className="editStudentButton" onClick={() => handleEditClick(student)}>Edit</button></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                )}
+                    {isEditing && (
+                        <div className="editFormModal">
+                            <form onSubmit={handleSave} className="editForm">
+                                <label>Last Name</label>
+                                <input type="text" name="lastName" value={editFormData.lastName} onChange={handleChange} />
+                                <label>First Name</label>
+                                <input type="text" name="firstName" value={editFormData.firstName} onChange={handleChange} />
+                                <label>Middle Name</label>
+                                <input type="text" name="middleName" value={editFormData.middleName} onChange={handleChange} />
+                                <label>Address</label>
+                                <input type="text" name="address" value={editFormData.address} onChange={handleChange} />
+                                <label>Contact Number</label>
+                                <input type="text" name="contactNumber" value={editFormData.contactNumber} onChange={handleChange} />
+                                <label>Email</label>
+                                <input type="email" name="email" value={editFormData.email} onChange={handleChange} />
+                                <label>Grade Level</label>
+                                <input type="text" name="gradeLevel" value={editFormData.gradeLevel} onChange={handleChange} />
+                                <label>Section</label>
+                                <input type="text" name="section" value={editFormData.section} onChange={handleChange} />
+                                <div className="form-buttons">
+                                    <button type="submit">Save</button>
+                                    <button type="button" onClick={handleCancel}>Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
+                </div>
             </div>
             <footer className="admin-footer">
                 <p>Sta. Teresita Elementary School © 2023. All Rights Reserved.</p>
@@ -124,4 +128,3 @@ function StudentsDatabase() {
 }
 
 export default StudentsDatabase;
-
