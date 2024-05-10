@@ -27,7 +27,36 @@ function ClassManagementPage() {
 
   return (
     <div className="admin-classmanagement">
-      
+              <header className="admin-header">
+          <img className="home-logo" src={logo} alt="School Logo" />
+          <nav className="admin-nav">
+            <ul>
+              <li>
+              <NavLink to="/student-database" activeClassName="active">
+                  Students
+                </NavLink>
+              </li>
+              <li>
+              <NavLink to="/employee-database" activeClassName="active">
+                  Employees
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/enroll-student" activeClassName="active">
+                  Enrollment
+                </NavLink>
+              </li>
+              <li>
+              <NavLink to="/class-management" activeClassName="active">
+                  Class Management
+                </NavLink>
+              </li>
+              <NavLink to="/financial-management" activeClassName="active">
+                  Financial Management
+                </NavLink>
+            </ul>
+          </nav>
+        </header>
       <div className="main-content">
         {/* Grade Level Dropdown */}
         <div className="grade-dropdown-container">
