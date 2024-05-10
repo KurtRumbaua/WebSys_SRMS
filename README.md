@@ -20,6 +20,10 @@ password: melon
 email: stuff@gmail.com
 password: melon
 
+Teacher:
+
+password: kiwi@gmail.com
+password: melon
 Admin:
 
 email: admin@example.com

@@ -17,7 +17,9 @@ function EnrollStudents() {
   return (
     <>
       <div className="admin-container">
+      <div className="admin-container">
         <AdminHeader />
+      </div>
       </div>
       <div className="enroll-students">
         <div className="admin-content">
