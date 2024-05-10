@@ -15,18 +15,25 @@ class StudentInfo extends Component {
     }
 
     componentDidMount() {
-        fetch(this.API_URL + "account/view", {
-            headers: { 'authorization': sessionStorage.getItem("token") }
+
+        let user_id = sessionStorage.getItem("user_id");
+        console.log("water_user_id: ", user_id);
+        
+        fetch("http://localhost:7000/student/viewone", {
+            headers: { 
+                'userId': user_id
+            },
+            method: "GET",
         })
         .then(response => response.json())
         .then(message => {
-            var result = Object.keys(message).reduce((result, key) => {
-                result[key] = { value: message[key] };
-                return result;
-            }, {});
-            this.setState({ data: result, show_value: true });
+            message = message['data'];
+            // Fetch login information (??) fg
+            this.setState({ data: message, show_value: true });
+            console.log("water_message: ", message);
         })
         .catch(error => console.log(error));
+
     }
 
     render() {
@@ -40,7 +47,7 @@ class StudentInfo extends Component {
                     <ul>
                       <li><a href="/parenthome">Home</a></li>
                       <li><a href="/studentprofile">Student Information</a></li>
-                      <li><a href="/parentenrollment">Enrollment</a></li>
+                      <li><a href="/enroll-student">Enrollment</a></li>
                     </ul>
                   </nav>
                 </header>
@@ -50,35 +57,35 @@ class StudentInfo extends Component {
                 <div class="student-information">
                     <div class="field">
                     <span class="label">First Name:</span>
-                    <span class="value">Juan</span>
+                    <span class="value">{this.state.show_value ? this.state.data['firstName'] : "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Last Name:</span>
-                    <span class="value">Dela Cruz</span>
+                    <span class="value">{this.state.show_value ? this.state.data['lastName']: "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Email:</span>
-                    <span class="value">juan@gmail.com</span>
+                    <span class="value">{this.state.show_value ? this.state.data['email']: "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Contact No:</span>
-                    <span class="value">123456789</span>
+                    <span class="value">{this.state.show_value ? this.state.data['contactNumber']: "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Grade Level:</span>
-                    <span class="value">3</span>
+                    <span class="value">{this.state.show_value ? this.state.data['gradeLevel']: "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Section/Class:</span>
-                    <span class="value">Lorem</span>
+                    <span class="value">{this.state.show_value ? this.state.data['section']: "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Student ID:</span>
-                    <span class="value">123456789</span>
+                    <span class="value">{this.state.show_value ? this.state.data['studentNumber']: "loading..."}</span>
                     </div>
                     <div class="field">
                     <span class="label">Address:</span>
-                    <span class="value">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                    <span class="value">{this.state.show_value ? this.state.data['address']: "loading..."}</span>
                     </div>
                 </div>
                 <h2 class = "title">Student Medical Information</h2>
@@ -93,7 +100,7 @@ class StudentInfo extends Component {
                     </div>
                     <div class="field">
                     <span class="label">Emergency Contact:</span>
-                    <span class="value">123456789</span>
+                    <span class="value">{this.state.show_value ? this.state.data['emergencyContact']: "loading..."}</span>
                     </div>
                 </div>
 
