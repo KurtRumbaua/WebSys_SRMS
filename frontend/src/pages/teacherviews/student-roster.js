@@ -95,12 +95,12 @@ const StudentRosterPage = () => {
     };
 
     return (
-        <div className="container">
-            <h1 className="title">Class Record</h1>
-            <div className="search-bar">
+        <div className="teacher-container">
+            <h1 className="teacher-title">Class Record</h1>
+            <div className="teacher-search-bar">
                 <input type="text" placeholder="Search by ID, Name..." onChange={handleSearchChange} />
             </div>
-            <div className="select-section">
+            <div className="teacher-select-section">
                 <label htmlFor="sectionSelect">Select Section:</label>
                 <select id="sectionSelect" onChange={handleSectionChange} value={selectedSection}>
                     <option value="">-- Select Section --</option>
@@ -110,7 +110,7 @@ const StudentRosterPage = () => {
                 </select>
                 {selectedSection === '' && <p className="no-section-text">Please select a section.</p>}
             </div>
-            <table className="student-table">
+            <table className="teacher-student-table">
                 <thead>
                     <tr>
                         <th>ID Number</th>
@@ -137,7 +137,7 @@ const StudentRosterPage = () => {
 
             {/* Dialog for adding grades */}
             <Dialog open={openDialog} onClose={handleDialogClose}>
-                <DialogTitle className="dialog-title">{selectedStudent ? `Add Grades - ${selectedStudent.firstName} ${selectedStudent.lastName}` : 'Add Grades'}</DialogTitle>
+                <DialogTitle className="teacher-dialog-title">{selectedStudent ? `Add Grades - ${selectedStudent.firstName} ${selectedStudent.lastName}` : 'Add Grades'}</DialogTitle>
                 <DialogContent>
                     <FormControl fullWidth>
                         <Select value={selectedSubject} onChange={handleSubjectChange} displayEmpty>

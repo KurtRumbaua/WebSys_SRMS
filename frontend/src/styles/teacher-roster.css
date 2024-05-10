@@ -42,3 +42,8 @@
   .assign-button:hover {
     background-color: #0056b3;
   }
+
+  .teacher-dashboard-title {
+    color: black;
+    padding-left: 5%;
+  }

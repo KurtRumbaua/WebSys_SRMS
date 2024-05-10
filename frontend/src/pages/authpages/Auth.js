@@ -45,14 +45,14 @@ class Auth extends Component {
         const { data, show_value } = this.state;
         return (
             <>
-            <div className="body-bg" style={{ backgroundImage: `url(${schoolbg})` }}>
-                <div className="container">
+            <div className="auth-body-bg" style={{ backgroundImage: `url(${schoolbg})` }}>
+                <div className="auth-container">
                     <header>
                         <img src={logo} alt="School Logo" />
                     </header>
-                    <div className="buttons">
-                        <button className="login-btn" onClick={this.handleLoginClick}>Login</button>
-                        <button className="signup-btn"onClick={this.handleSignupClick}>Sign Up</button>
+                    <div className="auth-buttons">
+                        <button className="auth-login-btn" onClick={this.handleLoginClick}>Login</button>
+                        <button className="auth-signup-btn"onClick={this.handleSignupClick}>Sign Up</button>
                     </div>
                     {show_value && data && Object.entries(data).map(([key, { value }]) => (
                         <div key={key}>

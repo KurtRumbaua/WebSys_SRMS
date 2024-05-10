@@ -1,4 +1,4 @@
-.teacher-dashboard {
+.admin-classmanagement {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -23,11 +23,14 @@
     font-size: 1rem;
   }
   
-  .card-table-container {
+  .admin-card-table-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, minmax(250px, 2fr)); /* Three columns */
     gap: 20px;
-  }
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
   
   .card {
     background-color: #f0f0f0;
@@ -41,12 +44,12 @@
     transform: translateY(-5px); /* Added a slight lift on hover */
   }
   
-  .card-title {
+  .admin-card-title {
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
   
-  .card-content {
+  .admin-card-content {
     font-size: 1.2rem;
     color: #333;
   }

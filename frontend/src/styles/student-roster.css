@@ -2,7 +2,7 @@
 
 /* Common styles */
 
-.container {
+.teacher-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -11,7 +11,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.title {
+.teacher-title {
     font-size: 28px;
     margin-bottom: 20px;
     color: #333;
@@ -19,7 +19,7 @@
 
 /* Search bar styles */
 
-.search-bar input {
+.teacher-search-bar input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -30,13 +30,13 @@
 
 /* Select section styles */
 
-.select-section label {
+.teacher-select-section label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
-.select-section select {
+.teacher-select-section select {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -46,25 +46,25 @@
 
 /* Student table styles */
 
-.student-table {
+.teacher-teacher-student-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.student-table th,
-.student-table td {
+.teacher-student-table th,
+.teacher-student-table td {
     border: 1px solid #ddd;
     padding: 12px;
 }
 
-.student-table th {
+.teacher-student-table th {
     background-color: #f2f2f2;
     font-weight: bold;
     text-align: left;
 }
 
-.student-table td button {
+.teacher-student-table td button {
     padding: 8px 16px;
     background-color: #4CAF50;
     color: white;
@@ -74,25 +74,25 @@
     transition: background-color 0.3s ease;
 }
 
-.student-table td button:hover {
+.teacher-student-table td button:hover {
     background-color: #45a049;
 }
 
 /* Dialog styles */
 
-.dialog-title {
+.teacher-dialog-title {
     background-color: #e0dada;
     color: #333;
     padding: 20px;
     border-radius: 8px 8px 0 0;
 }
 
-.dialog-content {
+.teacher-dialog-content {
     padding: 20px;
 }
 
-.dialog-content select,
-.dialog-content input[type="number"] {
+.teacher-dialog-content select,
+.teacher-dialog-content input[type="number"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -101,7 +101,7 @@
     font-size: 16px;
 }
 
-.dialog-actions {
+.teacher-dialog-actions {
     display: flex;
     justify-content: flex-end;
     padding: 20px;
@@ -109,7 +109,7 @@
     border-radius: 0 0 8px 8px;
 }
 
-.dialog-actions button {
+.teacher-dialog-actions button {
     padding: 12px 24px;
     border-radius: 6px;
     border: none;
@@ -118,12 +118,12 @@
     font-size: 16px;
 }
 
-.dialog-actions button:first-child {
+.teacher-dialog-actions button:first-child {
     background-color: #d32f2f;
     color: #fff;
 }
 
-.dialog-actions button:last-child {
+.teacher-dialog-actions button:last-child {
     background-color: #388e3c;
     color: #fff;
 }
