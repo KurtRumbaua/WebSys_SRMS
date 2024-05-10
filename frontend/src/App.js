@@ -18,7 +18,7 @@ import ClassManagementPage from "./pages/adminviews/class-management";
 import EnrollStudentPage from "./pages/adminviews/enroll_students";
 import StudentsDatabase from "./pages/adminviews/students-database";
 import EmployeesDatabase from "./pages/adminviews/employees-database";
-import FinancialManagement from "./pages/adminviews/financial-management";
+import TransactionDatabase from "./pages/adminviews/financial-management";
 
 //parent-views
 import StudenInfo from "./pages/parentviews/studentinfo";
@@ -37,7 +37,7 @@ function App() {
         <Route path="/class-teacher-assign" element={<ClassTeacherAssign />} />
         <Route path="/class-management" element={<ClassManagementPage />} />
         <Route path="/enroll-student" element={<EnrollStudentPage />} />
-        <Route path="/financial-management" element={<FinancialManagement />} />
+        <Route path="/financial-management" element={<TransactionDatabase/>} />
 
         {/* parentviews */}
         <Route path="/parenthome" element={<ParentHome/>}/>
