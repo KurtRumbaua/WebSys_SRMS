@@ -10,6 +10,7 @@ MONGODB_CONNECTION_STRING=mongodb+srv://asrielkuroo:PBdFg2WHtTrPHUGA@cluster0.dq
 User accounts with data entries:
 
 Parents:
+
 email: orange@gmail.com
 password: melon
 
@@ -20,6 +21,7 @@ email: stuff@gmail.com
 password: melon
 
 Admin:
+
 email: admin@example.com
 password: melon
 
