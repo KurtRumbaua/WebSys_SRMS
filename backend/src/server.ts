@@ -10,6 +10,7 @@ import enrollmentRoute from "./routes/enrollmentRoute";
 import transactionRoute from "./routes/transactionRoute";
 import gradeRoute from "./routes/gradeRoute";
 import parentRoute from "./routes/parentRoute";
+import teacherRoute from "./routes/teacherRoute";
 
 db.initDatabaseConnection();
 
@@ -36,7 +37,8 @@ const apiRoutes = {
     "/enrollment": enrollmentRoute,
     "/transaction": transactionRoute,
     "/grade": gradeRoute,
-    "/parent": parentRoute
+    "/parent": parentRoute,
+    "/teacher": teacherRoute
 }
 for (const key of Object.keys(apiRoutes)) {
     app.use(key, apiRoutes[key as keyof typeof apiRoutes]);
