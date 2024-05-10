@@ -24,6 +24,7 @@ Teacher:
 
 password: kiwi@gmail.com
 password: melon
+
 Admin:
 
 email: admin@example.com
