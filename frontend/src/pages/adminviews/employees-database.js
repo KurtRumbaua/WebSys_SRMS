@@ -16,6 +16,11 @@ function EnrollStudents() {
         setIsPopupOpen(!isPopupOpen);
       };
 
+      const handleEditClick = (e) => { // Pass the event argument explicitly
+        e.preventDefault(); // Prevent default form submission
+        setIsEditing(!isEditing);
+      };      
+
         // Function to toggle add employee pop-up visibility
     const toggleAddEmployeePopup = () => {
       setIsAddEmployeePopupOpen(!isAddEmployeePopupOpen);
@@ -172,6 +177,70 @@ function EnrollStudents() {
         <button onClick={() => toggleAddEmployeePopup()}>Close</button>
         </div>
     </div>
+    )}
+
+        {/* Pop-up window */}
+        {isPopupOpen && (
+      <div className="admin-popup-container">
+        <div className="admin-popup-content">
+          <h2>Employee Details</h2>
+          <form>
+            <p>Last Name:</p>
+            <input
+              type="text"
+              value={selectedEmployee?.lastName || ''}
+              readOnly={!isEditing} // Read-only if not editing
+            />
+            <p>First Name:</p>
+            <input
+              type="text"
+              value={selectedEmployee?.firstName || ''}
+              readOnly={!isEditing}
+            />
+            <p>ID:</p>
+            <input
+              type="text"
+              value={selectedEmployee?.id || ''}
+              readOnly={true} // Always read-only for ID
+            />
+            <p>Field:</p>
+            <input
+              type="text"
+              value={selectedEmployee?.field || ''}
+              readOnly={!isEditing}
+            />
+            <p>Birth Date:</p>
+            <input
+              type="text"
+              value={selectedEmployee?.birthDate || ''}
+              readOnly={!isEditing}
+            />
+            <p>Contact No:</p>
+            <input
+              type="text"
+              value={selectedEmployee?.contactNo || ''}
+              readOnly={!isEditing}
+            />
+            <p>Email:</p>
+            <input
+              type="email"
+              value={selectedEmployee?.email || ''}
+              readOnly={!isEditing}
+            />
+            <p>Address:</p>
+            <textarea
+              value={selectedEmployee?.address || ''}
+              readOnly={!isEditing}
+            />
+            <div className="button-container">
+            <button onClick={handleEditClick}>Edit</button>
+            <button type="submit" disabled={!isEditing}>Save</button> 
+            <button disabled>Delete</button>
+            </div>
+          </form>
+          <button onClick={() => togglePopup(null)}>Close</button>
+        </div>
+      </div>
     )}
 
       <button
