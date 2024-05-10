@@ -1,4 +1,3 @@
-
 //env file in backend 
 .env file:
 PORT=7000
