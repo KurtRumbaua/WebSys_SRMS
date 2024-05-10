@@ -58,7 +58,7 @@ export async function fetchAllUsersAPI(req: Request, res: Response) {
 
 export async function loginUserAPI(req: Request, res: Response) {
     try {
-        console.log(req.body);
+        console.log("data",req.body);
         const { email, password } = req.body;
 
         const userExists = await checkIfUserExists(email);
