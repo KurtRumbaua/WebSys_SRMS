@@ -173,7 +173,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">{this.state.show_grades ? this.grades['FILIPINO'][0]['assignment_1'] : "Loading..."}</td>
+                                    <td class="parent-td">Row 1</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
