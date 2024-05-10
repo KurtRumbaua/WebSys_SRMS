@@ -48,6 +48,8 @@ function Signup() {
     let email = data['userEmail']["name"];
     let password = data['userPassword']['name'];
     let role = 'PARENT'
+
+
     // user data push
     fetch("http://localhost:7000/account/create", {
       headers: {
@@ -76,6 +78,8 @@ function Signup() {
         console.log("email: ", email);
         console.log("letAddress: ", letAddress);
 
+
+        // parent shits
         fetch("http://localhost:7000/parent/create", {
           headers: {
             'Content-Type': 'application/json',
@@ -138,6 +142,27 @@ function Signup() {
             .then((message) => {
               message = message['data'];
               console.log("THISIS STUDENT", message);
+
+              // populate grade (WORKING)
+              fetch('http://localhost:7000/grade/populate', {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                "studentNumber": message['studentNumber'],
+                })
+              })
+              .then((response) => response.json())
+              .then((message) => {
+                message = message['data'];
+                console.log("THIS IS GRADE: ", message);
+              })
+              .catch(
+                (error) => {
+                  console.log("THIS IS ERROR: ", error);
+                }
+              );
             })
             .catch(
               (error) => {
