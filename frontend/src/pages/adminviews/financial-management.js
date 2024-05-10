@@ -5,6 +5,15 @@ import { NavLink } from 'react-router-dom';
 
 function TransactionDatabase() {
 
+
+  const [isAddTransactionPopupOpen, setIsAddTransactionPopupOpen] =
+  useState(false);
+
+// Function to toggle add transaction pop-up visibility
+const toggleAddTransactionPopup = () => {
+  setIsAddTransactionPopupOpen(!isAddTransactionPopupOpen);
+};
+
     const [transactions, setTransactions] = useState([
         { id: 1, transactionType: "incoming", transactionDescription: "Payment for tuition", transactionDate: "2023-01-01", cost: 1000 },
     ]);
@@ -100,6 +109,44 @@ function TransactionDatabase() {
             </tbody>
           </table>
         </div>
+
+      </div>
+      <div>
+        {/* Add employee pop-up */}
+        {isAddTransactionPopupOpen && (
+          <div className="admin-popup-container">
+            <div className="admin-popup-content">
+              <h2>Add Transaction Record</h2>
+              <div className="form-group">
+                <label htmlFor="transactionType">Transaction Type:</label>
+                <select id="transactionType" name="transactionType">
+                  <option value="incoming">Incoming</option>
+                  <option value="outgoing">Outgoing</option>
+                </select>
+              </div>
+              <form clasName="admin-form-employee">
+                <div className="form-group">
+                  <label htmlFor="lastName">Transaction Description:</label>
+                  <input type="text" id="lastName" name="lastName" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="firstName">Cost:</label>
+                  <input type="text" id="firstName" name="firstName" />
+                </div>
+                <button type="submit">Submit</button>
+              </form>
+              <button onClick={() => toggleAddTransactionPopup()}>Close</button>
+            </div>
+          </div>
+        )}
+        <button
+          className="admin-post-button"
+          onClick={() => toggleAddTransactionPopup()}
+        >
+          Add Transaction
+        </button>
+        <h3>Total Incoming:</h3>
+        <h3>Total Outgoing:</h3>
       </div>
     </>
    );
