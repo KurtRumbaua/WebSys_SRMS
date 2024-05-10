@@ -8,7 +8,6 @@ function StudentsDatabase() {
         { id: 1, lastName: "Doe", firstName: "John", middleName: "L", address: "123 Main St", contactNumber: "123-456-7890", email: "john.doe@example.com", gradeLevel: "10", section: "A" }
     ]);
 
-
     const [editFormData, setEditFormData] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -38,6 +37,22 @@ function StudentsDatabase() {
         const { name, value } = event.target;
         setEditFormData(prev => ({ ...prev, [name]: value }));
     };
+
+    // Simulate fetching data
+    useEffect(() => {
+        const fetchData = async () => {
+            // Simulated fetch from an API
+            let result = await fetch('http://localhost:7000/student/basic')
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error));
+            result = result['data'];
+            for (let i = 0; i < result.length; i++) {
+                setStudents(oldArray => [...oldArray, result[i]]);
+            }
+        };
+
+        fetchData();
+    }, []); // Empty dependency array means this effect runs only once after the initial
 
 
     return (

@@ -9,7 +9,18 @@ export class StudentModel {
     // get 
     // for basic information
     async getAllStudentsBasic(): Promise<IStudent[]> {
-        return await db.StudentModel.find({enrollmentStatus: EnrollmentStatus.ENROLLED}, { studentNumber: 1, firstName: 1, lastName: 1, gradeLevel: 1, section: 1, enrollmentStatus: 1 }).sort('_id'); //leaN? -_id for desc.
+        return await db.StudentModel.find(
+          {enrollmentStatus: EnrollmentStatus.ENROLLED}, 
+          { 
+            firstName: 1, 
+            lastName: 1,
+            middleName: 1,
+            gradeLevel: 1, 
+            section: 1, 
+            address: 1,
+            contactNumber: 1,
+            email: 1,
+          }).sort('_id'); //leaN? -_id for desc.
     }
 
     
