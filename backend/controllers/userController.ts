@@ -4,6 +4,7 @@ import { removeUser, checkIfUserExists, addUser, getAllUsers, validateLogin, fet
 export async function registerUserAPI(req: Request, res: Response) {
     try {
         const userData = req.body;
+        console.log("DATA:", userData);
 
         const doesUserExist = await checkIfUserExists(userData.email);
         if (doesUserExist) {

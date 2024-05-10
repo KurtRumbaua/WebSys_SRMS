@@ -34,7 +34,7 @@ export class UserModel {
 
     // create
     async createUser(user: IUser): Promise<IUser> {
-        console.log(`Creating user: ${user}.`);
+        console.log(`Creating user: ${user.email}.`);
         const newUser = new db.UserModel(user);
         return await newUser.save();
     }
