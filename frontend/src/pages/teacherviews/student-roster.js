@@ -10,6 +10,9 @@ import MenuItem from '@mui/material/MenuItem';
 import '../../styles/student-roster.css';
 import logo from "../../assets/Schoollogo.png";
 
+import TeacherHeader from '../../components/teacher-header';
+import STESFooter from '../../components/footer';
+
 const StudentRosterPage = () => {
     const sections = ['Imus', 'Maragondon', 'General Trias', 'Dasmarinas', 'Bacoor']; // Example sections
     const subjects = ['Assignments', 'Projects', 'Exams', 'Quizzes']; // Example subjects
@@ -97,9 +100,7 @@ const StudentRosterPage = () => {
 
     return (
         <div className="teacher-container">
-                            <header className="admin-header">
-            <img className="home-logo" src={logo} alt="School Logo" />
-            </header>
+            <TeacherHeader />
             <h1 className="teacher-title">Class Record</h1>
             <div className="teacher-search-bar">
                 <input type="text" placeholder="Search by ID, Name..." onChange={handleSearchChange} />

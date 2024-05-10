@@ -17,18 +17,13 @@ function TeacherHeader() {
         <nav className="admin-nav">
           <ul>
             <li>
-              <NavLink to="/parenthome" activeClassName="active">
-                Home
+              <NavLink to="/student-roster" activeClassName="active">
+                Student Roster
               </NavLink>
             </li>
             <li>
-              <NavLink to="/studentinfo" activeClassName="active">
-                Student Information
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/parentenrollment" activeClassName="active">
-                Enrollment
+              <NavLink to="/teacher-classes" activeClassName="active">
+                Classes
               </NavLink>
             </li>
           </ul>

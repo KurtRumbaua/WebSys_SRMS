@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "../../styles/parenthome.css";
 import logo from "../../assets/Schoollogo.png";
+import ParentHeader from '../../components/parent-header';
+import STESFooter from '../../components/footer';
 
 class ParentHome extends Component {
     API_URL = "http://localhost:7000/";
@@ -90,16 +92,7 @@ class ParentHome extends Component {
             <>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
               <div className="home-container">
-                <header className="home-header">
-                  <img className="home-logo" src={logo} alt="School Logo" />
-                  <nav class = "nav">
-                    <ul>
-                      <li><a href="/parenthome">Home</a></li>
-                      <li><a href="/studentprofile">Student Information</a></li>
-                      <li><a href="/parentenrollment">Enrollment</a></li>
-                    </ul>
-                  </nav>
-                </header>
+                <ParentHeader />
                 <div className ="home-content">
                     <div className="home-leftcontainer">
                         <div className="home-studentsummary">
@@ -429,9 +422,7 @@ class ParentHome extends Component {
                         </div>
                     </div>
                 </div>
-                <footer class= "home-footer">
-                Sta. Teresita Elementary School © 2023. All Rights Reserved.
-                </footer>
+                <STESFooter />
               </div>
             </>
           );        

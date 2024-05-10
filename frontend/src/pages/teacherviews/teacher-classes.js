@@ -2,14 +2,16 @@ import React from 'react';
 import '../../styles/teacher-roster.css'; // Import CSS file for styling
 import logo from "../../assets/Schoollogo.png";
 import { NavLink } from "react-router-dom";
+import TeacherHeader from '../../components/teacher-header';
+import STESFooter from '../../components/footer';
 
 function TeacherClasses() {
   return (
 
     <div className="teacher-dashboard">
-              <header className="admin-header">
-          <img className="home-logo" src={logo} alt="School Logo" />
-        </header>          
+      <div>
+        <TeacherHeader />
+        </div>     
             {/* Main Content */}
             <div className="teacher-main-content">
             <h1 className="teacher-dashboard-title">Welcome, Teacher Juan!</h1>
@@ -25,9 +27,9 @@ function TeacherClasses() {
                 </div>
             </div>  
                   {/* Footer */}
-            <footer className="admin-footer">
-        <p className="footer-text">Sta. Teresita Elementary School 2023. All Rights Reserved.</p>
-      </footer>
+            <div>
+              <STESFooter />
+            </div>
     </div>
     
   );

@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
-import '../../styles/teacher-roster.css'; // Import CSS file for styling
-import AdminHeader from '../../components/admin-header';
-import STESFooter from '../../components/footer';
+import React, { useState } from "react";
+import "../../styles/teacher-roster.css"; // Import CSS file for styling
+import AdminHeader from "../../components/admin-header";
+import STESFooter from "../../components/footer";
 
 function ClassTeacherAssign() {
-    const [teachers, setTeachers] = useState([
-      { id: 1, firstName: 'John', middleName: 'Doe', lastName: 'Smith', fields: 'Math' },
-      { id: 2, firstName: 'Jane', middleName: 'Marie', lastName: 'Johnson', fields: 'English' },
-      { id: 3, firstName: 'Robert', middleName: 'Lee', lastName: 'Brown', fields: 'PE' },
-      // Add more teachers as needed
-    ]);
-  
-    return (
-      <>
+  const [teachers, setTeachers] = useState([
+    {
+      id: 1,
+      firstName: "John",
+      middleName: "Doe",
+      lastName: "Smith",
+      fields: "Math",
+    },
+    {
+      id: 2,
+      firstName: "Jane",
+      middleName: "Marie",
+      lastName: "Johnson",
+      fields: "English",
+    },
+    {
+      id: 3,
+      firstName: "Robert",
+      middleName: "Lee",
+      lastName: "Brown",
+      fields: "PE",
+    },
+    // Add more teachers as needed
+  ]);
+
+  return (
+    <>
       <div>
-         <AdminHeader />
-         </div>
+        <AdminHeader />
+      </div>
       <div className="teachers-page">
         <h1 className="page-title">Teachers Information</h1>
         <div className="teachers-table-container">
@@ -38,7 +56,9 @@ function ClassTeacherAssign() {
                   <td>{teacher.middleName}</td>
                   <td>{teacher.lastName}</td>
                   <td>{teacher.fields}</td>
-                  <td><button className="assign-button">Assign to Subject</button></td>
+                  <td>
+                    <button className="assign-button">Assign to Subject</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -48,9 +68,8 @@ function ClassTeacherAssign() {
       <div>
         <STESFooter />
       </div>
-      </>
-    );
-  }
-  
-  export default ClassTeacherAssign;
+    </>
+  );
+}
 
+export default ClassTeacherAssign;
