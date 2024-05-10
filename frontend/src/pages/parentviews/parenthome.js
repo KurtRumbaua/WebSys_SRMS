@@ -3,30 +3,87 @@ import "../../styles/parenthome.css";
 import logo from "../../assets/Schoollogo.png";
 
 class ParentHome extends Component {
-    API_URL = "http://localhost:7777/";
+    API_URL = "http://localhost:7000/";
 
     constructor(props) {
         super(props);
         this.state = {
             data: null,
             show_value: false,
+            show_grades: false
         };
+
+        this.grades = {}
     }
 
-    componentDidMount() {
-        fetch(this.API_URL + "account/view", {
-            headers: { 'authorization': sessionStorage.getItem("token") }
+    getSubjectGrade(subject, studentNumber) {
+        // Fetch the grades for the subject
+        //
+        console.log("STUDNUM:", studentNumber);
+        fetch("http://localhost:7000/grade/view/subject", {
+            headers: {
+                'studentNumber': studentNumber,
+                'subject': subject
+            },
+            method: "GET",
         })
         .then(response => response.json())
         .then(message => {
-            var result = Object.keys(message).reduce((result, key) => {
-                result[key] = { value: message[key] };
-                return result;
-            }, {});
-            this.setState({ data: result, show_value: true });
+            message = message['data'];
+                this.grades[subject] = message;
+            if (message.length == 0){
+                this.grades[subject] = {
+                    0:{
+                    'assignment_1': "N/G",
+                    'assignment_2': "N/G",
+                    'written_task': "N/G",
+                    'final_exam': "N/G" 
+                    }
+                };
+            }
+                console.log("message in " + subject, message);
+                console.log("grades in " + subject, this.grades);
         })
         .catch(error => console.log(error));
     }
+
+    componentDidMount() {
+
+        let user_id = sessionStorage.getItem("user_id");
+        console.log("water_user_id: ", user_id);
+        
+        fetch("http://localhost:7000/student/viewone", {
+            headers: { 
+                'userId': user_id
+            },
+            method: "GET",
+        })
+        .then(response => response.json())
+        .then(message => {
+            message = message['data'];
+            // Fetch login information (??) fg
+            this.setState({ data: message, show_value: true });
+
+            let subjects = ["SCIENCE", "MATH", "ENGLISH", "FILIPINO", "HISTORY", "P.E", "HEALTH", "MUSIC", "ARTS", "HEALTH", "VALUES"];
+            let studentNumber = message['_id'];
+            for (let i = 0; i < subjects.length; i++) {
+                this.grades[subjects[i]] =  this.getSubjectGrade(subjects[i], studentNumber);
+            }
+
+        })
+        .catch(error => console.log(error));
+
+        this.sleep(1000).then(() => {
+            this.setState({show_grades: true});
+        });
+
+    }
+
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
 
     render() {
         return (
@@ -39,7 +96,7 @@ class ParentHome extends Component {
                     <ul>
                       <li><a href="/parenthome">Home</a></li>
                       <li><a href="/studentprofile">Student Information</a></li>
-                      <li><a href="">Enrollment</a></li>
+                      <li><a href="/enroll-student">Enrollment</a></li>
                     </ul>
                   </nav>
                 </header>
@@ -47,11 +104,16 @@ class ParentHome extends Component {
                     <div className="home-leftcontainer">
                         <div className="home-studentsummary">
                             <h1>
-                                Juan Dela Cruz
+                                {
+                                    this.state.show_value ? this.state.data['firstName'] + 
+                                    " " + this.state.data['lastName'] : "Loading..."
+                                }
                             </h1>
-                            <p>3rd Grade</p>
-                            <p>Status</p>
-                            <p>Age:</p>
+                            <p>
+                                {this.state.show_value ? this.state.data['gradeLevel'] : "Loading..."}
+                                {this.state.show_value ? this.state.data['gradeLevel'] === 1  ? "st" : this.state.data['gradeLevel'] === 2 ? "nd" : this.state.data['gradeLevel'] === 3 ? "rd" : "th" : "Loading..."} Grade
+                            </p>
+                            <p>{this.state.show_value? this.state.data['enrollmentStatus'] : "Loading..."}</p>
                         </div>
                         <div className="home-classannouncement">
                             <h1>Class Announcements:</h1>
@@ -77,19 +139,19 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
-                                    <td class="parent-td">Row 2</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_2'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Written Task</td>
-                                    <td class="parent-td">Row 3</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['written_task'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Final Exam</td>
-                                    <td class="parent-td">Row 3</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['final_exam'] : "Loading..."}</td>
                                 </tr>
                             </tbody>
                             </table>
@@ -111,7 +173,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['FILIPINO'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -145,7 +207,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -179,7 +241,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -213,7 +275,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -247,7 +309,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -281,7 +343,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -315,7 +377,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['SCIENCE'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>
@@ -349,7 +411,7 @@ class ParentHome extends Component {
                             <tbody>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 1</td>
-                                    <td class="parent-td">Row 1</td>
+                                    <td class="parent-td">{this.state.show_grades ? this.grades['ARTS'][0]['assignment_1'] : "Loading..."}</td>
                                 </tr>
                                 <tr class="parent-tr">
                                     <td class="parent-td">Assigment 2</td>

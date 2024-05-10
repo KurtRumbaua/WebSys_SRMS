@@ -11,7 +11,6 @@ export async function registerUserAPI(req: Request, res: Response) {
                 success: "false",
                 message: 'User is already registered!'});
             return;
-            
         }
 
         const success = await addUser(userData);

@@ -8,6 +8,7 @@ export async function checkIfUserExists(email: string): Promise<boolean>{
 }
 
 export async function addUser(userData: IUser): Promise<IUser> {
+    console.log(`Adding user: ${userData.password}.`);
     const hashedPassword = await generateHash(userData.password);
     userData.password = hashedPassword;
     return await userModel.createUser(userData);

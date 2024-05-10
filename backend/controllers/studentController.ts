@@ -48,6 +48,7 @@ export async function fetchStudentsBasicAPI(req: Request, res: Response) {
 export async function fetchStudentAPI(req: Request, res: Response) {
     try {
         const userId:string = req.headers['userid'] as string;
+        console.log("USERID: ",userId);
         const students = await fetchStudentByUserId(userId);
         if (!students) {
             res.status(400).send({

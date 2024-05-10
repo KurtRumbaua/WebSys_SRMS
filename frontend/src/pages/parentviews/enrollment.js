@@ -3,7 +3,7 @@ import "../../styles/parenthome.css";
 import logo from "../../assets/Schoollogo.png";
 import editbutton from "../../assets/edit-button.png"
 
-class StudentInfo extends Component {
+class Enrollment extends Component {
     API_URL = "http://localhost:7777/";
 
     constructor(props) {
@@ -98,4 +98,4 @@ class StudentInfo extends Component {
 
 }    
 
-export default StudentInfo;
+export default Enrollment;

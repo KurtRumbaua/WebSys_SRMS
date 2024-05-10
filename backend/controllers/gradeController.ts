@@ -85,7 +85,10 @@ export async function getGradeAPI(req: Request, res: Response) {
 // for teachers?
 export async function getGradeBySubjectAPI(req: Request, res: Response) {
     try {
-        const { studentNumber, subject } = req.body;
+        //const { studentNumber, subject } = req.body;
+        const studentNumber: string = req.headers['studentnumber'] as string;
+        const subject: string = req.headers['subject'] as string;
+        console.log("YES", studentNumber, subject);
         const grades = await getGradeBySubject(studentNumber, subject);
         res.status(200).send({
             success: "true",
