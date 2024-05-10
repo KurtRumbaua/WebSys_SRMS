@@ -15,6 +15,7 @@ class Auth extends Component {
             show_value: false,
         };
         this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleSignupClick = this.handleSignupClick.bind(this);
     }
 
     componentDidMount() {
@@ -33,7 +34,7 @@ class Auth extends Component {
     }
 
     handleLoginClick() {
-        this.props.navigate('/Login');
+        this.props.navigate('/login');
     }
 
     handleSignupClick(){
@@ -51,7 +52,7 @@ class Auth extends Component {
                     </header>
                     <div className="buttons">
                         <button className="login-btn" onClick={this.handleLoginClick}>Login</button>
-                        <button className="signup-btn">Sign Up</button>
+                        <button className="signup-btn"onClick={this.handleSignupClick}>Sign Up</button>
                     </div>
                     {show_value && data && Object.entries(data).map(([key, { value }]) => (
                         <div key={key}>
