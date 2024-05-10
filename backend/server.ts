@@ -10,12 +10,12 @@ import enrollmentRoute from "./routes/enrollmentRoute";
 import transactionRoute from "./routes/transactionRoute";
 import gradeRoute from "./routes/gradeRoute";
 import parentRoute from "./routes/parentRoute";
-//import teacherRoute from "./routes/teacherRoute";
+import teacherRoute from "./routes/teacherRoute";
 
 db.initDatabaseConnection();
 
 const app = express();
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
@@ -38,7 +38,7 @@ const apiRoutes = {
     "/transaction": transactionRoute,
     "/grade": gradeRoute,
     "/parent": parentRoute,
-    //"/teacher": teacherRoute,
+    "/teacher": teacherRoute
 }
 for (const key of Object.keys(apiRoutes)) {
     app.use(key, apiRoutes[key as keyof typeof apiRoutes]);

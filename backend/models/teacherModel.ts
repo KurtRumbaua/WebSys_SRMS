@@ -19,7 +19,7 @@ export class TeacherModel {
 
     async getAllTeachersBasic(): Promise<ITeacher[]> {
         // maybe teachers should also have a teacherNumber generate for their start year but welp next time.
-        return await db.TeacherModel.find({}, { _id: 1, firstName: 1, lastName: 1, field: 1, contactNumber: 1 }).sort('_id');
+        return await db.TeacherModel.find({}, { _id: 1, firstName: 1, lastName: 1, field: 1}).sort('_id');
     }
 
     // for full information

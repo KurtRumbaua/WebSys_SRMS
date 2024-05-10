@@ -14,18 +14,22 @@ function EnrollStudents() {
 
     // Simulate fetching data
     useEffect(() => {
-        //const fetchData = async () => {
-        //    // Simulated fetch from an API
-        //    let result = await fetch('http://localhost:7000/student/basic')
-        //        .then(response => response.json())
-        //        .catch(error => console.error('Error:', error));
-        //    result = result['data'];
-        //    for (let i = 0; i < result.length; i++) {
-        //        setStudents(oldArray => [...oldArray, result[i]]);
-        //    }
-        //};
+        const fetchData = async () => {
+            // Simulated fetch from an API
+            let result = await fetch('http://localhost:7000/teacher/view/basic')
+                .then(response => response.json())
+                .catch(error => console.error('Error:', error));
+            result = result['data'];
 
-        //fetchData();
+            let id_count = 2;
+            for (let i = 0; i < result.length; i++) {
+              result[i].id = id_count;
+                setTeachers(oldArray => [...oldArray, result[i]]);
+              id_count++;
+            }
+        };
+
+        fetchData();
     }, []); // Empty dependency array means this effect runs only once after the initial
 
 
