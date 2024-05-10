@@ -6,7 +6,7 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-.body-bg {
+.auth-body-bg {
     background-image: "../frontend/src/assets/schoolbg.png";
     background-size: cover;
     background-position: center;
@@ -26,7 +26,7 @@ html, body {
     align-items: center;
 }
 
-.container {
+.auth-container {
     width: 300px;
     height: 55%;
     padding: 40px;
@@ -45,7 +45,7 @@ header img {
     margin-bottom: 20px;
 }
 
-.buttons button {
+.auth-buttons button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -59,7 +59,7 @@ header img {
     margin-right: 100px;
 }
 
-.buttons button:hover {
+.auth-buttons button:hover {
     background-color: #e55a70;
 }
 

@@ -30,9 +30,156 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const convert = (obj) => {
+    return Object.keys(obj).reduce((result, key) => {
+      result[key] = {
+        name: obj[key],
+        type: "foo"
+      };
+      return result;
+    }, {});
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Form data submitted:', formData);
+
+    let data = convert(formData);
+
+    let email = data['userEmail']["name"];
+    let password = data['userPassword']['name'];
+    let role = 'PARENT'
+
+
+    // user data push
+    fetch("http://localhost:7000/account/create", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      method: "POST",
+      body: JSON.stringify({ "email": email, "password": password, "role": role }),
+    })
+      .then((response) => response.json())
+      .then(message => {
+        message = message['data'];
+        let userId = message['_id'];
+
+        let firstName = data['parentFirstName']["name"];
+        let middleName = data['parentMiddleName']["name"];
+        let lastName = data['parentLastName']["name"];
+        let contactNumber = data['parentContactNumber']["name"];
+        email = data['parentEmail']["name"];
+        let letAddress = data['parentAddress']["name"];
+        console.log("userId: ", userId);
+        console.log("firstName: ", firstName);
+        console.log("middleName: ", middleName);
+        console.log("lastName: ", lastName);
+        console.log("contactNumber: ", contactNumber);
+        console.log("email: ", email);
+        console.log("letAddress: ", letAddress);
+
+
+        // parent shits
+        fetch("http://localhost:7000/parent/create", {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: "POST",
+          body: JSON.stringify(
+            {
+              "firstName": firstName,
+              "middleName": middleName,
+              "lastName": lastName,
+              "contactNumber": contactNumber,
+              "email": email,
+              "address": letAddress,
+              "userId": userId
+            }
+          ),
+
+        })
+          .then((response) => response.json())
+          .then((message) => {
+            message = message['data'];
+            console.log("THIS IS PARENT:", message);
+            firstName = data['studentFirstName']["name"];
+            middleName = data['studentMiddleName']["name"];
+            lastName = data['studentLastName']["name"];
+            let gradeLevel = data['studentGradeLevel']["name"];
+            email = data['studentEmail']["name"];
+            let contactNumber = data['studentContactNumber']["name"];
+            let birthDate = data['studentBirthDate']["name"];
+            let letAddress = data['studentAddress']["name"];
+            let medicalCondition = data['studentMedicalCondition']["name"];
+            let allergy = data['studentAllergy']["name"];
+            let emergencyContact = data['studentEmergencyContact']["name"];
+            
+
+            // student shits
+            fetch("http://localhost:7000/student/create",{
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              method: "POST",
+              body: JSON.stringify(
+                {
+                  "firstName": data['studentFirstName']["name"],
+                  "middleName": data['studentMiddleName']["name"],
+                  "lastName": data['studentLastName']["name"],
+                  "gradeLevel": data['studentGradeLevel']["name"],
+                  "email": data['studentEmail']["name"],
+                  "contactNumber": data['studentContactNumber']["name"],
+                  "birthDate": data['studentBirthDate']["name"],
+                  "address": data['studentAddress']["name"],
+                  "medicalCondition": data['studentMedicalCondition']["name"],
+                  "allergy": data['studentAllergy']["name"],
+                  "emergencyContact": data['studentEmergencyContact']["name"],
+                  "parentId": message['_id']
+                }
+              ),
+            })
+            .then((response) => response.json())
+            .then((message) => {
+              message = message['data'];
+              console.log("THISIS STUDENT", message);
+
+              // populate grade (WORKING)
+              fetch('http://localhost:7000/grade/populate', {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                "studentNumber": message['studentNumber'],
+                })
+              })
+              .then((response) => response.json())
+              .then((message) => {
+                message = message['data'];
+                console.log("THIS IS GRADE: ", message);
+              })
+              .catch(
+                (error) => {
+                  console.log("THIS IS ERROR: ", error);
+                }
+              );
+            })
+            .catch(
+              (error) => {
+                console.log("THIS IS ERROR: ", error);
+              }
+            );
+
+          })
+          .catch(
+            (error) => {
+              console.log("THIS IS ERROR: ", error);
+            }
+          );
+
+      })
+
+    console.log('Form data submitted:', data);
     navigate('/login'); // Redirect to login after submission
   };
 

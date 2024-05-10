@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import '../../styles/student-roster.css';
+import logo from "../../assets/Schoollogo.png";
 
 const StudentRosterPage = () => {
     const sections = ['Imus', 'Maragondon', 'General Trias', 'Dasmarinas', 'Bacoor']; // Example sections
@@ -95,12 +96,15 @@ const StudentRosterPage = () => {
     };
 
     return (
-        <div className="container">
-            <h1 className="title">Class Record</h1>
-            <div className="search-bar">
+        <div className="teacher-container">
+                            <header className="admin-header">
+            <img className="home-logo" src={logo} alt="School Logo" />
+            </header>
+            <h1 className="teacher-title">Class Record</h1>
+            <div className="teacher-search-bar">
                 <input type="text" placeholder="Search by ID, Name..." onChange={handleSearchChange} />
             </div>
-            <div className="select-section">
+            <div className="teacher-select-section">
                 <label htmlFor="sectionSelect">Select Section:</label>
                 <select id="sectionSelect" onChange={handleSectionChange} value={selectedSection}>
                     <option value="">-- Select Section --</option>
@@ -110,7 +114,7 @@ const StudentRosterPage = () => {
                 </select>
                 {selectedSection === '' && <p className="no-section-text">Please select a section.</p>}
             </div>
-            <table className="student-table">
+            <table className="teacher-student-table">
                 <thead>
                     <tr>
                         <th>ID Number</th>
@@ -137,7 +141,7 @@ const StudentRosterPage = () => {
 
             {/* Dialog for adding grades */}
             <Dialog open={openDialog} onClose={handleDialogClose}>
-                <DialogTitle className="dialog-title">{selectedStudent ? `Add Grades - ${selectedStudent.firstName} ${selectedStudent.lastName}` : 'Add Grades'}</DialogTitle>
+                <DialogTitle className="teacher-dialog-title">{selectedStudent ? `Add Grades - ${selectedStudent.firstName} ${selectedStudent.lastName}` : 'Add Grades'}</DialogTitle>
                 <DialogContent>
                     <FormControl fullWidth>
                         <Select value={selectedSubject} onChange={handleSubjectChange} displayEmpty>
@@ -156,6 +160,10 @@ const StudentRosterPage = () => {
                     <Button onClick={handleSubmitGrade}>Submit</Button>
                 </DialogActions>
             </Dialog>
+        {/* Footer */}
+        <footer className="admin-footer">
+            <p className="footer-text">Sta. Teresita Elementary School 2023. All Rights Reserved.</p>
+        </footer>
         </div>
     );
 };
