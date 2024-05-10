@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ClassManagementPage from "./pages/adminviews/class-management";
-import StudentRosterPage from "./pages/teacherviews/student-roster";
+import StudentRosterPage from "./pages/teacherviews/teacher-roster";
 import Auth from "./pages/authpages/Auth";
 import StudenInfo from "./pages/parentviews/studentinfo";
 import Login from "./pages/authpages/Login";
