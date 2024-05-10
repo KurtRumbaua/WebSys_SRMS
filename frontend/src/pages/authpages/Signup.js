@@ -197,6 +197,7 @@ function Signup() {
           <label className="signup-label">First Name</label>
           <input className="signup-input" type="text" name="parentFirstName" placeholder="First Name" value={formData.parentFirstName} onChange={handleChange} />
           <label className="signup-label">Middle Name (Optional)</label>
+          <input className="signup-input" type="text" name="studentMiddleName" placeholder="Middle Name" value={formData.studentMiddleName} onChange={handleChange} />
           <input className="signup-input" type="text" name="parentMiddleName" placeholder="Middle Name" value={formData.parentMiddleName} onChange={handleChange} />
           <label className="signup-label">Last Name</label>
           <input className="signup-input" type="text" name="parentLastName" placeholder="Last Name" value={formData.parentLastName} onChange={handleChange} />
@@ -214,7 +215,15 @@ function Signup() {
           <label className="signup-label">Last Name</label>
           <input className="signup-input" type="text" name="studentLastName" placeholder="Last Name" value={formData.studentLastName} onChange={handleChange} />
           <label className="signup-label">Grade Level</label>
-          <input className="signup-input" type="text" name="studentGradeLevel" placeholder="Grade Level" value={formData.studentGradeLevel} onChange={handleChange} />
+          <select className="signup-input" name="studentGradeLevel" value={formData.studentGradeLevel} onChange={handleChange}>
+            <option value="">Select Grade Level</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
           <label className="signup-label">Email</label>
           <input className="signup-input" type="email" name="studentEmail" placeholder="Email" value={formData.studentEmail} onChange={handleChange} />
           <label className="signup-label">Contact Number</label>
