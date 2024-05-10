@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import '../../styles/class-management.css'; // Import CSS file for styling
+import React, { useState } from "react";
+import "../../styles/class-management.css"; // Import CSS file for styling
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/Schoollogo.png";
+import AdminHeader from "../../components/admin-header";
+import STESFooter from "../../components/footer";
 
 function ClassManagementPage() {
   const [selectedGrade, setSelectedGrade] = useState("");
@@ -27,41 +29,16 @@ function ClassManagementPage() {
 
   return (
     <div className="admin-classmanagement">
-              <header className="admin-header">
-          <img className="home-logo" src={logo} alt="School Logo" />
-          <nav className="admin-nav">
-            <ul>
-              <li>
-              <NavLink to="/student-database" activeClassName="active">
-                  Students
-                </NavLink>
-              </li>
-              <li>
-              <NavLink to="/employee-database" activeClassName="active">
-                  Employees
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/enroll-student" activeClassName="active">
-                  Enrollment
-                </NavLink>
-              </li>
-              <li>
-              <NavLink to="/class-management" activeClassName="active">
-                  Class Management
-                </NavLink>
-              </li>
-              <NavLink to="/financial-management" activeClassName="active">
-                  Financial Management
-                </NavLink>
-            </ul>
-          </nav>
-        </header>
+      <AdminHeader />
       <div className="main-content">
         {/* Grade Level Dropdown */}
         <div className="grade-dropdown-container">
           <label htmlFor="grade-select">Select Grade Level:</label>
-          <select id="grade-select" value={selectedGrade} onChange={handleGradeChange}>
+          <select
+            id="grade-select"
+            value={selectedGrade}
+            onChange={handleGradeChange}
+          >
             <option value="">Select Grade</option>
             {[1, 2, 3, 4, 5, 6].map((grade) => (
               <option key={grade} value={grade}>
@@ -77,17 +54,24 @@ function ClassManagementPage() {
             {subjectsByGrade[selectedGrade].map((subject) => (
               <div key={`subject-${subject}`} className="card">
                 <h2 className="admin-card-title">{subject}</h2>
-                <p className="admin-card-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor accumsan tincidunt.</p>
-                <a href="/class-teacher-assign" onClick={() => handleAssignClick(selectedGrade)} className="assign-link">Assign</a>
+                <p className="admin-card-content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                  porttitor accumsan tincidunt.
+                </p>
+                <a
+                  href="/class-teacher-assign"
+                  onClick={() => handleAssignClick(selectedGrade)}
+                  className="assign-link"
+                >
+                  Assign
+                </a>
               </div>
             ))}
           </div>
         )}
       </div>
       <div>
-        <footer className="admin-footer">
-          <p>Sta. Teresita Elementary School © 2023. All Rights Reserved.</p>
-        </footer>
+        <STESFooter />
       </div>
     </div>
   );
