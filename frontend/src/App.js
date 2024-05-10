@@ -8,12 +8,14 @@ import Login from "./pages/authpages/Login";
 import ParentHome from "./pages/parentviews/parenthome";
 import TeacherDashboard from "./pages/teacherviews/teacher-classes";
 import Enrollment from "./pages/parentviews/enrollment";
+import StudentsDatabase from "./pages/adminviews/students-database";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/class-management" element={<ClassManagementPage />} />
+        <Route path="/student-database" element={<StudentsDatabase />} />
         <Route path="/student-roster" element={<StudentRosterPage />} />
         <Route path="/teacher-classes" element={<TeacherDashboard />} />
         <Route path="/enroll-student" element={<Enrollment />} />

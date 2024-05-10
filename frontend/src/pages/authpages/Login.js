@@ -50,9 +50,8 @@ function Login() {
         console.log("user_id: ", message['data']['_id']);
 
         let role = message['data']['role'];
-        console.log('Logged in as:', role);
       if (role === 'ADMIN') {
-        navigate('/admin-dashboard');
+        navigate('/student-database');
       } else if (role === 'PARENT') {
        navigate('/parenthome');
       } else {
