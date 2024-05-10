@@ -3,6 +3,9 @@ import "../../styles/parenthome.css";
 import logo from "../../assets/Schoollogo.png";
 import editbutton from "../../assets/edit-button.png"
 
+
+
+
 class Enrollment extends Component {
     API_URL = "http://localhost:7777/";
 
@@ -12,6 +15,9 @@ class Enrollment extends Component {
             data: null,
             show_value: false,
         };
+
+
+        this.handleSubmit = this.handleSubmitFunc.bind(this);
     }
 
     componentDidMount() {
@@ -25,6 +31,31 @@ class Enrollment extends Component {
                 return result;
             }, {});
             this.setState({ data: result, show_value: true });
+        })
+        .catch(error => console.log(error));
+    }
+
+    handleSubmitFunc(event){
+        event.preventDefault();
+
+        // get the data from the forms
+        const data = new FormData(event.target);
+
+        let user_id = sessionStorage.getItem("user_id");
+        
+        // Simultaneously get parent and student data
+        fetch("http://localhost:7000/student/viewone", {
+            headers: { 
+                'userId': user_id
+            },
+            method: "GET",
+        })
+        .then(response => response.json())
+        .then(message => {
+            message = message['data'];
+            // Fetch login information (??) fg
+            this.setState({ data: message, show_value: true });
+            console.log("student data: ", message);
         })
         .catch(error => console.log(error));
     }
@@ -48,7 +79,7 @@ class Enrollment extends Component {
                 <div className="parentenrollment">
                     <h2>Enrollment Status: Pending</h2>
                     <div className="parent-form-container">
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <div className="parent-parent-form-row">
                                 <label htmlFor="gradeLevel" className="parent-form-label">Grade Level:</label>
                                 <select name="gradeLevel" id="gradeLevel">

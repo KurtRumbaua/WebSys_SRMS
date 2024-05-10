@@ -7,7 +7,7 @@ export enum Field {
     english = 'ENGLISH',
     filipino = 'FILIPINO',
     history = 'HISTORY',
-    physical_education = 'PE',
+    physical_education = 'P.E',
     music = 'MUSIC',
     arts = 'ARTS',
     health = 'HEALTH',
