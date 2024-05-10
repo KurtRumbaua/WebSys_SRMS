@@ -136,8 +136,13 @@ export async function createStudentAPI(req: Request, res: Response) {
 
 export async function updateStudentAPI(req: Request, res: Response) {
     try {
+
+        console.log("THE BODY", req.body);
+        const studentNumber = req.body['studentNumber'];
         const studentData = req.body;
-        const { studentNumber } = req.query;
+
+        //const studentData = req.body;
+        //const { studentNumber } = req.query;
         if (!studentNumber || !studentData || typeof studentNumber !== 'string') {
             res.status(400).send({
                 success: "false",

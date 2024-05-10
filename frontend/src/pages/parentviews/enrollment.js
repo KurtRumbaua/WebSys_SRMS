@@ -5,7 +5,6 @@ import editbutton from "../../assets/edit-button.png"
 
 
 
-
 class Enrollment extends Component {
     API_URL = "http://localhost:7777/";
 
@@ -21,18 +20,6 @@ class Enrollment extends Component {
     }
 
     componentDidMount() {
-        fetch(this.API_URL + "account/view", {
-            headers: { 'authorization': sessionStorage.getItem("token") }
-        })
-        .then(response => response.json())
-        .then(message => {
-            var result = Object.keys(message).reduce((result, key) => {
-                result[key] = { value: message[key] };
-                return result;
-            }, {});
-            this.setState({ data: result, show_value: true });
-        })
-        .catch(error => console.log(error));
     }
 
     handleSubmitFunc(event){
@@ -55,7 +42,30 @@ class Enrollment extends Component {
             message = message['data'];
             // Fetch login information (??) fg
             this.setState({ data: message, show_value: true });
+            
+            const newStudentData = { 
+              ...message,
+              gradeLevel: data.get("gradeLevel"),
+              enrolleeType: data.get("enrolleeType"),
+              form137: data.get("form137"),
+              birthCerth: data.get("birthCerth"),
+              GMC: data.get("GMC"),
+              proofPayment: data.get("proofPayment"),
+            }
+          
+            fetch("http://localhost:7000/student/update", {
+                headers: { 'Content-Type': 'application/json' },
+                method: "PATCH",
+                body: JSON.stringify(newStudentData)
+            })
+            .then(response => response.json())
+            .then(message => {
+              console.log("message: ", message);
+            })
+            .catch(error => console.log(error));
+
             console.log("student data: ", message);
+            console.log("new student data: ", newStudentData);
         })
         .catch(error => console.log(error));
     }
