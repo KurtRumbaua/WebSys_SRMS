@@ -146,7 +146,7 @@ const StudentRosterPage = () => {
                     <FormControl fullWidth>
                         <Select value={selectedSubject} onChange={handleSubjectChange} displayEmpty>
                             <MenuItem value="" disabled>
-                                Select Subject
+                                Select Category
                             </MenuItem>
                             {subjects.map(subject => (
                                 <MenuItem key={subject} value={subject}>{subject}</MenuItem>
