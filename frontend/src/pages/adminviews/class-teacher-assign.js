@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/teacher-roster.css'; // Import CSS file for styling
+import AdminHeader from '../../components/admin-header';
+import STESFooter from '../../components/footer';
 
 function ClassTeacherAssign() {
     const [teachers, setTeachers] = useState([
@@ -10,6 +12,10 @@ function ClassTeacherAssign() {
     ]);
   
     return (
+      <>
+      <div>
+         <AdminHeader />
+         </div>
       <div className="teachers-page">
         <h1 className="page-title">Teachers Information</h1>
         <div className="teachers-table-container">
@@ -39,6 +45,10 @@ function ClassTeacherAssign() {
           </table>
         </div>
       </div>
+      <div>
+        <STESFooter />
+      </div>
+      </>
     );
   }
   
