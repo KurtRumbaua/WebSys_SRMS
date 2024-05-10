@@ -1,7 +1,6 @@
 .admin-classmanagement {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    flex-direction: column
   }
   
   .dashboard-title {
@@ -11,7 +10,6 @@
   
   .main-content {
     flex-grow: 1;
-    padding: 20px;
   }
   
   .grade-dropdown-container {

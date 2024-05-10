@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import '../../styles/student-roster.css';
+import logo from "../../assets/Schoollogo.png";
 
 const StudentRosterPage = () => {
     const sections = ['Imus', 'Maragondon', 'General Trias', 'Dasmarinas', 'Bacoor']; // Example sections
@@ -96,6 +97,9 @@ const StudentRosterPage = () => {
 
     return (
         <div className="teacher-container">
+                            <header className="admin-header">
+            <img className="home-logo" src={logo} alt="School Logo" />
+            </header>
             <h1 className="teacher-title">Class Record</h1>
             <div className="teacher-search-bar">
                 <input type="text" placeholder="Search by ID, Name..." onChange={handleSearchChange} />
@@ -156,6 +160,10 @@ const StudentRosterPage = () => {
                     <Button onClick={handleSubmitGrade}>Submit</Button>
                 </DialogActions>
             </Dialog>
+        {/* Footer */}
+        <footer className="admin-footer">
+            <p className="footer-text">Sta. Teresita Elementary School 2023. All Rights Reserved.</p>
+        </footer>
         </div>
     );
 };
