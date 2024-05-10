@@ -12,14 +12,14 @@ import logo from "../../assets/Schoollogo.png";
 
 const StudentRosterPage = () => {
     const sections = ['Imus', 'Maragondon', 'General Trias', 'Dasmarinas', 'Bacoor']; // Example sections
-    const subjects = ['Assignments', 'Projects', 'Exams', 'Quizzes']; // Example subjects
+    const category = ['Assignments', 'Projects', 'Exams', 'Quizzes']; // Example category
 
     const [selectedSection, setSelectedSection] = useState('');
     const [students, setStudents] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
-    const [selectedSubject, setSelectedSubject] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [gradeInput, setGradeInput] = useState('');
 
     const handleSectionChange = (event) => {
@@ -82,7 +82,7 @@ const StudentRosterPage = () => {
     };
 
     const handleSubjectChange = (event) => {
-        setSelectedSubject(event.target.value);
+        setSelectedCategory(event.target.value);
     };
 
     const handleGradeInputChange = (event) => {
@@ -91,7 +91,7 @@ const StudentRosterPage = () => {
 
     const handleSubmitGrade = () => {
         // Placeholder function for submitting grades
-        console.log(`Submitted grade for subject ${selectedSubject}: ${gradeInput}`);
+        console.log(`Submitted grade for subject ${selectedCategory}: ${gradeInput}`);
         setOpenDialog(false);
     };
 
@@ -144,12 +144,12 @@ const StudentRosterPage = () => {
                 <DialogTitle className="teacher-dialog-title">{selectedStudent ? `Add Grades - ${selectedStudent.firstName} ${selectedStudent.lastName}` : 'Add Grades'}</DialogTitle>
                 <DialogContent>
                     <FormControl fullWidth>
-                        <Select value={selectedSubject} onChange={handleSubjectChange} displayEmpty>
+                        <Select value={selectedCategory} onChange={handleSubjectChange} displayEmpty>
                             <MenuItem value="" disabled>
                                 Select Category
                             </MenuItem>
-                            {subjects.map(subject => (
-                                <MenuItem key={subject} value={subject}>{subject}</MenuItem>
+                            {category.map(category => (
+                                <MenuItem key={category} value={category}>{category}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
