@@ -8,10 +8,22 @@ function EnrollStudents() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [isAddEmployeePopupOpen, setIsAddEmployeePopupOpen] = useState(false);
+  
+  const [melons, setMelons] = useState({
+      lastName: "Doe",
+      firstName: "John",
+      id: "1",
+      field: "Math",  
+      birthdate: "2000-01-01",
+      contactNumber: "123-456-7890",
+      email: "doejohn@gmail.com",
+      address: "123 Main St",
+  });
 
       // Function to toggle pop-up visibility and set selected enrollee
-      const togglePopup = (employee) => {
-        console.log("sdasda");
+      const togglePopup = (employee, data) => {
+        console.log(data);
+        setMelons(data);
         setSelectedEmployee(employee);
         setIsPopupOpen(!isPopupOpen);
       };
@@ -32,10 +44,11 @@ function EnrollStudents() {
     useEffect(() => {
         const fetchData = async () => {
             // Simulated fetch from an API
-            let result = await fetch('http://localhost:7000/teacher/view/basic')
+            let result = await fetch('http://localhost:7000/teacher/view/all')
                 .then(response => response.json())
                 .catch(error => console.error('Error:', error));
             result = result['data'];
+            console.log(result);
 
             let id_count = 2;
             for (let i = 0; i < result.length; i++) {
@@ -98,7 +111,7 @@ function EnrollStudents() {
           <tbody>
             {
               teachers.map((teacher) => (
-                <tr onClick={() => togglePopup()} key={teacher.id}>
+                <tr onClick={() => togglePopup(null, teacher)} key={teacher.id}>
                   <td>{teacher.id}</td>
                   <td>{teacher.lastName}</td>
                   <td>{teacher.firstName}</td>
@@ -115,14 +128,14 @@ function EnrollStudents() {
         <div className="admin-popup-container">
           <div className="admin-popup-content">
             <h2>Employee Details</h2>
-            <p>Last Name:</p>
-            <p>First Name:</p>
-            <p>ID:</p>
-            <p>Field:</p>
-            <p>Birth Date:</p>
-            <p>Contact No:</p>
-            <p>Email:</p>
-            <p>Address:</p>
+            <p>Last Name: {melons.lastName}</p>
+            <p>First Name: {melons.firstName}</p>
+            <p>ID: {melons.id}</p>
+            <p>Field: {melons.field}</p>
+            <p>Birth Date: {melons.birthdate}</p>
+            <p>Contact No: {melons.contactNumber}</p>
+            <p>Email: {melons.email}</p>
+            <p>Address: {melons.address}</p>
             <button>Edit</button>
             <button>Delete</button>
             <button onClick={() => togglePopup(null)}>Close</button>

@@ -11,22 +11,32 @@ function EnrollStudents() {
   const [selectedEnrollee, setSelectedEnrollee] = useState(null);
 
   // Function to toggle pop-up visibility and set selected enrollee
-  const togglePopup = (enrollee) => {
-    setSelectedEnrollee(enrollee);
-    setIsPopupOpen(!isPopupOpen);
-  };
 
-    const [transactions, setTransactions] = useState([
-        { id: 1, transactionType: "incoming", transactionDescription: "Payment for tuition", transactionDate: "2023-01-01", cost: 1000 },
-    ]);
 
     const [enrollments, setEnrollments] = useState([
-        { id: 1, lastName: "Doe", firstName: "John", gradeLevel: "10", enrollmentStatus: "Enrolled" },
     ]);
 
 
     const [editFormData, setEditFormData] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+
+    
+  const [melons, setMelons] = useState({
+      lastName: "Doe",
+      firstName: "John",
+      gradeLevel: "10",
+      birthdate: "2000-01-01",
+      contactNumber: "123-456-7890",
+      email: "doejohn@gmail.com",
+      address: "123 Main St",
+      enrolleeType: "New",
+      form138: "Yes",
+      birthCertificate: "Yes",
+      gmc: "Yes",
+      proofOfPayment: "Yes",
+      section: "A",
+      enrollmentStatus: "In Progress"
+    });
 
     // Simulate fetching data
     useEffect(() => {
@@ -34,24 +44,31 @@ function EnrollStudents() {
             // Simulated fetch from an API
             let result = await fetch('http://localhost:7000/student/all')
                 .then(response => response.json())
+                .then(message =>{
+                    setEnrollments([]);
+                    let result = message['data'];
+                    let id_count = 1;
+                    for (let i = 0; i < result.length; i++) {
+                        result[i]['id'] = id_count;
+                        setEnrollments(oldArray => [...oldArray, result[i]]);
+                        id_count++;
+                    }
+                })
                 .catch(error => console.error('Error:', error));
-            result = result['data'];
-            let id_count = 2;
-            for (let i = 0; i < result.length; i++) {
-                let newResult = {
-                  id: id_count,
-                  lastName: result[i].lastName,
-                  firstName: result[i].firstName,
-                  gradeLevel: result[i].gradeLevel,
-                  enrollmentStatus: result[i].enrollmentStatus
-                }
-                setEnrollments(oldArray => [...oldArray, newResult]);
-                id_count++;
-            }
         };
-
         fetchData();
     }, []); // Empty dependency array means this effect runs only once after the initial
+
+  const togglePopup = (enrollee,data) => {
+    setMelons(data);
+    setSelectedEnrollee(enrollee);
+    setIsPopupOpen(!isPopupOpen);
+  };
+
+  const submitTogglePopup = (data) => {
+    setIsPopupOpen(!isPopupOpen);
+  }
+
 
 
     return (
@@ -105,7 +122,7 @@ function EnrollStudents() {
             {/* Example row (you can add more or integrate with data fetching logic) */}
             {
               enrollments.map(enrollment => (
-                <tr onClick={() => togglePopup()} key={enrollment.id}>
+                <tr onClick={() => togglePopup(null, enrollment)} key={enrollment.id}>
                   <td>{enrollment.id}</td>
                   <td>{enrollment.lastName}</td>
                   <td>{enrollment.firstName}</td>
@@ -121,35 +138,35 @@ function EnrollStudents() {
       {isPopupOpen && (
         <div className="admin-popup-container">
           <div className="admin-popup-content">
-            <h2>Enrollee Details</h2>
-            <p>Last Name:</p>
-            <p>First Name:</p>
-            <p>Grade Level:</p>
-            <p>Birth Date:</p>
-            <p>Contact No:</p>
-            <p>Email:</p>
-            <p>Address:</p>
-            <p>Enrollee Type: </p>
-            <p>Form138:</p>
-            <p>Birth Certificate: </p>
-            <p>GMC</p>
-            <p>Proof of Payment</p>
+            <h2>Enrollee No. {melons._id}</h2>
+            <p>Last Name: {melons.lastName}</p>
+            <p>First Name: {melons.firstName}</p>
+            <p>Grade Level: {melons.gradeLevel}</p>
+            <p>Birth Date: {melons.birthdate}</p>
+            <p>Contact No: {melons.contactNumber}</p>
+            <p>Email: {melons.email}</p>
+            <p>Address: {melons.address}</p>
+            <p>Enrollee Type: {melons.enrolleeType}</p>
+            <p>Form138: {melons.form138}</p>
+            <p>Birth Certificate: {melons.birthCertificate}</p>
+            <p>GMC: {melons.gmc}</p>
+            <p>Proof of Payment: {melons.proofOfPayment}</p>
             <div className="form-group">
               <label htmlFor="section">Section:</label>
               <select id="section" name="section">
-              <option value="imus">Incoming</option>
-              <option value="dasmarinas">Outgoing</option>
+                <option value="imus">Incoming</option>
+                <option value="dasmarinas">Outgoing</option>
               </select>
-          </div>
+            </div>
             <div className="form-group">
               <label htmlFor="enrollmentstatus">In Progress:</label>
               <select id="enrollmentstatus" name="enrollmentstatus">
-              <option value="inprogress">In-PRogress</option>
-              <option value="accepted">Accepted</option>
+                <option value="inprogress">In-PRogress</option>
+                <option value="accepted">Accepted</option>
               </select>
-          </div>
+            </div>
             <button>Confirm</button>
-            <button onClick={() => togglePopup(null)}>Close</button>
+            <button onClick={() => submitTogglePopup(null)}>Close</button>
           </div>
         </div>
       )}
